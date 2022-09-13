@@ -1,0 +1,22 @@
+﻿[
+  {
+    "name": "Xcrypt",
+    "desc": "Encrypt or Decrypt file in Android or Windows.",
+    "path": "/xcrypt"
+  },
+  {
+    "name": "AutoReact",
+    "desc": "Automated Reactions for Facebook and Instagram.",
+    "path": "/autoreact"
+  },
+  {
+    "name": "ThemePatcher",
+    "desc": "Get free themes on Oppo or Realme Android device.",
+    "path": "/themepatcher"
+  },
+  {
+    "name": "Screenery",
+    "desc": "Keep Android Screen Awake or make it Dim.",
+    "path": "/screenery"
+  }
+]

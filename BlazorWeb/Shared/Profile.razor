@@ -1,0 +1,190 @@
+﻿
+
+<div class="container mt-5">
+
+    <div class="d-flex justify-content-center">
+
+        <div class="col-md-7">
+
+            <div class="card p-3 py-4" id="cardProfile">
+
+                <div class="text-center">
+                    <img src="https://avatars.githubusercontent.com/u/69689739?v=4" width="100" class="rounded-circle">
+                </div>
+
+                <div class="text-center mt-3">
+                    <h5 class="mt-2 mb-0" id="name">Sayantan Paul</h5>
+                    <span id="text">Software Developer</span>
+
+                    <div class="px-4 mt-1">
+                        <p class="fonts">A passionate programmer who primarily uses java to create beautiful and responsive android apps.</p>
+
+                    </div>
+                    <span id="text">Languages and Tools I use</span>
+                    <div class="flex-row">
+                        <img height="25" width="25" src="https://raw.githubusercontent.com/devicons/devicon/master/icons/c/c-original.svg" />
+                        <img height="25" width="25" src="https://raw.githubusercontent.com/devicons/devicon/master/icons/cplusplus/cplusplus-original.svg" />
+                        <img height="25" width="25" src="https://raw.githubusercontent.com/devicons/devicon/master/icons/csharp/csharp-original.svg" />
+                        <img height="25" width="25" src="https://raw.githubusercontent.com/devicons/devicon/master/icons/unity/unity-original.svg" />
+                        <img height="25" width="25" src="https://raw.githubusercontent.com/devicons/devicon/master/icons/java/java-original.svg" />
+                        <img height="25" width="25" src="https://raw.githubusercontent.com/devicons/devicon/master/icons/python/python-original.svg" />
+                        <img height="25" width="25" src="https://raw.githubusercontent.com/devicons/devicon/master/icons/javascript/javascript-original.svg" />
+                        <img height="25" width="25" src="https://raw.githubusercontent.com/devicons/devicon/master/icons/html5/html5-original.svg" />
+                        <img height="25" width="25" src="https://raw.githubusercontent.com/devicons/devicon/master/icons/css3/css3-original.svg" />
+                        <img height="25" width="25" src="https://raw.githubusercontent.com/devicons/devicon/master/icons/gradle/gradle-plain.svg" />
+                        <img height="25" width="25" src="https://raw.githubusercontent.com/devicons/devicon/master/icons/androidstudio/androidstudio-original.svg" />
+                        <img height="25" width="25" src="https://raw.githubusercontent.com/devicons/devicon/master/icons/firebase/firebase-plain.svg" />
+
+                    </div>
+                    <br />
+                    <span id="text">Contact Info</span>
+                    <div class="flex-row">
+                        <a href="https://fb.com/legendsayantan" target="_blank">
+                        <img  height="25" width="25" src="https://img.icons8.com/material/2x/facebook--v1.png" />
+                        </a><a href="http://www.instagram.com/legendsayantan" target="_blank">
+                        <img height="25" width="25" src="https://img.icons8.com/material/2x/instagram-new--v1.png" />
+                        </a><a href="http://www.reddit.com/u/legendsayantan" target="_blank">
+                        <img height="25" width="25" src="https://img.icons8.com/material/2x/reddit.png" />
+                        </a><a href="https://twitter.com/legendsayantan" target="_blank">
+                        <img height="25" width="25" src="https://img.icons8.com/material/2x/twitter--v2.png" />
+                        </a><a href="https://linkedin.com/in/sayantan-paul-4717b3231" target="_blank">
+                        <img height="25" width="25" src="https://img.icons8.com/material/2x/linkedin--v1.png" />
+                        </a>
+                    </div>
+                    <br/>
+                    <div class="buttons">
+                        <button @onclick="openGitHub" class="btn btn-primary px-4 ms-3">GitHub</button>
+                        <button @onclick="openIssue" class="btn btn-outline-primary px-4">Support</button>
+                    </div>
+
+
+                </div>
+
+
+
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+<style>
+    #cardProfile{
+        background-image: linear-gradient(to bottom right,#0F2CD4, #1C72EB);
+    }
+
+    body {
+        background: #eee;
+    }
+
+    .card {
+        border: none;
+        position: relative;
+        overflow: hidden;
+        border-radius: 15px;
+        cursor: pointer;
+        min-width:fit-content;
+    }
+
+        .card:before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 4px;
+            height: 100%;
+            background-color: #1C72EB;
+            transform: scaleY(1);
+            transition: all 0.5s;
+            transform-origin: bottom
+        }
+
+        .card:after {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 4px;
+            height: 100%;
+            background-color: #0F2CD4;
+            transform: scaleY(0);
+            transition: all 0.5s;
+            transform-origin: bottom
+        }
+
+        .card:hover::after {
+            transform: scaleY(1);
+        }
+
+
+    .fonts {
+        font-family: 'Palatino Linotype';
+        font-size: 12px;
+        color: yellow;
+    }
+
+    .social-list {
+        display: flex;
+        list-style: none;
+        justify-content: center;
+        padding: 0;
+    }
+
+        .social-list li {
+            padding: 10px;
+            color: white;
+            font-size: 19px;
+        }
+
+
+    .buttons button:nth-child(2) {
+        border: 1px solid #0F15FA !important;
+        color: #0F15FA;
+        height: 40px;
+    }
+
+        .buttons button:nth-child(2):hover {
+            border: 1px solid #0F15FA !important;
+            color: #fff;
+            height: 40px;
+            background-color: #0F15FA;
+        }
+
+    .buttons button:nth-child(1) {
+        border: 1px solid #0F15FA !important;
+        background-color: #0F2CD4;
+        color: #fff;
+        height: 40px;
+    }
+    .btn{
+        font-weight:bold;
+    }
+    #name{
+        color:wheat;
+        font-family:'Palatino Linotype';
+    }
+    #text{
+        color:powderblue;
+        font-family:Consolas;
+    }
+    .flex-row {
+        display: flex;
+        justify-content: center;
+    }
+</style>
+
+@inject IJSRuntime jsRuntime
+@code{
+    public async Task openGitHub()
+    {
+        string url = "https://github.com/legendsayantan";
+        await jsRuntime.InvokeAsync<object>("open", url, "_blank");
+    }
+    public async Task openIssue()
+    {
+        string url = "https://github.com/legendsayantan/legendsayantan.github.io/issues";
+        await jsRuntime.InvokeAsync<object>("open", url, "_blank");
+    }
+}

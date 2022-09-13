@@ -1,0 +1,36 @@
+﻿@page "/"
+
+<PageTitle>LegendSayantan</PageTitle>
+<div style ="margin-top:100px;"/>
+<Profile/>
+<h3 class="center" style="margin-top:100px;">Projects</h3>
+<div class="center" id="projectContainer">
+    @foreach (Project proj in @projects ?? Enumerable.Empty<Project>())
+    {
+        <ProjectCard project="@proj"/>
+    }
+</div>
+<style>
+    .center{
+        display:flex;
+        flex-wrap: wrap;
+        padding:25px;
+        justify-content:center;
+        color: powderblue;
+        font-family:'Palatino Linotype';
+    }
+</style>
+@inject HttpClient Http
+@code {
+    string text = "Hi";
+    Project[]? projects;
+
+    protected override async Task OnInitializedAsync()
+    {
+        projects = await Http.GetJsonAsync<Project[]>("/data/projects.json");
+    }
+}
+<RadzenDialog />
+<RadzenNotification />
+<RadzenContextMenu />
+<RadzenTooltip />

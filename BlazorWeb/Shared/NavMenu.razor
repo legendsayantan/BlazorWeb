@@ -1,0 +1,51 @@
+﻿
+<div class="top-row ps-3 navbar navbar-dark">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="">LegendSayantan.github.io
+        </a>
+        <button title="Navigation menu" class="navbar-toggler" @onclick="ToggleNavMenu">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+    </div>
+</div>
+
+<div class="@NavMenuCssClass" @onclick="ToggleNavMenu">
+    <nav class="flex-column">
+        <div class="nav-item px-3">
+            <NavLink class="nav-link" href="" Match="NavLinkMatch.All">
+                <span class="oi oi-home" aria-hidden="true"></span> Home
+            </NavLink>
+        </div>
+        <div class="navDivider">
+            <span id="divider">Projects</span>
+        </div>
+        @foreach(Project proj in @projects ?? Enumerable.Empty<Project>()){
+            <div class="nav-item px-3">
+                <NavLink class="nav-link" href=@proj.path>@proj.name</NavLink>
+            </div>
+        }
+        </nav>
+</div>
+<style>
+    .navbar-brand{
+        font-family:Pristina;
+        font-size:150%;
+    }
+    #divider{
+        padding-left:20px;
+        margin-top:25px;
+        margin-bottom:15px;
+        color:powderblue;
+    }
+</style>
+@inject HttpClient Http
+@code {
+    Project[] projects;
+    private bool collapseNavMenu = true;
+    private string? NavMenuCssClass => collapseNavMenu ? "collapse" : null;
+    private void ToggleNavMenu() => collapseNavMenu = !collapseNavMenu;
+    protected override async Task OnInitializedAsync()
+    {
+        projects = await Http.GetJsonAsync<Project[]>("/data/projects.json");
+    }
+}

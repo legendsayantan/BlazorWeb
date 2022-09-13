@@ -1,0 +1,71 @@
+﻿<MatCard class="demo-mat-card">
+    <MatCardContent>
+        <div class="demo-mat-card-content">
+            <MatHeadline6 class="demo-mat-card-clean-margin">
+                @project.name
+            </MatHeadline6>
+        </div>
+
+        <MatBody2 class="demo-mat-card-content demo-mat-card-clean-margin">
+            @project.desc
+        </MatBody2>
+    </MatCardContent>
+    <MatCardActions Class="actions">
+        <MatButton OnClick="@wikiClick" Class="mat-card-action">Wiki</MatButton>
+        <MatButton OnClick="@gitClick" Class="mat-card-action">Github</MatButton>
+    </MatCardActions>
+</MatCard>
+
+<style>
+    .demo-mat-card {
+        margin:25px;
+        min-width: fit-content;
+        max-width: fit-content;
+        max-height: 178px;
+        color: #181828;
+    }
+
+    .demo-mat-card-content {
+        display: flex;
+        padding: 1rem;
+        background-color: #181828;
+        border: #1C72EB;
+        border-width: 2px;
+        border-bottom-width: 0px;
+        border-style: solid;
+    }
+
+    .demo-mat-card-clean-margin {
+        color: #1C72EB;
+        border-top-width: 0px;
+        border-bottom-width: 0px;
+        transform: translateY(-25);
+    }
+
+    .actions {
+        border: #1C72EB;
+        border-width: 2px;
+        border-top-width: 0px;
+        background-color: #181828;
+        border-style: solid;
+    }
+
+    .mat-card-action {
+        -webkit-text-fill-color: #1C72EB;
+    }
+</style>
+
+
+@inject IJSRuntime jsRuntime
+@code {
+
+    [Parameter]
+    public Project project { get; set; }
+
+    public async Task wikiClick(){
+        await jsRuntime.InvokeAsync<object>("open", project.path, "_blank");
+    }
+    public async Task gitClick(){
+        await jsRuntime.InvokeAsync<object>("open", "https://github.com/legendsayantan"+project.path, "_blank");
+    }
+}
