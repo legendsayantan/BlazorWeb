@@ -7,8 +7,7 @@
 <div class="maincard centerAlign flex-column" style="display:flex;">
     <div class="centerAlign" id="no_file" style="display:flex; flex-wrap:wrap;">
         <InputFile type="file" id="myFile" name="filename" OnChange=fileSelect style="margin-top:35px;" />
-        
-        <EditForm class="inputForm centerAlign" Model="@Params" EditContext="@editContext" style="display:flex; flex-wrap:wrap;">
+        <EditForm class="inputForm centerAlign" Model="@Params" EditContext="@editContext" style="display:flex; flex-wrap:wrap; margin-left:10px; margin-right:10px;">
             <h6 style="color:white; margin:15px;">Or, Input Raw Text to Encrypt </h6>
             <InputText @bind-Value="@Params.text" class="inputText"/>
         </EditForm>
