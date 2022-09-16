@@ -1,5 +1,5 @@
 ﻿@inherits LayoutComponentBase
-
+@inject NavigationManager navManager
 <div class="page">
     <div class="sidebar">
         <NavMenu />
@@ -10,10 +10,62 @@
          
             @Body
         </article>
+        <footer class="padder" style="background-color:rgb(9,28,128); width=120%;">
+            <div style="display:flex; flex-wrap:wrap;">
+                <div>
+                    <h3 class="footerHead">LegendSayantan</h3>
+                    <span class="footerText">Creating for Convenience.</span>
+                </div>
+                <div style="margin: 25px; display: flex; flex-direction: column;">
+                    <span class="footerText">Contact</span>
+                    <div class="flex-row tinted" style="margin-left:25px;">
+                        <a href="https://fb.com/legendsayantan" target="_blank">
+                            <img height="25" width="25" src="https://img.icons8.com/material/2x/facebook--v1.png" />
+                        </a><a href="http://www.instagram.com/legendsayantan" target="_blank">
+                            <img height="25" width="25" src="https://img.icons8.com/material/2x/instagram-new--v1.png" />
+                        </a><a href="http://www.reddit.com/u/legendsayantan" target="_blank">
+                            <img height="25" width="25" src="https://img.icons8.com/material/2x/reddit.png" />
+                        </a><a href="https://twitter.com/legendsayantan" target="_blank">
+                            <img height="25" width="25" src="https://img.icons8.com/material/2x/twitter--v2.png" />
+                        </a><a href="https://linkedin.com/in/sayantan-paul-4717b3231" target="_blank">
+                            <img height="25" width="25" src="https://img.icons8.com/material/2x/linkedin--v1.png" />
+                        </a>
+                    </div>
+                </div>
+                <div style="margin: 25px; display: flex; flex-direction: column;">
+                    <a class="footerText" style="cursor:pointer; margin-bottom:10px;" href=@(navManager.Uri)>Scroll to top</a>
+                    <a class="footerText" style="cursor:pointer;" href="\">Home Page</a>
+                </div>
+            </div>
+        </footer>
     </main>
+
 </div>
+
 <style>
     #back {
         background-image: linear-gradient(to bottom right,black,#3890FC);
+    }
+    .footerHead{
+        color: #3890FC;
+        font-family:'Palatino Linotype';
+        margin: 25px;
+        margin-bottom:5px;
+    }
+    .footerText {
+        color: #3890FC;
+        font-family:Consolas;
+        margin-left:25px;
+    }
+    .padder{
+        padding:20px;
+    }
+    img{
+        color:#3890FC;
+    }
+    .tinted{
+        padding:5px;
+        background-color: #3890FC;
+        border-radius:10px;
     }
 </style>

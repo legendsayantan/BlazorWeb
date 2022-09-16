@@ -1,0 +1,71 @@
+﻿@page "/xcryptdemo"
+<PageTitle>Xcrypt</PageTitle>
+<img src="https://user-images.githubusercontent.com/69689739/190592603-f8215e2f-ab47-4701-aead-8d01a14245b1.png" asp-append-version="true" />
+<h6 class="text">Encrypt or Decrypt files on Android or Windows.</h6>
+<h1 class="center">Reclaim Your Privacy.</h1>
+
+<h3 class="center" style="margin-bottom:0px;">Online Demo</h3>
+<div style="justify-content: center; display:flex; flex-wrap:wrap;">
+    <span class="text" style="justify-content: center;">Works on your browser. Still no data leaves your device. </span>
+    <span class="text" style="justify-content: center; margin-left:5px;"> Max file limit : 512 KB.</span>
+    <span class="text" style="justify-content: center; margin-left:5px;"> The result file can only be decrypted using this webpage.</span>
+</div>
+<XcryptDemoModule/>
+<h5 class="text center" style="margin:0px;">If you need a more private approach with custom encryption keys and cross-compatibility, Consider Installing Xcrypt for your Device.</h5>
+<div class="text">
+    <h3 class="center" style="margin:0px;">Installation</h3>
+    <p>Android Package Archive (Apk) for Android : <a href="https://github.com/legendsayantan/Xcrypt/releases">Download here</a></p>
+    <p>Java Archive (Jar) for Windows : <a href="https://github.com/legendsayantan/Xcrypt-windows/releases">Download Here</a> [Needs <a href="https://www.java.com/en/download/help/download_options.html#windows">Java</a> to be Installed]</p>
+</div>
+<h3 id="source-code" class="center" style="margin:0px;">Source code</h3>
+<p><a href="https://github.com/legendsayantan/Xcrypt">Android</a></p>
+<p><a href="https://github.com/legendsayantan/Xcrypt-windows">Windows</a></p>
+<style>
+    .center {
+        display: flex;
+        flex-wrap: wrap;
+        padding: 25px;
+        justify-content: center;
+        color: powderblue;
+        margin-top: 100px;
+        margin-bottom: 100px;
+        font-family: 'Palatino Linotype';
+    }
+
+    .text {
+        color: #55b9f3;
+    }
+
+    p {
+        color: powderblue;
+        justify-content: center;
+    }
+
+    a:link {
+        color: #55b9f3;
+        text-decoration: none;
+    }
+
+    a:hover {
+        text-decoration: underline;
+    }
+
+    .btn:hover {
+        color: #55b9f3;
+        background-color: #0F2CD4;
+    }
+
+    .btn {
+        color: #0F2CD4;
+        background-color: #55b9f3;
+    }
+</style>
+
+@inject IJSRuntime jsRuntime
+@inject NavigationManager NavManager
+@code {
+    protected void startDemo()
+    {
+        NavManager.NavigateTo("/xcryptdemo");
+    }
+}

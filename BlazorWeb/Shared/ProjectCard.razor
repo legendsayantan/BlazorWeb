@@ -1,4 +1,5 @@
-﻿<MatCard class="demo-mat-card">
+﻿@using MatBlazor;
+<MatCard class="demo-mat-card">
     <MatCardContent>
         <div class="demo-mat-card-content">
             <MatHeadline6 class="demo-mat-card-clean-margin">
@@ -57,13 +58,14 @@
 
 
 @inject IJSRuntime jsRuntime
+@inject NavigationManager NavManager
 @code {
 
     [Parameter]
     public Project project { get; set; }
 
-    public async Task wikiClick(){
-        await jsRuntime.InvokeAsync<object>("open", project.path, "_blank");
+    public void wikiClick(){
+        NavManager.NavigateTo(project.path);
     }
     public async Task gitClick(){
         await jsRuntime.InvokeAsync<object>("open", "https://github.com/legendsayantan"+project.path, "_blank");

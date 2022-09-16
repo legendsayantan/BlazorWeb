@@ -1,0 +1,162 @@
+﻿@using Radzen.Blazor
+@using Microsoft.AspNetCore.Components.WebAssembly.Hosting
+@using System.Security.Cryptography;
+@using System.Runtime.InteropServices;
+@using System.Text;
+@using FileDownloader
+<div class="maincard centerAlign flex-column" style="display:flex;">
+    <div class="centerAlign" id="no_file" style="display:flex; flex-wrap:wrap;">
+        <h6 style="color:white; padding:7px;">Drag and drop files here or </h6>
+        <InputFile type="file" id="myFile" name="filename" multiple OnChange=fileSelect />
+    </div>
+    <div class="centerAlign" style="display:flex;">
+        <button class="xcryptButton" @onclick="startTask">
+            @action
+        </button>
+    </div>
+</div>
+<style>
+    .maincard {
+        padding:50px;
+        border-radius: 25px;
+        background: #55b9f3;
+        box-shadow: inset 35px 35px 70px #489dcf, inset -35px -35px 70px #62d5ff;
+    }
+    .centerAlign{
+        justify-content:center;
+    }
+    input[type=file]{
+        padding:7px;
+        justify-content:center;
+    }
+    .inputForm{
+        margin-top:15px;
+        padding:15px;
+        border-radius: 25px;
+        background: linear-gradient(145deg, #4da7db, #5bc6ff);
+        box-shadow:  20px 20px 25px #489dcf,
+             -20px -20px 25px #62d5ff;
+    }
+
+    .inputCode {
+        padding: 15px;
+        display: flex;
+        flex-wrap: wrap;
+    }
+    input::file-selector-button {
+        border-width: 0px;
+        border-radius: 5px;
+        background: #55b9f3;
+        box-shadow: 3px 3px 6px #489dcf, -3px -3px 6px #62d5ff;
+        color:white;
+    }
+    input::file-selector-button:hover {
+        border-width: 0px;
+                border-radius: 5px;
+                background: #55b9f3;
+                box-shadow: 3px 3px 6px #408bb6, -3px -3px 6px #6ae7ff;
+        color:white;
+    }
+    input::file-selector-button:active{
+        border-radius: 5px;
+        background: #55b9f3;
+        box-shadow: inset 3px 3px 6px #489dcf,
+            inset -3px -3px 6px #62d5ff;
+    }
+    input::first-line{
+        color:white;
+    }
+    .inputText{
+        padding-left:10px;
+        padding-right:10px;
+        border-width: 0px;
+        border-radius: 25px;
+        background: #55b9f3;
+        box-shadow: inset 10px 10px 20px #489dcf, inset -10px -10px 20px #62d5ff;
+    }
+
+    input[type=password]:focus {
+        outline:none;
+    }
+    .xcryptButton{
+        margin-top:25px;
+        border-radius: 25px;
+        border-width:0px;
+        padding:15px;
+        padding-left:50px;
+        padding-right: 50px;
+        color:white;
+        background: linear-gradient(145deg, #5bc6ff, #4da7db);
+        box-shadow: 10px 10px 20px #489dcf, -10px -10px 20px #62d5ff;
+    }
+    .xcryptButton:hover{
+            border-radius: 25px;
+            background: linear-gradient(145deg, #5bc6ff, #4da7db);
+            box-shadow: 10px 10px 20px #4494c2, -10px -10px 20px #66deff;
+    }
+    .xcryptButton:active{
+            border-radius: 25px;
+            background: #55b9f3;
+            box-shadow: inset 10px 10px 20px #489dcf, inset -10px -10px 20px #62d5ff;
+    }
+</style>
+@inject ICryptoService Crypto
+@inject Downloader downloader
+@inject NavigationManager Nav
+@code {
+    String action = "Xcrypt";
+    IReadOnlyList<IBrowserFile>? files;
+    string prompt = "Enter 16 digit Key";
+    InputParams Params = new InputParams();
+    public void fileSelect(InputFileChangeEventArgs e){
+        files = e.GetMultipleFiles(e.FileCount);
+
+    }
+    class InputParams
+    {
+        public string code { get; set; } = "";
+    }
+    public async Task startTask()
+    {
+        
+        if (files == null) return;
+        foreach (IBrowserFile file in files)
+        {
+            var fileName = file.Name;
+            string[] parts = file.Name.Split(".");
+            int Byte_Buffer = 512000;
+            if (file.Size > Byte_Buffer) return;
+            byte[] bytes = new byte[file.Size];
+            await file.OpenReadStream().ReadAsync(bytes);
+            byte[] OutFile = new byte[file.Size];
+            if (parts[parts.Length - 1].Contains("xcrypt_"))
+            {
+                //Decryption
+                fileName = file.Name.Replace(parts[parts.Length - 1], "") + parts[parts.Length - 1].Replace("xcrypt_", "");
+                if (bytes.ToString() == null)
+                {
+                    Console.WriteLine("null string 1");
+                    return;
+                }
+                String data = await Crypto.DecryptAsync(Encoding.UTF8.GetString(bytes));
+                if (data == null)
+                {
+                    Console.WriteLine("null string 2");
+                    return;
+                }
+                OutFile = Encoding.UTF8.GetBytes(data);
+                Console.WriteLine(Encoding.UTF8.GetString(OutFile));
+            }
+            else
+            {
+                //Encryption
+                fileName = file.Name.Replace(parts[parts.Length - 1], "") + "xcrypt_" + parts[parts.Length - 1];
+                CryptoResult data = await Crypto.EncryptAsync(Encoding.UTF8.GetString(bytes));
+                OutFile = Encoding.UTF8.GetBytes(data.Value);
+                Console.WriteLine(Encoding.UTF8.GetString(OutFile));
+            }
+            await downloader.DownloadFromStream(OutFile, fileName);
+        }
+    }
+}
+    

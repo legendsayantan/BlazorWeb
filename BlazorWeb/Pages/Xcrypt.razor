@@ -1,8 +1,8 @@
 ﻿@page "/xcrypt"
 <PageTitle>Xcrypt</PageTitle>
-<img src="images/xcrypt.png" asp-append-version="true" />
+<img src="https://user-images.githubusercontent.com/69689739/190592603-f8215e2f-ab47-4701-aead-8d01a14245b1.png" asp-append-version="true" />
 <h6 class="text">Encrypt or Decrypt files on Android or Windows.</h6>
-<h1 class="center">Reclaim Your Privacy.</h1>
+<h1 class="center heading">Reclaim Your Privacy.</h1>
 <div class="text">
     <h3>Why Xcrypt?</h3>
     <ul>
@@ -40,26 +40,30 @@
   </li>
 </ul>
 </div>
+<div class="center  " style="margin-top:10px; margin-bottom:20px">
+    <button class="btn" @onclick="startDemo">Try Online Demo</button>
+</div>
 <div class="text">
     <h3>Installation</h3>
     <p>Android Package Archive (Apk) for Android : <a href="https://github.com/legendsayantan/Xcrypt/releases">Download here</a></p>
     <p>Java Archive (Jar) for Windows : <a href="https://github.com/legendsayantan/Xcrypt-windows/releases">Download Here</a> [Needs <a href="https://www.java.com/en/download/help/download_options.html#windows">Java</a> to be Installed]</p>
 </div>
-<h2 id="screenshots" class="center" style="margin:0px;">Screenshots</h2>
+<h2 id="screenshots" class="center heading" style="margin:0px;">Screenshots</h2>
 <h3 id="android" class="text">Android</h3>
-<p style="display:flex; flex-wrap:wrap;" ><img src="https://user-images.githubusercontent.com/69689739/185054247-5bd416fd-a865-49f2-ad3c-0d6b4251fbb4.png" alt="image">
-<img src="https://user-images.githubusercontent.com/69689739/185054062-530d4deb-7873-4382-ba19-64ea518ebb30.png" alt="image">
-<img src="https://user-images.githubusercontent.com/69689739/185054168-4aabd149-dd0d-410a-867c-ecf88c86e7ac.png" alt="image"></p>
+<p style="display:flex; flex-wrap:wrap;" >
+    <img src="https://user-images.githubusercontent.com/69689739/185054247-5bd416fd-a865-49f2-ad3c-0d6b4251fbb4.png" alt="image">
+    <img src="https://user-images.githubusercontent.com/69689739/185054062-530d4deb-7873-4382-ba19-64ea518ebb30.png" alt="image">
+    <img src="https://user-images.githubusercontent.com/69689739/185054168-4aabd149-dd0d-410a-867c-ecf88c86e7ac.png" alt="image"></p>
 <h3 id="windows" class="text">Windows</h3>
 <p style="display:flex; flex-wrap:wrap; justify-content:center;" >
-<img src="images/xcrypt_pc_1.png" alt="image">
-<img src="images/xcrypt_pc_2.png" alt="image">
-<img src="images/xcrypt_pc_3.png" alt="image">
-<img style="margin:25px; margin-top:60px; margin-bottom:60px;" src="images/xcrypt_pc_4.png" alt="image"></p>
-<h3 id="source-code" class="center" style="margin:0px;">Source code</h3>
+    <img src="https://user-images.githubusercontent.com/69689739/190592840-a01e8d87-98c1-41d2-9aea-e1f4dff47c9f.png" alt="image">
+    <img src="https://user-images.githubusercontent.com/69689739/190592968-dec7b9b0-290d-46f1-b792-7faee22ad2b0.png" alt="image">
+    <img src="https://user-images.githubusercontent.com/69689739/190593057-f674b1d8-77d2-45a8-8316-b39f06957db1.png" alt="image">
+    <img style="margin:25px; margin-top:60px; margin-bottom:60px;" src="https://user-images.githubusercontent.com/69689739/190593215-28c115e9-b350-4352-bcc8-20fb3aa53f2a.png" alt="image">
+</p>
+<h3 id="source-code" class="center heading" style="margin:0px;">Source code</h3>
 <p><a href="https://github.com/legendsayantan/Xcrypt">Android</a></p>
 <p><a href="https://github.com/legendsayantan/Xcrypt-windows">Windows</a></p>
-<h3 id="go-to-website-home" class="text">Go to Website <a href="https://legendsayantan.github.io">Home</a></h3>
 <style>
     .center{
         display:flex;
@@ -67,9 +71,11 @@
         padding:25px;
         justify-content:center;
         color: powderblue;
-        margin-top:100px;
-        margin-bottom:100px;
         font-family:'Palatino Linotype';
+    }
+    .heading{
+        margin-top: 100px;
+        margin-bottom: 100px;
     }
     .text{
         color:#55b9f3;
@@ -78,7 +84,27 @@
         color:powderblue;
         justify-content:center;
     }
-</style>
-@code {
+    a:link{
+        color: #55b9f3;
+        text-decoration: none;
+    }
+    a:hover{
+        text-decoration: underline;
+    }
 
+    .btn:hover {
+        color:#55b9f3;
+        background-color:#0F2CD4;
+    }
+    .btn{
+            color: #0F2CD4;
+        background-color:#55b9f3;
+    }
+</style>
+@inject IJSRuntime jsRuntime
+@inject NavigationManager NavManager
+@code {
+    protected void startDemo(){
+        NavManager.NavigateTo("/xcryptdemo");
+    }
 }

@@ -7,9 +7,10 @@
 <div class="center" id="projectContainer">
     @foreach (Project proj in @projects ?? Enumerable.Empty<Project>())
     {
-        <ProjectCard project="@proj"/>
+        <ProjectCard project=@proj/>
     }
 </div>
+
 <style>
     .center{
         display:flex;
@@ -41,7 +42,3 @@
         projects = await Http.GetFromJsonAsync<Project[]>("/data/projects.json");
     }
 }
-<RadzenDialog />
-<RadzenNotification />
-<RadzenContextMenu />
-<RadzenTooltip />
