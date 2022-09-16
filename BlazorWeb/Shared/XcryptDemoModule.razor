@@ -6,8 +6,12 @@
 @using FileDownloader
 <div class="maincard centerAlign flex-column" style="display:flex;">
     <div class="centerAlign" id="no_file" style="display:flex; flex-wrap:wrap;">
-        <h6 style="color:white; padding:7px;">Drag and drop files here or </h6>
-        <InputFile type="file" id="myFile" name="filename" multiple OnChange=fileSelect />
+        <InputFile type="file" id="myFile" name="filename" OnChange=fileSelect style="margin-top:35px;" />
+        
+        <EditForm class="inputForm centerAlign" Model="@Params" EditContext="@editContext" style="display:flex; flex-wrap:wrap;">
+            <h6 style="color:white; margin:15px;">Or, Input Raw Text to Encrypt </h6>
+            <InputText @bind-Value="@Params.text" class="inputText"/>
+        </EditForm>
     </div>
     <div class="centerAlign" style="display:flex;">
         <button class="xcryptButton" @onclick="startTask">
@@ -75,7 +79,7 @@
         box-shadow: inset 10px 10px 20px #489dcf, inset -10px -10px 20px #62d5ff;
     }
 
-    input[type=password]:focus {
+    input[type=text]:focus {
         outline:none;
     }
     .xcryptButton{
@@ -104,59 +108,60 @@
 @inject Downloader downloader
 @inject NavigationManager Nav
 @code {
-    String action = "Xcrypt";
-    IReadOnlyList<IBrowserFile>? files;
+    public EditContext editContext ;
+    String action = "Download Result File";
+    IBrowserFile file;
     string prompt = "Enter 16 digit Key";
     InputParams Params = new InputParams();
+    byte[] OutFile;
+    string fileName = "New Encrypted Document.txt";
     public void fileSelect(InputFileChangeEventArgs e){
-        files = e.GetMultipleFiles(e.FileCount);
+        file = e.File;
 
     }
     class InputParams
     {
-        public string code { get; set; } = "";
+        public string text { get; set; } = "";
     }
     public async Task startTask()
     {
-        
-        if (files == null) return;
-        foreach (IBrowserFile file in files)
+
+        if (file == null&&Params.text.Length==0) return;
+        byte[] bytes;
+        string[] parts;
+        if (Params.text.Length!=0)
         {
-            var fileName = file.Name;
-            string[] parts = file.Name.Split(".");
+
+            bytes = new byte[Params.text.Length];
+            bytes = Encoding.UTF8.GetBytes(Params.text);
+        }else{
+            fileName = file.Name;
             int Byte_Buffer = 512000;
             if (file.Size > Byte_Buffer) return;
-            byte[] bytes = new byte[file.Size];
+            bytes = new byte[file.Size];
             await file.OpenReadStream().ReadAsync(bytes);
-            byte[] OutFile = new byte[file.Size];
-            if (parts[parts.Length - 1].Contains("xcrypt_"))
-            {
-                //Decryption
-                fileName = file.Name.Replace(parts[parts.Length - 1], "") + parts[parts.Length - 1].Replace("xcrypt_", "");
-                if (bytes.ToString() == null)
-                {
-                    Console.WriteLine("null string 1");
-                    return;
-                }
-                String data = await Crypto.DecryptAsync(Encoding.UTF8.GetString(bytes));
-                if (data == null)
-                {
-                    Console.WriteLine("null string 2");
-                    return;
-                }
-                OutFile = Encoding.UTF8.GetBytes(data);
-                Console.WriteLine(Encoding.UTF8.GetString(OutFile));
-            }
-            else
-            {
-                //Encryption
-                fileName = file.Name.Replace(parts[parts.Length - 1], "") + "xcrypt_" + parts[parts.Length - 1];
-                CryptoResult data = await Crypto.EncryptAsync(Encoding.UTF8.GetString(bytes));
-                OutFile = Encoding.UTF8.GetBytes(data.Value);
-                Console.WriteLine(Encoding.UTF8.GetString(OutFile));
-            }
-            await downloader.DownloadFromStream(OutFile, fileName);
         }
+
+        parts = fileName.Split(".");
+        if (parts[parts.Length - 1].Contains("xcrypt_"))
+        {
+            //Decryption
+            fileName = fileName.Replace(parts[parts.Length - 1], "") + parts[parts.Length - 1].Replace("xcrypt_", "");
+            String data = await Crypto.DecryptAsync(Encoding.UTF8.GetString(bytes));
+            OutFile = Encoding.UTF8.GetBytes(data);
+            Console.WriteLine(Encoding.UTF8.GetString(OutFile));
+        }
+        else
+        {
+            //Encryption
+            fileName = fileName.Replace(parts[parts.Length - 1], "") + "xcrypt_" + parts[parts.Length - 1];
+            CryptoResult data = await Crypto.EncryptAsync(Encoding.UTF8.GetString(bytes));
+            OutFile = Encoding.UTF8.GetBytes(data.Value);
+            Console.WriteLine(Encoding.UTF8.GetString(OutFile));
+        }
+        Params.text = "";
+        await downloader.DownloadFromStream(OutFile, fileName);
     }
+
 }
     
