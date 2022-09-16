@@ -27,7 +27,7 @@
 
     protected override async Task OnInitializedAsync()
     {
-        projects = await Http.GetFromJsonAsync<Project[]>("data/projects.json");
+        projects = await Http.GetJsonAsync<Project[]>("/data/projects.json");
     }
 }
 <RadzenDialog />
