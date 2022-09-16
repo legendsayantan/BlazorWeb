@@ -19,15 +19,26 @@
         color: powderblue;
         font-family:'Palatino Linotype';
     }
+    @@font-face{
+        font-family:Consolas;
+        src:url('/fonts/Consolas.woff');
+    }
+    @@font-face {
+        font-family: 'Palatino Linotype';
+        src: url('/fonts/Palatino Linotype.woff');
+    }
+    @@font-face {
+        font-family: Pristina;
+        src: url('/fonts/Pristina.woff');
+    }
 </style>
 @inject HttpClient Http
 @code {
-    string text = "Hi";
     Project[]? projects;
 
     protected override async Task OnInitializedAsync()
     {
-        projects = await Http.GetJsonAsync<Project[]>("/data/projects.json");
+        projects = await Http.GetFromJsonAsync<Project[]>("/data/projects.json");
     }
 }
 <RadzenDialog />
