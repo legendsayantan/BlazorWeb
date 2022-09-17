@@ -12,8 +12,8 @@
         </MatBody2>
     </MatCardContent>
     <MatCardActions Class="actions">
-        <MatButton OnClick="@wikiClick" Class="mat-card-action">Wiki</MatButton>
-        <MatButton OnClick="@gitClick" Class="mat-card-action">Github</MatButton>
+        <RainbowButton Text="Wiki" Path="@project.path"/>
+        <RainbowButton Text="Github" Path=@("https://github.com/legendsayantan/"+project.path) />
     </MatCardActions>
 </MatCard>
 
@@ -22,7 +22,7 @@
         margin:25px;
         min-width: fit-content;
         max-width: fit-content;
-        max-height: 178px;
+        max-height: 215px;
         color: #181828;
     }
 
@@ -30,29 +30,33 @@
         display: flex;
         padding: 1rem;
         background-color: #181828;
-        border: #1C72EB;
+        border: #3890FC;
         border-width: 2px;
         border-bottom-width: 0px;
         border-style: solid;
     }
 
     .demo-mat-card-clean-margin {
-        color: #1C72EB;
+        color: #3890FC;
         border-top-width: 0px;
         border-bottom-width: 0px;
         transform: translateY(-25);
+        font-family:Consolas;
     }
 
     .actions {
-        border: #1C72EB;
+        padding:10px;
+        border: #3890FC;
         border-width: 2px;
         border-top-width: 0px;
         background-color: #181828;
         border-style: solid;
+        justify-content:center;
+        align-items:center;
     }
 
     .mat-card-action {
-        -webkit-text-fill-color: #1C72EB;
+        -webkit-text-fill-color: #3890FC;
     }
 </style>
 

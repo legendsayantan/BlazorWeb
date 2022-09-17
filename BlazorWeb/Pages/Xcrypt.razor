@@ -41,12 +41,26 @@
 </ul>
 </div>
 <div class="center  " style="margin-top:10px; margin-bottom:20px">
-    <button class="btn" @onclick="startDemo">Try Quick Text Encryption</button>
+    <a href="/xcryptdemo" class="btn">Quick Text Encryption</a>
 </div>
 <div class="text">
-    <h3>Installation</h3>
-    <p>Android Package Archive (Apk) for Android : <a href="https://github.com/legendsayantan/Xcrypt/releases">Download here</a></p>
-    <p>Java Archive (Jar) for Windows : <a href="https://github.com/legendsayantan/Xcrypt-windows/releases">Download Here</a> [Needs <a href="https://www.java.com/en/download/help/download_options.html#windows">Java</a> to be Installed]</p>
+    <h3 class="center" style=" margin:0px;">Installation</h3>
+    <div class="center" style="display:flex; flex-wrap:wrap; margin:0px;">
+        
+        <div class="container">
+            <a href="https://github.com/legendsayantan/Xcrypt/releases" class="center btn flex-row">
+                Install on
+                <img src="https://img.icons8.com/fluency/2x/android-os.png" style=" margin-left:15px; height:25px; width:25px;" />
+            </a>
+        </div>
+        <div class="container">
+            <a href="https://github.com/legendsayantan/Xcrypt-Windows/releases" class="center btn flex-row">
+                Install on
+                <img src="https://img.icons8.com/color/2x/windows-10.png" style=" margin-left:15px; height:25px; width:25px;" />
+            </a>
+        </div>
+        <p>[Needs <a href="https://www.java.com/en/download/help/download_options.html#windows">Java</a> to be Installed]</p>
+    </div>
 </div>
 <h2 id="screenshots" class="center heading" style="margin:0px;">Screenshots</h2>
 <h3 id="android" class="text">Android</h3>
@@ -61,10 +75,26 @@
     <img src="https://user-images.githubusercontent.com/69689739/190593057-f674b1d8-77d2-45a8-8316-b39f06957db1.png" alt="image">
     <img style="margin:25px; margin-top:60px; margin-bottom:60px;" src="https://user-images.githubusercontent.com/69689739/190593215-28c115e9-b350-4352-bcc8-20fb3aa53f2a.png" alt="image">
 </p>
-<h3 id="source-code" class="center heading" style="margin:0px;">Source code</h3>
-<p><a href="https://github.com/legendsayantan/Xcrypt">Android</a></p>
-<p><a href="https://github.com/legendsayantan/Xcrypt-windows">Windows</a></p>
+<div class="text">
+    <h3 class="center" style=" margin:0px;">Source Code</h3>
+    <div class="center" style="display:flex; flex-wrap:wrap; margin:0px;">
+
+        <div class="container">
+            <a href="https://github.com/legendsayantan/Xcrypt" class="btn flex-row">
+                Source for
+                <img src="https://img.icons8.com/fluency/2x/android-os.png" style=" margin-left:15px; height:25px; width:25px;" />
+            </a>
+        </div>
+        <div class="container">
+            <a href="https://github.com/legendsayantan/Xcrypt-Windows" class="btn flex-row">
+                Source for
+                <img src="https://img.icons8.com/color/2x/windows-10.png" style=" margin-left:15px; height:25px; width:25px;" />
+            </a>
+        </div>
+    </div>
+</div>
 <style>
+
     .center{
         display:flex;
         flex-wrap: wrap;
@@ -92,14 +122,55 @@
         text-decoration: underline;
     }
 
-    .btn:hover {
+    .btnx:hover {
         color:#55b9f3;
         background-color:#0F2CD4;
     }
-    .btn{
-            color: #0F2CD4;
+    .btnx{
+        color: #0F2CD4;
         background-color:#55b9f3;
     }
+
+    .container {
+        display: flex;
+        flex-wrap:wrap;
+        justify-content: center;
+        align-items: center;
+        margin-top:50px;
+    }
+
+    .btn {
+        font-size: 1.0rem;
+        padding: 1rem 3rem;
+        color: #f4f4f4;
+        text-transform: uppercase;
+        text-decoration: none;
+        border: 1px solid #55b9f3;
+        position: relative;
+        overflow: hidden;
+    }
+
+        .btn:hover {
+            box-shadow: 1px 1px 25px 10px #55b9f3;
+            text-decoration: none;
+            color:powderblue;
+        }
+
+        .btn:before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient( 120deg, transparent, #55b9f3, transparent );
+            transition: all 650ms;
+        }
+
+        .btn:hover:before {
+            left: 100%;
+        }
+
 </style>
 @inject IJSRuntime jsRuntime
 @inject NavigationManager NavManager

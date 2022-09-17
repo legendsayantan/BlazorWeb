@@ -1,0 +1,211 @@
+﻿@page "/autoreact/{par:int?}"
+@using Radzen.Blazor
+<PageTitle>AutoReact</PageTitle>
+<h1 class ="text center" style="display:flex; flex-wrap:wrap; align-items:end">
+    <img style="height:50px; width:50px; margin-bottom:1px;" src="https://github.com/legendsayantan/AutoReact/blob/master/app/src/main/res/drawable-v24/logo.png?raw=true"/>
+    utoReact</h1>
+<h5 class="center" style="margin-top:0px;">Automated Reactions for Facebook and Instagram.</h5>
+<div class="text">
+    <h3>What actually is this?</h3>
+    <p>
+        This android app is a custom browser , integrated with a bot that can automatically scroll and/or react on posts in social media platforms like Facebook and Instagram, reducing your hassle to do these manually. Also, this blocks some fb ads/sponsored posts.
+    </p>
+</div>
+<div class="text">
+    <h3>How does it know the suitable reaction for every post?</h3>
+    <p>
+        Well... it doesn't. It scans the already existing reactions other people provided and just simply goes with the majority. 
+    </p>
+    <p>
+        (If a post has no reactions yet, this bot would skip the post too)
+    </p>
+</div>
+<div class="text">
+    <h3>Known bugs</h3>
+    <p>
+        Sometimes , if you set too high auto scrolling speed and also use auto reaction, Auto reaction might stop working after some time. This happens when the Auto reaction bot cannot keep up with the speed of posts being rendered and scrolled.
+    </p>
+    <h5>So... Could I not make the reaction bot faster?</h5>
+    <p>
+        No. Reacting too fast might make you sus in the eyes of facebook, thus your account might get temporarily restricted from reactions.
+    </p>
+</div>
+<div class="center  " style="margin-top:10px; margin-bottom:20px">
+    
+</div>
+<div class="text">
+    <h3 class="center" style=" margin:0px;">Installation</h3>
+    <div class="center" style="display:flex; flex-wrap:wrap; margin:0px;">
+
+        <div class="container">
+            <a href="https://github.com/legendsayantan/AutoReact/releases" class="center btn flex-row">
+                Install on
+                <img src="https://img.icons8.com/fluency/2x/android-os.png" style=" margin-left:15px; height:25px; width:25px;" />
+            </a>
+        </div>
+        <div class="container">
+            <a class="center btn flex-row" @onclick="openAuto">
+                Use On
+                <img src="https://img.icons8.com/color/2x/windows-10.png" style=" margin-left:15px; height:25px; width:25px; margin-right:15px;" />
+                Browsers
+            </a>
+        </div>
+    </div>
+</div>
+<div class="text">
+    <h3 class="center" style=" margin:0px;">Source Code</h3>
+    <div class="center" style="display:flex; flex-wrap:wrap; margin:0px;">
+
+        <div class="container">
+            <a href="https://github.com/legendsayantan/AutoReact" class="btn text flex-row">
+                Source for
+                <img src="https://img.icons8.com/fluency/2x/android-os.png" style=" margin-left:15px; height:25px; width:25px;" />
+            </a>
+        </div>
+    </div>
+</div>
+<MatDialog CanBeClosed IsOpen=@dialogOpen >
+    <MatDialogTitle>AutoReact On Browser</MatDialogTitle>
+    <MatDialogContent>
+        @dialogText
+        <br/>
+        <a href="https://appuals.com/open-browser-console/" class="text" style="font-size:12px;">How to open console in your browser?</a>
+    </MatDialogContent>
+    <MatDialogActions>
+        <MatButton OnClick="@openFbAuto">FaceBook</MatButton>
+        <MatButton OnClick="@openInstaAuto">Instagram</MatButton>
+    </MatDialogActions>
+</MatDialog>
+<style>
+
+    .center {
+        display: flex;
+        flex-wrap: wrap;
+        padding: 25px;
+        justify-content: center;
+        color: powderblue;
+        font-family: 'Palatino Linotype';
+    }
+
+    .heading {
+        margin-top: 100px;
+        margin-bottom: 100px;
+    }
+
+
+
+    .text {
+        color: #7F86FF;
+    }
+    .text:link{
+            color: #0F2CD4;
+    }
+
+    p {
+        color: powderblue;
+        justify-content: center;
+    }
+
+    a:link {
+        color: #f4f4f4;
+        text-decoration: none;
+    }
+
+    a:hover {
+        text-decoration: underline;
+    }
+
+    a:focus{
+        outline: none;
+    }
+
+    .btnx:hover {
+        color: #7F86FF;
+        background-color: #0F2CD4;
+    }
+
+    .btnx {
+        color: #0F2CD4;
+        background-color: #7F86FF;
+    }
+
+    .container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+        margin-top: 50px;
+    }
+
+    .btn {
+        font-size: 1.0rem;
+        padding: 1rem 3rem;
+        color: #f4f4f4;
+        text-transform: uppercase;
+        text-decoration: none;
+        border: 1px solid #7F86FF;
+        position: relative;
+        overflow: hidden;
+    }
+
+        .btn:hover {
+            box-shadow: 1px 1px 25px 10px #7F86FF;
+            text-decoration: none;
+            color: powderblue;
+        }
+
+        .btn:before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient( 120deg, transparent, #7F86FF, transparent );
+            transition: all 650ms;
+        }
+
+        .btn:hover:before {
+            left: 100%;
+        }
+
+</style>
+
+@inject IJSRuntime JS
+@inject HttpClient Http;
+@inject NavigationManager Nav
+@code {
+    [Parameter]
+    public int? par { get; set; }
+    private string? code;
+    public bool dialogOpen = false;
+    public string dialogText = "Choose your Platform and log in, then paste the copied code into Browser console.";
+    public string Reference = "";
+    protected override async Task OnInitializedAsync()
+    {
+        if (par != null)openAuto();
+    }
+    public async Task openFbAuto(){
+        code = await Http.GetStringAsync("https://raw.githubusercontent.com/legendsayantan/AutoReact/master/app/src/main/assets/FbAutoReactor.js");
+        if (code == null) return;
+        code = code.Replace("var autoscroll = false;", "var autoscroll = true;");
+        await JS.InvokeVoidAsync("navigator.clipboard.writeText", code);
+        par = null;
+        dialogOpen = false;
+        await JS.InvokeAsync<object>("open", "https://m.facebook.com", "_blank");
+    }
+    public async Task openInstaAuto()
+    {
+        code = await Http.GetStringAsync("https://raw.githubusercontent.com/legendsayantan/AutoReact/master/app/src/main/assets/InstaAutoReactor.js");
+        if (code == null) return;
+        await JS.InvokeVoidAsync("navigator.clipboard.writeText", code);
+        par = null;
+        dialogOpen = false;
+        await JS.InvokeAsync<object>("open", "https://instagram.com", "_blank");
+    }
+    public async Task openAuto(){
+        par = 0;
+        dialogOpen = true;
+    }
+
+}
