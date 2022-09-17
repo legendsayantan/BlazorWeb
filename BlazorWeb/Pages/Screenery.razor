@@ -1,0 +1,206 @@
+﻿@page "/screenery"
+@using Radzen.Blazor
+<PageTitle>Screenery</PageTitle>
+<h1 class ="text center" style="display:flex; flex-wrap:wrap; align-items:end">
+    Screenery</h1>
+<h5 class="center" style="margin-top:0px;">Keep Android Screen Awake or make it Dimmer, and Remap your hardware buttons as shortcuts.</h5>
+<div class="text">
+    <h3>Features</h3>
+    <ol dir="auto">
+        <li>
+            <p dir="auto">Prevent Android Screen from automatically turning off, until You do it.</p>
+        </li>
+        <li>
+            <p dir="auto">Set Custom Screen Wake Timers for your device.</p>
+        </li>
+        <li>
+            <p dir="auto">Turns off screen and pauses device media when you fall asleep, thanks to its Automatic Sleep Detection Capabilities. </p>
+        </li>
+        <li>
+            <p dir="auto">Android Screen too bright even at lowest brightness? Screenery can darken your screen up to <strong>90% more</strong> than lowest brightness.  </p>
+        </li>
+        <li>
+            <p dir="auto">Easy and Customisable Controls, from Quick Settings Panel or Floating Bubble.</p>
+        </li>
+        <li>
+            <p dir="auto">Remap the Hardware Buttons, As quick shortcuts for various actions.</p>
+        </li>
+    </ol>
+</div>
+<div class="text">
+    <h3 class="center" style=" margin:0px;">Installation</h3>
+    <div class="center" style="display:flex; flex-wrap:wrap; margin:0px;">
+
+        <div class="container">
+            <a href="https://github.com/legendsayantan/Screenery/releases" class="center btn flex-row">
+                Install on
+                <img src="https://img.icons8.com/fluency/2x/android-os.png" style=" margin-left:15px; height:25px; width:25px;" />
+            </a>
+        </div>
+    </div>
+</div>
+<h2 id="screenshots" class="center heading" style="margin:0px;">Screenshots</h2>
+<p style="display:flex; flex-wrap:wrap;">
+    <img style="margin:5px; height:700px;" src="https://user-images.githubusercontent.com/69689739/190870024-09c4edac-6108-4cec-ac9f-b92d2d206018.jpg" alt="image">
+    <img style="margin:5px; height:700px;" src="https://user-images.githubusercontent.com/69689739/190870023-03768393-c814-4cca-9886-e75038bf6a1f.jpg" alt="image">
+    <img style="margin:5px; height:700px;" src="https://user-images.githubusercontent.com/69689739/190870025-e10f3993-6bdd-4d25-9a35-7bc017b5e57f.jpg" alt="image">
+</p>
+
+<div class="text">
+    <h3 class="center" style=" margin:0px;">Source Code</h3>
+    <div class="center" style="display:flex; flex-wrap:wrap; margin:0px;">
+        <div class="container">
+            <a href="https://github.com/legendsayantan/Screenery" class="btn text flex-row">
+                Source for
+                <img src="https://img.icons8.com/fluency/2x/android-os.png" style=" margin-left:15px; height:25px; width:25px;" />
+            </a>
+        </div>
+    </div>
+</div>
+<MatDialog CanBeClosed IsOpen=@dialogOpen >
+    <MatDialogTitle>AutoReact On Browser</MatDialogTitle>
+    <MatDialogContent>
+        @dialogText
+        <br/>
+        <a href="https://appuals.com/open-browser-console/" class="text" style="font-size:12px;">How to open console in your browser?</a>
+    </MatDialogContent>
+    <MatDialogActions>
+        <MatButton OnClick="@openFbAuto">FaceBook</MatButton>
+        <MatButton OnClick="@openInstaAuto">Instagram</MatButton>
+    </MatDialogActions>
+</MatDialog>
+<style>
+
+    .center {
+        display: flex;
+        flex-wrap: wrap;
+        padding: 25px;
+        justify-content: center;
+        color: powderblue;
+        font-family: 'Palatino Linotype';
+    }
+
+    .heading {
+        margin-top: 100px;
+        margin-bottom: 100px;
+    }
+
+
+
+    .text {
+        color: #55b9f3;
+    }
+    .text:link{
+            color: #55b9f3;
+    }
+
+    p {
+        color: powderblue;
+        justify-content: center;
+    }
+
+    a:link {
+        color: #f4f4f4;
+        text-decoration: none;
+    }
+
+    a:hover {
+        text-decoration: underline;
+    }
+
+    a:focus{
+        outline: none;
+    }
+
+    .btnx:hover {
+        color: #55b9f3;
+        background-color: #0F2CD4;
+    }
+
+    .btnx {
+        color: #0F2CD4;
+        background-color: #55b9f3;
+    }
+
+    .container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+        margin-top: 50px;
+    }
+
+    .btn {
+        font-size: 1.0rem;
+        padding: 1rem 3rem;
+        color: #f4f4f4;
+        text-transform: uppercase;
+        text-decoration: none;
+        border: 1px solid #55b9f3;
+        position: relative;
+        overflow: hidden;
+    }
+
+        .btn:hover {
+            box-shadow: 1px 1px 25px 10px #55b9f3;
+            text-decoration: none;
+            color: powderblue;
+        }
+
+        .btn:before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient( 120deg, transparent, #55b9f3, transparent );
+            transition: all 650ms;
+        }
+
+        .btn:hover:before {
+            left: 100%;
+        }
+
+</style>
+
+@inject IJSRuntime JS
+@inject HttpClient Http;
+@inject NavigationManager Nav
+@code {
+    [Parameter]
+    public int? par { get; set; }
+    private string? code;
+    public bool dialogOpen = false;
+    public string dialogText = "Choose your Platform and log in, then paste the copied code into Browser console.";
+    public string Reference = "";
+    protected override async Task OnInitializedAsync()
+    {
+        if (par != null) openAuto();
+    }
+    public async Task openFbAuto()
+    {
+        code = await Http.GetStringAsync("https://raw.githubusercontent.com/legendsayantan/AutoReact/master/app/src/main/assets/FbAutoReactor.js");
+        if (code == null) return;
+        code = code.Replace("var autoscroll = false;", "var autoscroll = true;");
+        await JS.InvokeVoidAsync("navigator.clipboard.writeText", code);
+        par = null;
+        dialogOpen = false;
+        await JS.InvokeAsync<object>("open", "https://m.facebook.com", "_blank");
+    }
+    public async Task openInstaAuto()
+    {
+        code = await Http.GetStringAsync("https://raw.githubusercontent.com/legendsayantan/AutoReact/master/app/src/main/assets/InstaAutoReactor.js");
+        if (code == null) return;
+        await JS.InvokeVoidAsync("navigator.clipboard.writeText", code);
+        par = null;
+        dialogOpen = false;
+        await JS.InvokeAsync<object>("open", "https://instagram.com", "_blank");
+    }
+    public async Task openAuto()
+    {
+        par = 0;
+        dialogOpen = true;
+    }
+
+}
