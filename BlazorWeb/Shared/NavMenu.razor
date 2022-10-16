@@ -1,7 +1,8 @@
 ﻿
 <div class="top-row ps-3 navbar navbar-dark">
     <div class="container-fluid">
-        <a class="navbar-brand" href="">LegendSayantan.github.io
+        <a class="navbar-brand" href="">
+            @nav.BaseUri.Replace("https://","").Replace("http://","").Replace("/","")
         </a>
         <button title="Navigation menu" class="navbar-toggler" @onclick="ToggleNavMenu">
             <span class="navbar-toggler-icon"></span>
@@ -53,6 +54,7 @@
     }
 </style>
 @inject HttpClient Http
+@inject NavigationManager nav
 @code {
     Project[] projects;
     private bool collapseNavMenu = true;
