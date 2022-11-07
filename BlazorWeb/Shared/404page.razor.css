@@ -516,7 +516,7 @@ button {
 
 @media (max-width: 650px) {
     .message__title {
-        font-size: 36px;
+        font-size: 30px;
         padding-bottom: 20px;
     }
 
