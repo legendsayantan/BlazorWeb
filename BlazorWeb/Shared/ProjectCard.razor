@@ -1,6 +1,6 @@
 ﻿@using MatBlazor;
 <MatCard class="demo-mat-card">
-    <MatCardContent>
+    <MatCardContent @onclick="wikiClick">
         <div class="demo-mat-card-content">
             <MatHeadline6 class="demo-mat-card-clean-margin">
                 @project.name
@@ -12,8 +12,9 @@
         </MatBody2>
     </MatCardContent>
     <MatCardActions Class="actions">
-        <RainbowButton Text="Wiki" Path="@project.path"/>
+        
         <RainbowButton Text="Github" Path=@("https://github.com/legendsayantan/"+project.path) />
+        <RainbowButton Text="Download" Path=@("https://github.com/legendsayantan/"+project.path+"/releases/") />
     </MatCardActions>
 </MatCard>
 
