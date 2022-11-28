@@ -30,7 +30,7 @@ jobs:
     - name: Add .nojekyll file
       run: touch release/wwwroot/.nojekyll
     # push to another repo
-    - name: Pushes to another repository
+    - name: Push to GitHub page repository
       uses: cpina/github-action-push-to-another-repository@main
       env:
         API_TOKEN_GITHUB: ${{secrets.API_TOKEN_GITHUB}}
@@ -38,4 +38,13 @@ jobs:
         source-directory: 'release/wwwroot'
         destination-github-username: 'legendsayantan'
         destination-repository-name: 'legendsayantan.github.io'
+        target-branch: main
+    - name: Push to is a dev repo
+      uses: cpina/github-action-push-to-another-repository@main
+      env:
+        API_TOKEN_GITHUB: ${{secrets.API_TOKEN_GITHUB}}
+      with:
+        source-directory: 'release/wwwroot'
+        destination-github-username: 'legendsayantan'
+        destination-repository-name: 'legendsayantan.is-a.dev'
         target-branch: main
