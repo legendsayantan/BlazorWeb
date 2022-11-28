@@ -29,7 +29,6 @@ jobs:
     # add .nojekyll file to tell GitHub pages to not treat this as a Jekyll project. (Allow files and folders starting with an underscore)
     - name: Add .nojekyll file
       run: touch release/wwwroot/.nojekyll
-    # push to another repo
     - name: Push to GitHub page repository
       uses: cpina/github-action-push-to-another-repository@main
       env:
@@ -39,7 +38,7 @@ jobs:
         destination-github-username: 'legendsayantan'
         destination-repository-name: 'legendsayantan.github.io'
         target-branch: main
-    - name: Push to is a dev repo
+    - name: Push to is-a.dev repository 
       uses: cpina/github-action-push-to-another-repository@main
       env:
         API_TOKEN_GITHUB: ${{secrets.API_TOKEN_GITHUB}}
