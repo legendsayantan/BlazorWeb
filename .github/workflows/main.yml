@@ -52,7 +52,7 @@ jobs:
       env:
         API_TOKEN_GITHUB: ${{secrets.API_TOKEN_GITHUB}}
       with:
-        source-directory: .push/github/
+        source-directory: .push/.github/
         destination-directory: .github/
         destination-github-username: 'legendsayantan'
         destination-repository-name: 'legendsayantan.is-a.dev'
