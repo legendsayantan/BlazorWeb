@@ -15,15 +15,24 @@
 </head>
 
 <body>
-    <div id="app">Please wait, loading content...</div>
+    <div id="app"></div>
     <div id="blazor-error-ui">
         An unhandled error has occurred.
         <a href="" class="reload">Reload</a>
         <a class="dismiss">🗙</a>
     </div>
+    <script>
+        fetch('/loader.html')
+            .then(function (response) {
+                return response.text();
+            })
+            .then(function (body) {
+                document.getElementById('app').innerHTML = body;
+            });
+    </script>
     <script src="_framework/blazor.webassembly.js"></script>
     <script src="_content/Radzen.Blazor/Radzen.Blazor.js"></script>
     <script src="saveFile.js"></script>
-</body>
 
+</body>
 </html>

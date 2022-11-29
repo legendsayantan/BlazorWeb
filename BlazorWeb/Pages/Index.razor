@@ -4,7 +4,7 @@
 <div style ="margin-top:100px;"/>
 <Profile/>
 
-<h3 id="projheader" class="center" style="margin-top:100px;" onclick="document.getElementById('projheader').scrollIntoView({behavior:'smooth'})">Open-Source Projects</h3>
+<h3 class="center" style="margin-top:100px;" onclick="this.scrollIntoView({behavior:'smooth'})">Open-Source Projects</h3>
 
 <div class="center" id="projectContainer">
     @foreach (Project proj in @projects ?? Enumerable.Empty<Project>())
@@ -13,11 +13,26 @@
     }
 </div>
 
-<h3 id="stats" class="center" style="margin-top:100px;" onclick="document.getElementById('stats').scrollIntoView({behavior:'smooth'})">Statistics</h3>
+<h3 class="center" style="margin-top:100px;" onclick="this.scrollIntoView({behavior:'smooth'})">About me</h3>
+<ul class="center" style="display:flow-root;font-family:Consolas">
+    <li>19 M from West Bengal, India 🇮🇳</li>
+    <br />
+    <li>Always interested to learn about new tech and programming languages, Love Object-Oriented Programming 💻 </li>
+    <br />
+    <li>Aspiring Android dev with 2years+ experience and looking to do more unique projects to improve lifestyle 🚀 </li>
+    <br />
+    <li>Learning CyberSecurity, Web Security and penetration testing concepts 🕷 </li>
+    <br />
+    <li>Love to teach and explain educational concepts to others and help out ❤ </li>
+    <br />
+    <li>Like to play unique and action-packed video games 🎮</li>
+    <br />
+</ul>
+<h3 class="center" style="margin-top:100px;" onclick="this.scrollIntoView({behavior:'smooth'})">Statistics</h3>
 
 <div class="center" style="margin-left:0px; margin-right:0px;">
     <img style="margin:25px;" height="150" src="https://github-readme-stats.vercel.app/api?username=legendsayantan&show_icons=true&count_private=true&theme=radical&bg_color=45,0F2CD4,1C72EB&border_color=3890FC&title_color=f5deb3&custom_title=My%20Github%20Stats" />
-    <img style="margin:25px;" height="150" src="https://github-readme-stats.vercel.app/api/top-langs/?username=legendsayantan&layout=compact&theme=radical&bg_color=45,0F2CD4,1C72EB&border_color=3890FC&exclude_repo=legendsayantan.github.io&langs_count=6&title_color=f5deb3" />
+    <img style="margin:25px;" height="150" src="https://github-readme-stats.vercel.app/api/top-langs/?username=legendsayantan&layout=compact&theme=radical&bg_color=45,0F2CD4,1C72EB&border_color=3890FC&exclude_repo=legendsayantan.github.io,legendsayantan.is-a.dev&langs_count=6&title_color=f5deb3" />
 </div>
 
 <style>
@@ -28,6 +43,7 @@
         justify-content:center;
         color: powderblue;
         font-family:'Palatino Linotype';
+        animation:ease-in 1s;
     }
     @@font-face{
         font-family:Consolas;
