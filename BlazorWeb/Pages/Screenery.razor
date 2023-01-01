@@ -3,56 +3,56 @@
 <PageTitle>Screenery</PageTitle>
 <h1 class ="text center" style="display:flex; flex-wrap:wrap; align-items:end">
     Screenery</h1>
-<h5 class="center" style="margin-top:0px;">Keep Android Screen Awake or make it Dimmer.</h5>
+<h5 class="center small" style="margin-top:0px;">Keep Android Screen Awake or make it Dimmer.</h5>
 <div class="text">
-    <h3>Features</h3>
+    <h3 class="hiddenY">Features</h3>
     <ol dir="auto">
-        <li>
+        <li class="hidden" style="transition-delay:50ms">
             <p dir="auto">Prevent Android Screen from automatically turning off, until You do it.</p>
         </li>
-        <li>
+        <li class="hidden" style="transition-delay:100ms">
             <p dir="auto">Set Custom Screen Wake Timers for your device.</p>
         </li>
-        <li>
+        <li class="hidden" style="transition-delay:150ms">
             <p dir="auto">Turns off screen and pauses device media when you fall asleep, thanks to its Automatic Sleep Detection Capabilities. </p>
         </li>
-        <li>
+        <li class="hidden" style="transition-delay:200ms">
             <p dir="auto">Android Screen too bright even at lowest brightness? Screenery can darken your screen up to <strong>90% more</strong> than lowest brightness.  </p>
         </li>
-        <li>
+        <li class="hidden" style="transition-delay:250ms">
             <p dir="auto">Easy and Customisable Controls, from Quick Settings Panel or Floating Bubble.</p>
         </li>
-        <li>
+        <li class="hidden" style="transition-delay:300ms">
             <p dir="auto">More features are about to be added.</p>
         </li>
     </ol>
 </div>
 <div class="text">
-    <h3 class="center" style=" margin:0px;">Installation</h3>
+    <h3 class="center hiddenY" style=" margin:0px;">Installation</h3>
     <div class="center" style="display:flex; flex-wrap:wrap; margin:0px;">
 
         <div class="container">
             <a href="https://github.com/legendsayantan/Screenery/releases" class="center btn flex-row">
                 Install on
-                <img src="https://img.icons8.com/fluency/2x/android-os.png" style=" margin-left:15px; height:25px; width:25px;" />
+                <img class="small"src="https://img.icons8.com/fluency/2x/android-os.png" style=" margin-left:15px; height:25px; width:25px;" />
             </a>
         </div>
     </div>
 </div>
-<h2 id="screenshots" class="center heading" style="margin:0px;">Screenshots</h2>
+<h2 id="screenshots" class="center heading hiddenY" style="margin:0px;">Screenshots</h2>
 <p style="display:flex; flex-wrap:wrap;">
-    <img style="margin:5px; height:700px;" src="https://user-images.githubusercontent.com/69689739/190870024-09c4edac-6108-4cec-ac9f-b92d2d206018.jpg" alt="image">
-    <img style="margin:5px; height:700px;" src="https://user-images.githubusercontent.com/69689739/190870023-03768393-c814-4cca-9886-e75038bf6a1f.jpg" alt="image">
-    <img style="margin:5px; height:700px;" src="https://user-images.githubusercontent.com/69689739/190870025-e10f3993-6bdd-4d25-9a35-7bc017b5e57f.jpg" alt="image">
+    <img class="small"style="margin:5px; height:700px;" src="https://user-images.githubusercontent.com/69689739/190870024-09c4edac-6108-4cec-ac9f-b92d2d206018.jpg" alt="image">
+    <img class="small"style="margin:5px; height:700px;" src="https://user-images.githubusercontent.com/69689739/190870023-03768393-c814-4cca-9886-e75038bf6a1f.jpg" alt="image">
+    <img class="small"style="margin:5px; height:700px;" src="https://user-images.githubusercontent.com/69689739/190870025-e10f3993-6bdd-4d25-9a35-7bc017b5e57f.jpg" alt="image">
 </p>
 
 <div class="text">
-    <h3 class="center" style=" margin:0px;">Source Code</h3>
+    <h3 class="center hiddenY" style=" margin:0px;">Source Code</h3>
     <div class="center" style="display:flex; flex-wrap:wrap; margin:0px;">
         <div class="container">
             <a href="https://github.com/legendsayantan/Screenery" class="btn text flex-row">
                 Source for
-                <img src="https://img.icons8.com/fluency/2x/android-os.png" style=" margin-left:15px; height:25px; width:25px;" />
+                <img class="small"src="https://img.icons8.com/fluency/2x/android-os.png" style=" margin-left:15px; height:25px; width:25px;" />
             </a>
         </div>
     </div>
@@ -177,6 +177,8 @@
     protected override async Task OnInitializedAsync()
     {
         if (par != null) openAuto();
+        await JS.InvokeVoidAsync("animatePage");
+        await JS.InvokeVoidAsync("animatePageObserve");
     }
     public async Task openFbAuto()
     {

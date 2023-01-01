@@ -2,46 +2,58 @@
 
 <PageTitle>LegendSayantan</PageTitle>
 <div style ="margin-top:100px;"/>
-<Profile/>
+<section class="fade">
+    <Profile/>
+</section>
 
-<h3 class="center" style="margin-top:100px;" onclick="this.scrollIntoView({behavior:'smooth'})">Open-Source Projects</h3>
+<section>
+    <h3 class="center hiddenY" style="margin-top:100px;" onclick="this.scrollIntoView({behavior:'smooth'})">Open-Source Projects</h3>
 
-<div class="center" id="projectContainer">
-    @foreach (Project proj in @projects ?? Enumerable.Empty<Project>())
-    {
-        <ProjectCard project=@proj/>
-    }
-</div>
+    <div class="center" id="projectContainer">
+        @foreach (Project proj in @projects ?? Enumerable.Empty<Project>())
+        {
+            @if(projects.IndexOf(proj)%2==0){
+                <div class="hidden"><ProjectCard project="proj" /></div>
+            }else{
+                <div class="hidden2"><ProjectCard project="proj" /></div>
+            }
+        }
+    </div>
+</section>
 
-<h3 class="center" style="margin-top:100px;" onclick="this.scrollIntoView({behavior:'smooth'})">About me</h3>
-<ul class="center" style="display:flow-root;font-family:Consolas">
-    <li>19 M from West Bengal, India 🇮🇳</li>
-    <br />
-    <li>Always interested to learn about new tech and programming languages, Love Object-Oriented Programming 💻 </li>
-    <br />
-    <li>Aspiring Android dev with 2years+ experience and looking to do more unique projects to improve lifestyle 🚀 </li>
-    <br />
-    <li>Learning CyberSecurity, Web Security and Expoitation 🕷 </li>
-    <br />
-    <li>Love to teach and explain educational concepts to others and help out ❤ </li>
-    <br />
-    <li>Like to play unique and action-packed video games 🎮</li>
-    <br />
-    <li>People who inspired me are 
-        <a style="color: powderblue;" href="https://www.youtube.com/channel/UClcE-kVhqyiHCcjYwcpfj9w">LiveOverflow</a>,
-        <a style="color: powderblue;" href="https://www.youtube.com/channel/UCYbK_tjZ2OrIZFBvU6CCMiA">Brackeys</a>,
-        <a style="color: powderblue;" href="https://www.youtube.com/c/fireship">Fireship</a>,
-        <a style="color: powderblue;" href="https://www.youtube.com/channel/UC9-y-6csu5WGm29I7JiwpnA">Computerphile</a>,
-        <a style="color: powderblue;" href="https://www.youtube.com/channel/UCuUHDELv0TZM7VeDchmZrFQ">NoMagic</a>, etc.
-    </li>
-</ul> 
-<h3 class="center" style="margin-top:100px;" onclick="this.scrollIntoView({behavior:'smooth'})">Statistics</h3>
+<section>
+    <h3 class="center hiddenY" style="margin-top:100px;" onclick="this.scrollIntoView({behavior:'smooth'})">About me</h3>
+    <ul class="center" style="display:flow-root;font-family:Consolas">
+        <li class="hidden">19 M from West Bengal, India 🇮🇳</li>
+        <br />
+        <li class="hidden">Always interested to learn about new tech and programming languages, Love Object-Oriented Programming 💻 </li>
+        <br />
+        <li class="hidden">Aspiring Android dev with 2years+ experience and looking to do more unique projects to improve lifestyle 🚀 </li>
+        <br />
+        <li class="hidden">Learning CyberSecurity, Web Security and Expoitation 🕷 </li>
+        <br />
+        <li class="hidden">Love to teach and explain educational concepts to others and help out ❤ </li>
+        <br />
+        <li class="hidden">Like to play unique and action-packed video games 🎮</li>
+        <br />
+        <li class="hidden">
+            People who inspired me are
+            <a style="color: powderblue;" href="https://www.youtube.com/channel/UClcE-kVhqyiHCcjYwcpfj9w">LiveOverflow</a>,
+            <a style="color: powderblue;" href="https://www.youtube.com/channel/UCYbK_tjZ2OrIZFBvU6CCMiA">Brackeys</a>,
+            <a style="color: powderblue;" href="https://www.youtube.com/c/fireship">Fireship</a>,
+            <a style="color: powderblue;" href="https://www.youtube.com/channel/UC9-y-6csu5WGm29I7JiwpnA">Computerphile</a>,
+            <a style="color: powderblue;" href="https://www.youtube.com/channel/UCuUHDELv0TZM7VeDchmZrFQ">NoMagic</a>, etc.
+        </li>
+    </ul>
+</section>
+<section>
+    <h3 class="center hiddenY" style="margin-top:100px;" onclick="this.scrollIntoView({behavior:'smooth'})">Statistics</h3>
 
-<div class="center" style="margin-left:0px; margin-right:0px;">
-    <img style="margin:25px;" height="150" src="https://github-readme-stats.vercel.app/api?username=legendsayantan&show_icons=true&count_private=true&theme=radical&bg_color=45,0F2CD4,1C72EB&border_color=3890FC&title_color=f5deb3&custom_title=My%20Github%20Stats" />
-    <img style="margin:25px;" height="150" src="https://github-readme-stats.vercel.app/api/top-langs/?username=legendsayantan&layout=compact&theme=radical&bg_color=45,0F2CD4,1C72EB&border_color=3890FC&exclude_repo=legendsayantan.github.io,legendsayantan.is-a.dev&langs_count=6&title_color=f5deb3" />
-</div>
-
+    <div class="center" style="margin-left:0px; margin-right:0px;">
+        <img class="hidden" style="margin:25px;" height="150" src="https://github-readme-stats.vercel.app/api?username=legendsayantan&show_icons=true&count_private=true&theme=radical&bg_color=45,0F2CD4,1C72EB&border_color=3890FC&title_color=f5deb3&custom_title=My%20Github%20Stats" />
+        <img class="hidden2" style="margin:25px;" height="150" src="https://github-readme-stats.vercel.app/api/top-langs/?username=legendsayantan&layout=compact&theme=radical&bg_color=45,0F2CD4,1C72EB&border_color=3890FC&exclude_repo=legendsayantan.github.io,legendsayantan.is-a.dev&langs_count=6&title_color=f5deb3" />
+    </div>
+</section>
 <style>
     .center{
         display:flex;
@@ -64,13 +76,18 @@
         font-family: Pristina;
         src: url('/fonts/Pristina.woff');
     }
+    
 </style>
 @inject HttpClient Http
+@inject IJSRuntime js
 @code {
     Project[]? projects;
     protected override async Task OnInitializedAsync()
     {
         projects = await Http.GetFromJsonAsync<Project[]>("/data/projects.json");
+        await js.InvokeVoidAsync("animatePage");
+        await js.InvokeVoidAsync("animatePageObserve");
     }
+
 }
 

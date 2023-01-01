@@ -117,11 +117,16 @@
         }
 </style>
 
-@inject IJSRuntime jsRuntime
+@inject IJSRuntime js
 @inject NavigationManager NavManager
 @code {
     protected void startDemo()
     {
         NavManager.NavigateTo("/xcryptdemo");
+    }
+    protected override async Task OnInitializedAsync()
+    {
+        await js.InvokeVoidAsync("animatePage");
+        await js.InvokeVoidAsync("animatePageObserve");
     }
 }

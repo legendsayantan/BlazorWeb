@@ -33,6 +33,44 @@
     <script src="_framework/blazor.webassembly.js"></script>
     <script src="_content/Radzen.Blazor/Radzen.Blazor.js"></script>
     <script src="saveFile.js"></script>
+    <script src="scripts/index.js"></script>
+    <style>
+        .small {
+            transform: scale(0.75);
+            transition: all 0.75s;
+        }
 
+        .fade {
+            opacity: 0;
+            transition: all 1.5s;
+        }
+
+        .hidden {
+            opacity: 0;
+            filter: blur(5px);
+            transform: translateX(-100%);
+            transition: all 1s;
+        }
+
+        .hidden2 {
+            opacity: 0;
+            filter: blur(5px);
+            transform: translateX(100%);
+            transition: all 1s;
+        }
+
+        .hiddenY {
+            opacity: 0;
+            filter: blur(5px);
+            transform: translateY(100%);
+            transition: all 1s;
+        }
+
+        .show {
+            opacity: 1;
+            filter: blur(0px);
+            transform: translateX(0%) scale(1);
+        }
+    </style>
 </body>
 </html>

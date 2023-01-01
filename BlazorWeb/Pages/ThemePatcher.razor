@@ -2,60 +2,60 @@
 
 <PageTitle>ThemePatcher</PageTitle>
 <h1 class="text center">ThemePatcher</h1>
-<h6 class="center" style=" justify-content:center; align-content:center; align-self:center; align-items:center;">Get free themes on Oppo or Realme Android device.</h6>
-<div class="text">
+<h6 class="center small" style=" justify-content:center; align-content:center; align-self:center; align-items:center;">Get free themes on Oppo or Realme Android device.</h6>
+<div class="text small">
     <h5>Tired of buying overpriced themes in Oppo or Realme device? Use This Patcher to get them for free !</h5>
     <p>
         This script lets you unlock all the paid themes, fonts and wallpapers for free from the Theme store in any Oppo or Realme device.
     </p>
 </div>
 <div class="text">
-    <h3>Disclaimer</h3>
-    <p dir="auto">This Patcher <strong>was not tested and might not work</strong> on any device other than Oppo and Realme.</p>
+    <h3 class="small">Disclaimer</h3>
+    <p dir="auto" class="small">This Patcher <strong>was not tested and might not work</strong> on any device other than Oppo and Realme.</p>
 </div>
 <div class="text">
-    <h3 class="center" style=" margin:0px;">How to use</h3>
+    <h3 class="center hiddenY" style=" margin:0px;">How to use</h3>
     <p>
         This script runs on Windows . While setting up , If you get any prompt in your android device asking you to allow usb debugging , click on the allow button.
         <br/><br/>
         You need to repeat the following actions every time you want to get a paid theme/font/live wallpaper as free.
     </p>
     <ol dir="auto">
-        <li>
+        <li class="hidden">
             <p dir="auto">Tap on the build number <strong>seven times</strong> in your android device to enable developer options.</p>
         </li>
-        <li>
+        <li class="hidden">
             <p dir="auto">Go to developer options , then turn on <strong>usb debugging</strong> and also turn on <strong>Disable Permission Monitoring</strong> <em>if it exists</em>.</p>
         </li>
-        <li>
+        <li class="hidden">
             <p dir="auto">Connect your phone to the Windows pc using an usb cable.</p>
         </li>
-        <li>
+        <li class="hidden">
             <p dir="auto">Download and extract the provided Download file <a href="https://github.com/legendsayantan/ThemePatcher/releases">ThemePatcher.zip</a>.</p>
         </li>
-        <li>
+        <li class="hidden">
             <p dir="auto">Open Theme Store in the android device, choose whatever paid themes you like and click <strong>Free trial</strong>.</p>
         </li>
-        <li>
+        <li class="hidden">
             <p dir="auto">Run the file <strong>ThemePatcher.bat</strong> in the extracted folder.</p>
         </li>
-        <li>
+        <li class="hidden">
             <p dir="auto">ThemePatcher should now automatically detect your device and the installed trial theme , font or live wallpaper... will be converted to permanent !</p>
         </li>
     </ol>
-    <p>
+    <p class="hidden">
         Once you're done, just close the terminal window and unplug your android device from the pc...
         Turn off dev options if you want to.
     </p>
 </div>
 <div class="text">
-    <h3 class="center" style=" margin:0px;">Alternate Method</h3>
+    <h3 class="center hiddenY" style=" margin:0px;">Alternate Method</h3>
     <p dir="auto">If you want to do it through <a href="https://app.webadb.com" rel="nofollow">WebADB</a> , you cannot run the entire batch file.</p>
     <p dir="auto">In that case - go to developer options, enable usb debugging and disable permission monitoring, then connect your android device to <a href="https://app.webadb.com" rel="nofollow">WebADB webpage.</a></p>
     <p dir="auto">Go to Theme store and choose any theme/font/live wallpaper and take a free trial.</p>
     <p> Finally, copy the corresponding code snippet and paste inside the <a href="https://app.webadb.com/shell">Interactive Shell </a> -</p>
     <div class="flex-row center" style="display:flex; flex-direction:row;">
-        <h4 style=" margin:15px; align-content:center; margin-left:75px; margin-right:75px;">Code to Patch Themes</h4>
+        <h4 class="small" style=" margin:15px; align-content:center; margin-left:75px; margin-right:75px;">Code to Patch Themes</h4>
         <div class="center" style=" margin:0px; padding:0px;">
             <div class="container">
                 <a class="btn flex-row" style="margin:0px;" @onclick="@(() => copyText(CodeTheme))">
@@ -70,7 +70,7 @@
         </code>
     </pre>
     <div class="flex-row center" style="display:flex; flex-direction:row;">
-            <h4 style=" margin:15px; align-content:center; margin-left:75px; margin-right:75px;">Code to Patch Fonts</h4>
+            <h4 class="small" style=" margin:15px; align-content:center; margin-left:75px; margin-right:75px;">Code to Patch Fonts</h4>
         <div class="center" style=" margin:0px; padding:0px;">
             <div class="container">
                 <a class="btn flex-row" style="margin:0px;" @onclick="@(() => copyText(CodeFont))">
@@ -85,7 +85,7 @@
         </code>
     </pre>
     <div class="flex-row center" style="display:flex; flex-direction:row;">
-        <h4 style=" margin:15px; align-content:center; margin-left:75px; margin-right:75px;">Code to Patch Live Wallpapers</h4>
+        <h4 class="small" style=" margin:15px; align-content:center; margin-left:75px; margin-right:75px;">Code to Patch Live Wallpapers</h4>
         <div class="center" style=" margin:0px; padding:0px;">
             <div class="container">
                 <a class="btn flex-row" style="margin:0px;" @onclick="@(() => copyText(CodeWallpaper))">
@@ -102,7 +102,7 @@
 </div>
 <p>You need to run the entire code of a specific category to correctly patch it. Otherwise, it may not work.</p>
 <div class="text">
-    <h3 class="center" style=" margin:0px;">Source Code</h3>
+    <h3 class="center hiddenY" style=" margin:0px;">Source Code</h3>
     <div class="center" style="display:flex; flex-wrap:wrap; margin:0px;">
         <div class="container">
             <a href="https://github.com/legendsayantan/ThemePatcher" class="btn flex-row">
@@ -224,6 +224,11 @@
     {
         await jsRuntime.InvokeVoidAsync("navigator.clipboard.writeText", str);
         await jsRuntime.InvokeVoidAsync("alert", "Code copied to clipboard.");
+    }
+    protected override async Task OnInitializedAsync()
+    {
+        await jsRuntime.InvokeVoidAsync("animatePage");
+        await jsRuntime.InvokeVoidAsync("animatePageObserve");
     }
 }
 
