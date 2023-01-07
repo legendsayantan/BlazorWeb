@@ -111,6 +111,17 @@
         </div>
     </div>
 </div>
+<div class="text">
+    <h3 class="center hiddenY" style=" margin:0px;">Online Method</h3>
+<div class="center" style=" margin:0px; padding:0px;">
+            <div class="container">
+                <a class="btn flex-row" style="margin:0px;" @onclick="@(() => connectDevice())">
+                    Connect a device
+                </a>
+            </div>
+            <p id="connectedData"></p>
+        </div>
+</div>
 <style>
 
     .center {
@@ -229,6 +240,9 @@
     {
         await jsRuntime.InvokeVoidAsync("animatePage");
         await jsRuntime.InvokeVoidAsync("animatePageObserve");
+    }
+    protected async Task connectDevice(){
+        await jsRuntime.InvokeVoidAsync("connectADB", "connectedData");
     }
 }
 
