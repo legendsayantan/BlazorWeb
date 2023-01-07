@@ -4,20 +4,62 @@
 <h1 class="text center">ThemePatcher</h1>
 <h6 class="center small" style=" justify-content:center; align-content:center; align-self:center; align-items:center;">Get free themes on Oppo or Realme Android device.</h6>
 <div class="text small">
-    <h5>Tired of buying overpriced themes in Oppo or Realme device? Use This Patcher to get them for free !</h5>
+    <h5>Tired of buying overpriced themes in Oppo / Realme / OnePlus device? Use This unlocker to get them for free !</h5>
     <p>
         This script lets you unlock all the paid themes, fonts and wallpapers for free from the Theme store in any Oppo or Realme device.
     </p>
 </div>
 <div class="text">
     <h3 class="small">Disclaimer</h3>
-    <p dir="auto" class="small">This Patcher <strong>was not tested and might not work</strong> on any device other than Oppo and Realme.</p>
+    <p dir="auto" class="small">This unlocker <strong>was not tested and might not work</strong> on any device other than Oppo and Realme.</p>
+</div>
+
+<div class="text">
+    <h3 class="center hiddenY" style=" margin:0px;">Online Unlocker</h3>
+    <div class="center" style=" margin:0px; padding:0px; display:block; flex-direction:column">
+        <div id="connector">
+            <ol class="center" style="flex-direction:column">
+                <li class="hidden">Turn on developer options</li>
+                <li class="hidden" style="transition-delay:200ms">Enable USB debugging in developer options</li>
+                <li class="hidden" style="transition-delay:400ms">Turn on 'Disable Permission Monitoring' in developer options</li>
+                <li class="hidden" style="transition-delay:600ms">Click on the button below to connect the device.</li>
+            </ol>
+            <br />
+            <div class="container">
+                <a class="btn flex-row" style="margin:0px;" @onclick="@(() => connectDevice())">
+                    Connect a device
+                </a>
+            </div>
+        </div>
+        <p class="center" id="connectedData" style="padding-bottom:0px"></p>
+        <br />
+        <div class="center" id="deviceControl" style="display: none; padding-top:0px">
+            <p class="center" >6. Now choose any trial from Theme store, then select what you chose.</p>
+            <div class="row">
+                <div class="container" style="width: min-content">
+                    <a class="btn flex-row" style="margin:10px 0px; " @onclick="@(() => executePatch(CodeTheme))">
+                        Theme
+                    </a>
+                </div>
+                <div class="container" style="width: min-content">
+                    <a class="btn flex-row" style="margin:10px 0px;" @onclick="@(() => executePatch(CodeFont))">
+                        Font
+                    </a>
+                </div>
+                <div class="container" style="width: min-content">
+                    <a class="btn flex-row" style="margin:10px 0px;" @onclick="@(() => executePatch(CodeWallpaper))">
+                        Live wallpaper
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 <div class="text">
-    <h3 class="center hiddenY" style=" margin:0px;">How to use</h3>
+    <h3 class="center hiddenY" style=" margin:0px;">Offline Unlocker</h3>
     <p>
         This script runs on Windows . While setting up , If you get any prompt in your android device asking you to allow usb debugging , click on the allow button.
-        <br/><br/>
+        <br /><br />
         You need to repeat the following actions every time you want to get a paid theme/font/live wallpaper as free.
     </p>
     <ol dir="auto">
@@ -49,59 +91,6 @@
     </p>
 </div>
 <div class="text">
-    <h3 class="center hiddenY" style=" margin:0px;">Alternate Method</h3>
-    <p dir="auto">If you want to do it through <a href="https://app.webadb.com" rel="nofollow">WebADB</a> , you cannot run the entire batch file.</p>
-    <p dir="auto">In that case - go to developer options, enable usb debugging and disable permission monitoring, then connect your android device to <a href="https://app.webadb.com" rel="nofollow">WebADB webpage.</a></p>
-    <p dir="auto">Go to Theme store and choose any theme/font/live wallpaper and take a free trial.</p>
-    <p> Finally, copy the corresponding code snippet and paste inside the <a href="https://app.webadb.com/shell">Interactive Shell </a> -</p>
-    <div class="flex-row center" style="display:flex; flex-direction:row;">
-        <h4 class="small" style=" margin:15px; align-content:center; margin-left:75px; margin-right:75px;">Code to Patch Themes</h4>
-        <div class="center" style=" margin:0px; padding:0px;">
-            <div class="container">
-                <a class="btn flex-row" style="margin:0px;" @onclick="@(() => copyText(CodeTheme))">
-                    Copy Snippet
-                </a>
-            </div>
-        </div>
-    </div>
-    <pre class="notranslate">
-        <code>
-            @CodeTheme
-        </code>
-    </pre>
-    <div class="flex-row center" style="display:flex; flex-direction:row;">
-            <h4 class="small" style=" margin:15px; align-content:center; margin-left:75px; margin-right:75px;">Code to Patch Fonts</h4>
-        <div class="center" style=" margin:0px; padding:0px;">
-            <div class="container">
-                <a class="btn flex-row" style="margin:0px;" @onclick="@(() => copyText(CodeFont))">
-                    Copy Snippet
-                </a>
-            </div>
-        </div>
-    </div>
-    <pre class="notranslate">
-        <code>
-@CodeFont
-        </code>
-    </pre>
-    <div class="flex-row center" style="display:flex; flex-direction:row;">
-        <h4 class="small" style=" margin:15px; align-content:center; margin-left:75px; margin-right:75px;">Code to Patch Live Wallpapers</h4>
-        <div class="center" style=" margin:0px; padding:0px;">
-            <div class="container">
-                <a class="btn flex-row" style="margin:0px;" @onclick="@(() => copyText(CodeWallpaper))">
-                    Copy Snippet
-                </a>
-            </div>
-        </div>
-    </div>
-    <pre class="notranslate">
-        <code>
-@CodeWallpaper
-        </code>
-    </pre>
-</div>
-<p>You need to run the entire code of a specific category to correctly patch it. Otherwise, it may not work.</p>
-<div class="text">
     <h3 class="center hiddenY" style=" margin:0px;">Source Code</h3>
     <div class="center" style="display:flex; flex-wrap:wrap; margin:0px;">
         <div class="container">
@@ -111,17 +100,7 @@
         </div>
     </div>
 </div>
-<div class="text">
-    <h3 class="center hiddenY" style=" margin:0px;">Online Method</h3>
-<div class="center" style=" margin:0px; padding:0px;">
-            <div class="container">
-                <a class="btn flex-row" style="margin:0px;" @onclick="@(() => connectDevice())">
-                    Connect a device
-                </a>
-            </div>
-            <p id="connectedData"></p>
-        </div>
-</div>
+
 <style>
 
     .center {
@@ -129,7 +108,7 @@
         flex-wrap: wrap;
         padding: 25px;
         justify-content: center;
-        align-content:center;
+        align-content: center;
         color: powderblue;
         font-family: 'Palatino Linotype';
     }
@@ -187,6 +166,8 @@
         border: 1px solid #55b9f3;
         position: relative;
         overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
     }
 
         .btn:hover {
@@ -213,22 +194,22 @@
 </style>
 @inject IJSRuntime jsRuntime
 @code {
-    public string CodeTheme = ""+
-    "settings put system persist.sys.oppo.theme_uuid -1\n"+
-    "settings put system persist.sys.oplus.theme_uuid -1\n"+
-    "settings put system persist.sys.trial.theme 0\n"+
-    "settings put secure persist.sys.oppo.theme_uuid -1\n"+
-    "settings put secure persist.sys.oplus.theme_uuid -1\n"+
+    public string CodeTheme = "" +
+    "settings put system persist.sys.oppo.theme_uuid -1\n" +
+    "settings put system persist.sys.oplus.theme_uuid -1\n" +
+    "settings put system persist.sys.trial.theme 0\n" +
+    "settings put secure persist.sys.oppo.theme_uuid -1\n" +
+    "settings put secure persist.sys.oplus.theme_uuid -1\n" +
     "settings put secure persist.sys.trial.theme 0\n";
-    public string CodeFont = ""+
-    "settings put system persist.sys.trial.font 0\n"+
+    public string CodeFont = "" +
+    "settings put system persist.sys.trial.font 0\n" +
     "settings put secure persist.sys.trial.font 0\n";
-    public string CodeWallpaper = ""+
-    "settings put system persist.sys.oplus.live_wp_uuid default_live_wp_package_name\n"+
-    "settings put system persist.sys.oppo.live_wp_uuid -1\n"+
-    "settings put system persist.sys.trial.live_wp 0\n"+
-    "settings put secure persist.sys.oplus.live_wp_uuid default_live_wp_package_name\n"+
-    "settings put secure persist.sys.oppo.live_wp_uuid -1\n"+
+    public string CodeWallpaper = "" +
+    "settings put system persist.sys.oplus.live_wp_uuid default_live_wp_package_name\n" +
+    "settings put system persist.sys.oppo.live_wp_uuid -1\n" +
+    "settings put system persist.sys.trial.live_wp 0\n" +
+    "settings put secure persist.sys.oplus.live_wp_uuid default_live_wp_package_name\n" +
+    "settings put secure persist.sys.oppo.live_wp_uuid -1\n" +
     "settings put secure persist.sys.trial.live_wp 0\n";
 
     protected async Task copyText(string str)
@@ -241,8 +222,12 @@
         await jsRuntime.InvokeVoidAsync("animatePage");
         await jsRuntime.InvokeVoidAsync("animatePageObserve");
     }
-    protected async Task connectDevice(){
-        await jsRuntime.InvokeVoidAsync("connectADB", "connectedData");
+    protected async Task connectDevice()
+    {
+        await jsRuntime.InvokeVoidAsync("connectADB","connector","connectedData","deviceControl");
+    }
+    protected async Task executePatch(String code){
+        await jsRuntime.InvokeVoidAsync("executeOnShell", code);
     }
 }
 
