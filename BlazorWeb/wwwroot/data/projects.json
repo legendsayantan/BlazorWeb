@@ -5,11 +5,6 @@
     "path": "/xcrypt"
   },
   {
-    "name": "AutoReact",
-    "desc": "Automated Reactions for Facebook and Instagram.",
-    "path": "/autoreact"
-  },
-  {
     "name": "ThemePatcher",
     "desc": "Get free themes on Oppo or Realme Android device.",
     "path": "/themepatcher"
@@ -18,5 +13,10 @@
     "name": "Screenery",
     "desc": "Keep Android Screen Awake or make it Dim, and more.",
     "path": "/screenery"
+  },
+  {
+    "name": "AutoReact",
+    "desc": "Automated Reactions for Facebook and Instagram.",
+    "path": "/autoreact"
   }
 ]
