@@ -21,7 +21,7 @@ async function connectADB(connectBtnId, nameViewId, controlViewId) {
         container.style.display = "block";
         adbInstance = adb;
     } else {
-        document.getElementById(nameViewId).innerText = "Not connected";
+        document.getElementById(nameViewId).innerText = "Failed to connect";
     }
 }
 async function executeOnShell(data) {

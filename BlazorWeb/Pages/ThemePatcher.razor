@@ -57,38 +57,50 @@
 </div>
 <div class="text">
     <h3 class="center hiddenY" style=" margin:0px;">Offline Unlocker</h3>
-    <p>
-        This script runs on Windows . While setting up , If you get any prompt in your android device asking you to allow usb debugging , click on the allow button.
-        <br /><br />
-        You need to repeat the following actions every time you want to get a paid theme/font/live wallpaper as free.
-    </p>
+    <div>
+        <h4>Choose your os</h4>
+        <input type="button" onclick="document.getElementById('win').scrollIntoView({behavior:'smooth'})" value="Windows" />
+        <input type="button" onclick="document.getElementById('lin').scrollIntoView({behavior:'smooth'})" value="Linux" />
+        <input type="button" onclick="document.getElementById('mac').scrollIntoView({behavior:'smooth'})" value="Mac" />
+    </div>
+    <br />
+    <h4 id="win">Windows</h4>
     <ol dir="auto">
-        <li class="hidden">
-            <p dir="auto">Tap on the build number <strong>seven times</strong> in your android device to enable developer options.</p>
-        </li>
-        <li class="hidden">
-            <p dir="auto">Go to developer options , then turn on <strong>usb debugging</strong> and also turn on <strong>Disable Permission Monitoring</strong> <em>if it exists</em>.</p>
-        </li>
-        <li class="hidden">
-            <p dir="auto">Connect your phone to the Windows pc using an usb cable.</p>
-        </li>
-        <li class="hidden">
-            <p dir="auto">Download and extract the provided Download file <a href="https://github.com/legendsayantan/ThemePatcher/releases">ThemePatcher.zip</a>.</p>
-        </li>
-        <li class="hidden">
-            <p dir="auto">Open Theme Store in the android device, choose whatever paid themes you like and click <strong>Free trial</strong>.</p>
-        </li>
-        <li class="hidden">
-            <p dir="auto">Run the file <strong>ThemePatcher.bat</strong> in the extracted folder.</p>
-        </li>
-        <li class="hidden">
-            <p dir="auto">ThemePatcher should now automatically detect your device and the installed trial theme , font or live wallpaper... will be converted to permanent !</p>
-        </li>
+        <li class="hidden">Tap on the build number <strong>seven times</strong> in your android device to enable developer options.</li>
+        <li class="hidden">Go to developer options , then turn on <strong>usb debugging</strong> and also turn on <strong>Disable Permission Monitoring</strong> <em>if it exists</em>.</li>
+        <li class="hidden">Connect your phone to the Windows pc using an usb cable.</li>
+        <li class="hidden">Download and extract the file <a href="https://github.com/legendsayantan/ThemePatcher/releases/latest">ThemePatcher.zip</a>.</li>
+        <li class="hidden">Open Theme Store in the android device, choose whatever paid themes you like and click <strong>Free trial</strong>.</li>
+        <li class="hidden">Run the file <strong>ThemePatcher.bat</strong> in the extracted folder.</li>
+        <li class="hidden">ThemePatcher should now automatically detect your device and all of the installed trial themes , fonts or live wallpapers... And will automatically convert them to permanent !</li>
     </ol>
-    <p class="hidden">
-        Once you're done, just close the terminal window and unplug your android device from the pc...
-        Turn off dev options if you want to.
-    </p>
+    <br />
+    <h4 id="lin">Linux</h4>
+    <ol dir="auto">
+        <li class="hidden">Tap on the build number <strong>seven times</strong> in your android device to enable developer options.</li>
+        <li class="hidden">Go to developer options , then turn on <strong>usb debugging</strong> and also turn on <strong>Disable Permission Monitoring</strong> <em>if it exists</em>.</li>
+        <li class="hidden">Connect your phone to the Linux computer using an usb cable.</li>
+        <li class="hidden">Install adb using <code>sudo apt install adb</code> on the linux computer.</li>
+        <li class="hidden">Download the file <a href="https://github.com/legendsayantan/ThemePatcher/releases/latest">ThemePatcher.sh</a>.</li>
+        <li class="hidden">Enable execution of the script using <code>chmod +x ThemePatcher.sh</code>.</li>
+        <li class="hidden">Open Theme Store in the android device, choose whatever paid themes you like and click <strong>Free trial</strong>.</li>
+        <li class="hidden">Run <code>./ThemePatcher.sh</code></li>
+        <li class="hidden">ThemePatcher should now automatically detect your device and all of the installed trial themes , fonts or live wallpapers... And will automatically convert them to permanent !</li>
+    </ol>
+    <br />
+    <h4 id="mac">Mac</h4>
+    <ol dir="auto">
+        <li class="hidden">Tap on the build number <strong>seven times</strong> in your android device to enable developer options.</li>
+        <li class="hidden">Go to developer options , then turn on <strong>usb debugging</strong> and also turn on <strong>Disable Permission Monitoring</strong> <em>if it exists</em>.</li>
+        <li class="hidden">Connect your phone to the Mac using an usb cable.</li>
+        <li class="hidden">Install brew using <code>/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"</code>.</li>
+        <li class="hidden">Install adb using <code>brew install android-platform-tools</code></li>
+        <li class="hidden">Download the file <a href="https://github.com/legendsayantan/ThemePatcher/releases/latest">ThemePatcher.sh</a>.</li>
+        <li class="hidden">Enable execution of the script using <code>chmod +x ThemePatcher.sh</code>.</li>
+        <li class="hidden">Open Theme Store in the android device, choose whatever paid themes you like and click <strong>Free trial</strong>.</li>
+        <li class="hidden">Run <code>./ThemePatcher.sh</code></li>
+        <li class="hidden">ThemePatcher should now automatically detect your device and all of the installed trial themes , fonts or live wallpapers... And will automatically convert them to permanent !</li>
+    </ol>
 </div>
 <div class="text">
     <h3 class="center hiddenY" style=" margin:0px;">Source Code</h3>
@@ -102,7 +114,13 @@
 </div>
 
 <style>
-
+    code {
+        color: white;
+        white-space: break-spaces;
+        background-color: #133054;
+        padding: 3px;
+        border-radius: 6px;
+    }
     .center {
         display: flex;
         flex-wrap: wrap;
@@ -190,7 +208,15 @@
         .btn:hover:before {
             left: 100%;
         }
+    input[type=button]{
+        background-color: #0F2CD4;
+        color: powderblue;
+    }
 
+    input[type=button]:hover{
+        background-color: black;
+            color: #55b9f3;
+    }
 </style>
 @inject IJSRuntime jsRuntime
 @code {

@@ -7,7 +7,7 @@
 </section>
 
 <section>
-    <h3 class="center hiddenY" style="margin-top:100px;" onclick="this.scrollIntoView({behavior:'smooth'})">Open-Source Projects</h3>
+    <h3 class="center hiddenY" style="margin-top:100px;" onclick="this.scrollIntoView({behavior:'smooth'})">Open-Source Tools</h3>
 
     <div class="center" id="projectContainer">
         @foreach (Project proj in @projects ?? Enumerable.Empty<Project>())
@@ -53,6 +53,7 @@
         <img class="hidden" style="margin:25px;" height="150" src="https://github-readme-stats.vercel.app/api?username=legendsayantan&show_icons=true&count_private=true&theme=radical&bg_color=45,0F2CD4,1C72EB&border_color=3890FC&title_color=f5deb3&custom_title=My%20Github%20Stats" />
         <img class="hidden2" style="margin:25px;" height="150" src="https://github-readme-stats.vercel.app/api/top-langs/?username=legendsayantan&layout=compact&theme=radical&bg_color=45,0F2CD4,1C72EB&border_color=3890FC&exclude_repo=legendsayantan.github.io,legendsayantan.is-a.dev&langs_count=6&title_color=f5deb3" />
     </div>
+    
 </section>
 <style>
     .center{
