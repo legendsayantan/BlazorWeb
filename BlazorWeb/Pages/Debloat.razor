@@ -159,7 +159,7 @@
     {
         await jsRuntime.InvokeVoidAsync("connectADB","connector","text","deviceControl");
         packages = await jsRuntime.InvokeAsync<String>("getPackages");
-        await jsRuntime.InvokeVoidAsync("eval", "document.getrElementById('processing').style.display='block'");
+        await jsRuntime.InvokeVoidAsync("eval", "document.getElementById('processing').style.display='block'");
         json = await jsRuntime.InvokeAsync<String>("fetchAppInfo","text");
         apps = packages.Split("\n");
         AppInfo[]? allApps = System.Text.Json.JsonSerializer.Deserialize<AppInfo[]>(json);
