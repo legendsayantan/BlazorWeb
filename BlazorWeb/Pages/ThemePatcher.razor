@@ -253,8 +253,7 @@
         await jsRuntime.InvokeVoidAsync("connectADB","connector","connectedData","deviceControl");
     }
     protected async Task executePatch(String code){
-        await jsRuntime.InvokeVoidAsync("eval","let str = executeForResult(data);console.log(str); disconnect(); connectBtn.style.display = 'block';nameView.innerText = 'The selected material should be unlocked.';container.style.display = 'none';");
-        //await jsRuntime.InvokeVoidAsync("executePatch", "am force-stop com.heytap.themestore; am force-stop com.nearme.themestore; " + code);
+        await jsRuntime.InvokeVoidAsync("executePatch", "am force-stop com.heytap.themestore; am force-stop com.nearme.themestore; " + code);
     }
 }
 
