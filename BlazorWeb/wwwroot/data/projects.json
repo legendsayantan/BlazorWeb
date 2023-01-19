@@ -2,21 +2,33 @@
   {
     "name": "Xcrypt",
     "desc": "Encrypt or Decrypt file in Android or Windows.",
-    "path": "/xcrypt"
+    "btn1": "github",
+    "btn2": "download",
+    "url1": "https://github.com/legendsayantan/xcrypt",
+    "url2": "https://github.com/legendsayantan/xcrypt/releases"
   },
   {
     "name": "ThemePatcher",
     "desc": "Get free themes on Oppo or Realme Android device.",
-    "path": "/themepatcher"
+    "btn1": "github",
+    "btn2": "download",
+    "url1": "https://github.com/legendsayantan/themepatcher",
+    "url2": "https://github.com/legendsayantan/themepatcher/releases"
   },
   {
     "name": "Screenery",
     "desc": "Keep Android Screen Awake or make it Dim, and more.",
-    "path": "/screenery"
+    "btn1": "github",
+    "btn2": "download",
+    "url1": "https://github.com/legendsayantan/screenery",
+    "url2": "https://github.com/legendsayantan/screenery/releases"
   },
   {
     "name": "AutoReact",
     "desc": "Automated Reactions for Facebook and Instagram.",
-    "path": "/autoreact"
+    "btn1": "github",
+    "btn2": "download",
+    "url1": "https://github.com/legendsayantan/autoreact",
+    "url2": "https://github.com/legendsayantan/autoreact/releases"
   }
 ]

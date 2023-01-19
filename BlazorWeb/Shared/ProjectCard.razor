@@ -13,8 +13,8 @@
     </MatCardContent>
     <MatCardActions Class="actions">
 
-        <RainbowButton Text="Github" Path=@("https://github.com/legendsayantan/"+project.path) />
-        <RainbowButton Text="Download" Path=@("https://github.com/legendsayantan/"+project.path+"/releases/") />
+        <RainbowButton Text=@project.btn1 Path=@project.url1 />
+        <RainbowButton Text=@project.btn2 Path=@project.url2 />
     </MatCardActions>
 </MatCard>
 
@@ -72,9 +72,9 @@
     public Project project { get; set; }
 
     public void wikiClick(){
-        NavManager.NavigateTo(project.path);
+        NavManager.NavigateTo(project.url1);
     }
     public async Task gitClick(){
-        await jsRuntime.InvokeAsync<object>("open", "https://github.com/legendsayantan"+project.path, "_blank");
+        await jsRuntime.InvokeAsync<object>("open", "https://github.com/legendsayantan"+project.url1, "_blank");
     }
 }

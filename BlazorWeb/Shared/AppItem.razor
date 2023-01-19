@@ -1,0 +1,34 @@
+﻿<div class="container">
+    <div style="display: flex; flex-direction: row; align-items: baseline; margin: 0px;">
+        <h3>@info.id</h3>
+        <p>@("  Removal : " + info.removal)</p>
+    </div>
+    <p class="description">@info.description</p>
+</div>
+<style>
+    .container {
+        padding: 0.5rem;
+        font-size: medium;
+        border-radius: 1rem;
+        border-color: rgba(128, 128, 128, 0.5);
+        border-width: 5px;
+        margin: 5px;
+    }
+
+    h3 {
+        margin: 0px;
+    }
+
+    .container:hover {
+        background-color: rgba(128, 128, 128, 0.5);
+    }
+
+    .description {
+        font-size: small;
+        margin: 0%;
+    }
+</style>
+@code {
+    [Parameter]
+    public AppInfo? info { get; set; }
+}

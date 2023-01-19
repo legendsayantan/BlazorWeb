@@ -20,7 +20,12 @@
 </section>
 
 <section id="deviceControl">
-    
+    <p style="display:none" id="processing">Please wait, Processing Apps...</p>
+    <ul id="list">
+        @foreach(AppInfo info in appInfos){
+            <AppItem info=info @onclick="@(()=>uninstallApp(info.id))" />
+        }
+    </ul>
 </section>
 
 <style>
@@ -149,6 +154,7 @@
     {
         await jsRuntime.InvokeVoidAsync("connectADB","connector","text","deviceControl");
         packages = await jsRuntime.InvokeAsync<String>("getPackages");
+        await jsRuntime.InvokeVoidAsync("eval", "document.getrElementById('processing').style.display='block'");
         json = await jsRuntime.InvokeAsync<String>("fetchAppInfo","text");
         apps = packages.Split("\n");
         AppInfo[]? allApps = System.Text.Json.JsonSerializer.Deserialize<AppInfo[]>(json);
@@ -156,6 +162,7 @@
             AppInfo app = new AppInfo();
             string[] segments = str.Split(".apk=");
             app.id = segments[segments.Length - 1].Trim();
+            if (app.id.Equals("")) continue;
             foreach (AppInfo appInfo in allApps ?? Enumerable.Empty<AppInfo>())
             {
                 if (appInfo.id.Trim().Equals(app.id)) app = appInfo;
@@ -163,9 +170,13 @@
             appInfos.Add(app);
         }
         Console.WriteLine(System.Text.Json.JsonSerializer.Serialize(appInfos.ToArray()));
+        await jsRuntime.InvokeVoidAsync("eval", "document.getrElementById('processing').style.display='none'");
     }
     protected async Task executeCommand(String code){
         await jsRuntime.InvokeVoidAsync("executeForResult", code);
+    }
+    protected async Task uninstallApp(string id){
+        Console.WriteLine("Requested to uninstall "+id);
     }
 
 }
