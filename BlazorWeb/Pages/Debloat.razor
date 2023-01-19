@@ -5,7 +5,7 @@
 <div class="text">
     <h5 class="hidden">Have a phone full of bloatwares? Clean them up !</h5>
     <p class="hidden" style="transition-delay:250ms">
-        Datasets for this project is provided by <a href="https://github.com/0x192/universal-android-debloater">Universal Android Debloater</a>.
+        Datasets for this project is collected from <a href="https://github.com/0x192/universal-android-debloater">Universal Android Debloater</a>.
     </p>
 </div>
 <section class="center small">
@@ -158,6 +158,13 @@
     protected async Task connectDevice()
     {
         await jsRuntime.InvokeVoidAsync("connectADB","connector","text","deviceControl");
+        access(1);
+    }
+    protected async Task access(int count){
+        if(count>3){
+            await jsRuntime.InvokeVoidAsync("eval", "document.getElementById('text').innerText='Failed to retrieve app data, try refreshing the page.'");
+            return;
+        }
         packages = await jsRuntime.InvokeAsync<String>("getPackages");
         await jsRuntime.InvokeVoidAsync("eval", "document.getElementById('processing').style.display='block'");
         json = await jsRuntime.InvokeAsync<String>("fetchAppInfo","text");
@@ -176,9 +183,11 @@
         }
         Console.WriteLine(System.Text.Json.JsonSerializer.Serialize(appInfos.ToArray()));
         if(appInfos.Count<1){
-            await jsRuntime.InvokeVoidAsync("eval", "document.getElementById('text').innerText='Failed to retrieve app data, try refreshing the page.'");
+            await jsRuntime.InvokeVoidAsync("eval", "await new Promise(()=>setTimeout(1000))");
+            await access(count+1);
+        }else{
+            await jsRuntime.InvokeVoidAsync("eval", "document.getElementById('processing').style.display='none'");
         }
-        await jsRuntime.InvokeVoidAsync("eval", "document.getElementById('processing').style.display='none'");
     }
     protected async Task executeCommand(String code){
         await jsRuntime.InvokeVoidAsync("executeForResult", code);

@@ -1,8 +1,8 @@
 ﻿<div class="container" @onclick="@onclick">
-    <div style="display: flex; flex-direction: row; align-items: baseline; margin: 0px;">
-        <h4>@info.id</h4>
+    <div style="display: flex; flex-direction: row; align-items: center; margin: 0px; height: 25px;">
+        <h5>@info.id</h5>
             <br /><br />
-        <p>@("Removal : " + info.removal)</p>
+        <p style="margin: 0px 10px;">@("Removal : " + info.removal)</p>
     </div>
     <p class="description">@info.description</p>
 </div>
@@ -13,7 +13,8 @@
         border-radius: 1rem;
         border-color: rgba(128, 128, 128, 0.5);
         border-width: 5px;
-        flex: none;
+        display: block;
+        flex: nowrap;
         margin: 2.5px;
     }
 
