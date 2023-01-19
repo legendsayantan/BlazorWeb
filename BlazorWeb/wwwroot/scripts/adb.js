@@ -1,5 +1,5 @@
 ﻿console.log('init adb.js');
-var adb = null, dev = null, webusb = null;
+var adbInstance = null, dev = null, webusb = null;
 var connectBtn, nameView, container;
 async function connectADB(connectBtnId, nameViewId, controlViewId) {
     console.log("Connecting to WebUSB");
@@ -7,6 +7,7 @@ async function connectADB(connectBtnId, nameViewId, controlViewId) {
     nameView = document.getElementById(nameViewId);
     container = document.getElementById(controlViewId);
     await usbConnection();
+    console.log(webusb == null + " - " + adbInstance == null);
 }
 async function usbConnection() {
     webusb = await Adb.open("WebUSB");
@@ -15,17 +16,20 @@ async function usbConnection() {
         console.log('usb fail');
     } else {
         nameView.innerText = "Click 'Allow' in your Android device.";
-        adb = await webusb.connectAdb("host::");
-        await adbConnection();
+        let tempadb;
+        tempadb = await webusb.connectAdb("host::");
+        await adbConnection(tempadb);
     }
 }
-async function adbConnection() {
-    if (adb == null) {
+async function adbConnection(tempadb) {
+    console.log("checking adb connection");
+    if (tempadb == null) {
         await setTimeout(500);
         await adbConnection();
     } else {
-        dev = await adb.transport.device;
-        console.log("ADB connection ready" + adb);
+        adbInstance = tempadb;
+        dev = await adbInstance.transport.device;
+        console.log("ADB connection ready " + adbInstance);
         connectBtn.style.display = "none";
         nameView.innerText = "Connected to " + dev.manufacturerName + " " + dev.productName;
         container.style.display = "block";
@@ -40,7 +44,7 @@ async function executePatch(data) {
     container.style.display = "none";
 }
 async function executeForResult(data) {
-    let shell = await adb.shell(data.replace("\n", ";"));
+    let shell = await adbInstance.shell(data.replace("\n", ";"));
     console.log("execution ready");
     let response = await shell.receive();
     let str;
@@ -53,12 +57,13 @@ async function executeForResult(data) {
     return str;
 }
 async function disconnect() {
+    console.log(webusb == null + " - " + adbInstance == null);
     try {
         dev.close();
     } catch (error) { }
 }
 async function getPackages() {
-    if (webusb && adb) return await executeForResult('pm list packages -f');
+    if (webusb && adbInstance) return await executeForResult('pm list packages -f');
     else return '';
 }
 async function fetchAppInfo(view) {
