@@ -158,13 +158,6 @@
     protected async Task connectDevice()
     {
         await jsRuntime.InvokeVoidAsync("connectADB","connector","text","deviceControl");
-        access(1);
-    }
-    protected async Task access(int count){
-        if(count>3){
-            await jsRuntime.InvokeVoidAsync("eval", "document.getElementById('text').innerText='Failed to retrieve app data, try refreshing the page.'");
-            return;
-        }
         packages = await jsRuntime.InvokeAsync<String>("getPackages");
         await jsRuntime.InvokeVoidAsync("eval", "document.getElementById('processing').style.display='block'");
         json = await jsRuntime.InvokeAsync<String>("fetchAppInfo","text");
@@ -183,11 +176,13 @@
         }
         Console.WriteLine(System.Text.Json.JsonSerializer.Serialize(appInfos.ToArray()));
         if(appInfos.Count<1){
-            await jsRuntime.InvokeVoidAsync("eval", "await new Promise(()=>setTimeout(1000))");
-            await access(count+1);
+            await jsRuntime.InvokeVoidAsync("eval", "document.getElementById('text').innerText='Failed to retrieve app data, try refreshing the page.'");
         }else{
             await jsRuntime.InvokeVoidAsync("eval", "document.getElementById('processing').style.display='none'");
         }
+    }
+    protected async Task access(int count){
+
     }
     protected async Task executeCommand(String code){
         await jsRuntime.InvokeVoidAsync("executeForResult", code);

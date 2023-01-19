@@ -7,7 +7,9 @@ async function connectADB(connectBtnId, nameViewId, controlViewId) {
     try {
         webusb = await Adb.open("WebUSB");
         document.getElementById(nameViewId).innerText = "5. Click 'Allow' in your Android device.";
+        console.log("USB connection ready");
         adb = await webusb.connectAdb("host::");
+        console.log("ADB connection ready");
         if (!webusb) {
             document.getElementById(nameViewId).innerText = "No device selected.";
         }
@@ -37,6 +39,7 @@ async function executePatch(data) {
 }
 async function executeForResult(data) {
     let shell = await adbInstance.shell(data.replace("\n", ";"));
+    console.log("execution ready");
     let response = await shell.receive();
     let str;
     try {
