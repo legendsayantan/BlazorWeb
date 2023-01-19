@@ -192,9 +192,6 @@
             await jsRuntime.InvokeVoidAsync("eval", "document.getElementById('processing').style.display='none'");
         }
     }
-    protected async Task access(int count){
-
-    }
     protected async Task executeCommand(String code){
         await jsRuntime.InvokeVoidAsync("executeForResult", code);
     }
@@ -205,12 +202,12 @@
         }else if(info.removal.Equals("Unknown")){
             bool ask = await jsRuntime.InvokeAsync<bool>("prompt","Removal may cause problems if it is a system app.\nUninstall Anyway??");
             if(ask){
-                executeCommand("pm uninstall 0 -k --user "+info.id);
+                await executeCommand("pm uninstall "+info.id);
             }
         }else{
             bool ask = await jsRuntime.InvokeAsync<bool>("prompt","Uninstall app "+info.id+" ??");
             if(ask){
-                executeCommand("pm uninstall 0 -k --user "+info.id);
+                await executeCommand("pm uninstall "+info.id);
             }
         }
     }
