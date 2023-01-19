@@ -5,7 +5,7 @@
 <div class="text">
     <h5 class="hidden">Have a phone full of bloatwares? Clean them up !</h5>
     <p class="hidden" style="transition-delay:250ms">
-        This project is based on <a href="https://github.com/0x192/universal-android-debloater">Universal Android Debloater</a>. Credits to them for providing resources.
+        Datasets for this project is provided by <a href="https://github.com/0x192/universal-android-debloater">Universal Android Debloater</a>.
     </p>
 </div>
 <section class="center small">
@@ -20,7 +20,7 @@
 </section>
 
 <section id="deviceControl">
-
+    
 </section>
 
 <style>
@@ -130,24 +130,10 @@
 </style>
 @inject IJSRuntime jsRuntime
 @code {
-    public string CodeTheme = "" +
-    "settings put system persist.sys.oppo.theme_uuid -1\n" +
-    "settings put system persist.sys.oplus.theme_uuid -1\n" +
-    "settings put system persist.sys.trial.theme 0\n" +
-    "settings put secure persist.sys.oppo.theme_uuid -1\n" +
-    "settings put secure persist.sys.oplus.theme_uuid -1\n" +
-    "settings put secure persist.sys.trial.theme 0\n";
-    public string CodeFont = "" +
-    "settings put system persist.sys.trial.font 0\n" +
-    "settings put secure persist.sys.trial.font 0\n";
-    public string CodeWallpaper = "" +
-    "settings put system persist.sys.oplus.live_wp_uuid default_live_wp_package_name\n" +
-    "settings put system persist.sys.oppo.live_wp_uuid -1\n" +
-    "settings put system persist.sys.trial.live_wp 0\n" +
-    "settings put secure persist.sys.oplus.live_wp_uuid default_live_wp_package_name\n" +
-    "settings put secure persist.sys.oppo.live_wp_uuid -1\n" +
-    "settings put secure persist.sys.trial.live_wp 0\n";
 
+    public String packages = "";
+    public String json = "[]";
+    List<String> apps = new List<String>();
     protected async Task copyText(string str)
     {
         await jsRuntime.InvokeVoidAsync("navigator.clipboard.writeText", str);
@@ -161,9 +147,18 @@
     protected async Task connectDevice()
     {
         await jsRuntime.InvokeVoidAsync("connectADB","connector","text","deviceControl");
+        packages = await jsRuntime.InvokeAsync<String>("getPackages");
+        json = await jsRuntime.InvokeAsync<String>("fetchAppInfo","text");
     }
-    protected async Task executePatch(String code){
-        await jsRuntime.InvokeVoidAsync("executeOnShell", code);
+    protected async Task executeCommand(String code){
+        await jsRuntime.InvokeVoidAsync("executeForResult", code);
+    }
+    public class AppInfo{
+        String? Name;
+        String? id;
+        String? description;
+        String? removal;
+        public AppInfo(){ }
     }
 }
 

@@ -50,3 +50,20 @@ async function executeForResult(data) {
 async function disconnect() {
     dev.close();
 }
+async function getPackages() {
+    if (webusb && adbInstance) return await executeForResult('pm list packages -f');
+    else return '';
+}
+async function fetchAppInfo(view) {
+    let txt = view.innerText;
+    view.innerText = "Loading information on apps, please wait...";
+    let data;
+    await fetch('https://rawcdn.githack.com/0x192/universal-android-debloater/749820ca8616df97b81a2b51e0422f3ae7cd593c/resources/assets/uad_lists.json').then(async function (response) {
+        return response.text();
+    })
+        .then(async function (body) {
+            data = body;
+        });
+    view.innerText = txt;
+    return data;
+}
