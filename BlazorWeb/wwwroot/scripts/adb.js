@@ -38,9 +38,9 @@ async function executePatch(data) {
 async function executeForResult(data) {
     let shell = await adbInstance.shell(data.replace("\n", ";"));
     let response = await shell.receive();
-    let decoder = new TextDecoder("utf-8");
     let str;
     try {
+        let decoder = new TextDecoder("utf-8");
         str = decoder.decode(response.data);
     } catch (error) {
         str = response;
