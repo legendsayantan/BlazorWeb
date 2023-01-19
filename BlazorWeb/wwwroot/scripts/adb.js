@@ -15,7 +15,7 @@ async function connectADB(connectBtnId, nameViewId, controlViewId) {
         console.error(error);
     }
     if (adb) {
-        dev = adb.transport.device;
+        dev = await adb.transport.device;
         connectBtn = document.getElementById(connectBtnId);
         nameView = document.getElementById(nameViewId);
         container = document.getElementById(controlViewId);

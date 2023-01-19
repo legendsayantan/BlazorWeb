@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-    <title>Sayantan</title>
+    <title>LegendSayantan</title>
     <base href="/" />
     <link href="css/bootstrap/bootstrap.min.css" rel="stylesheet" />
     <link href="css/app.css" rel="stylesheet" />
@@ -15,6 +15,11 @@
 </head>
 
 <body>
+    <script type="text/javascript">
+        caches.delete("blazor-resources-/").then(function (e) {
+            console.log("'blazor-resources-/' cache deleted");
+        });
+    </script>
     <div id="app"></div>
     <div id="blazor-error-ui">
         An unhandled error has occurred.
@@ -34,12 +39,11 @@
     <script src="scripts/adb.js"></script>
     <script src="_framework/blazor.webassembly.js"></script>
     <script src="_content/Radzen.Blazor/Radzen.Blazor.js"></script>
-    <script src="saveFile.js"></script>
     <script src="scripts/index.js"></script>
 
 
     <style>
-        
+
         .small {
             transform: scale(0.75);
             transition: all 0.75s;

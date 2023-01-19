@@ -15,7 +15,7 @@
 </div>
 
 <div class="text">
-    <h3 class="center hiddenY" style=" margin:0px;">Online Unlocker</h3>
+    <h3 class="center hiddenY" style=" margin:0px;">Online Unlocker (Temporarily Down)</h3>
     <div class="center" style=" margin:0px; padding:0px; display:block; flex-direction:column">
         <div id="connector">
             <ol class="center" style="flex-direction:column">
@@ -253,7 +253,8 @@
         await jsRuntime.InvokeVoidAsync("connectADB","connector","connectedData","deviceControl");
     }
     protected async Task executePatch(String code){
-        await jsRuntime.InvokeVoidAsync("executePatch", "am force-stop com.heytap.themestore; am force-stop com.nearme.themestore; " + code);
+        await jsRuntime.InvokeVoidAsync("eval","let str = executeForResult(data);console.log(str); disconnect(); connectBtn.style.display = 'block';nameView.innerText = 'The selected material should be unlocked.';container.style.display = 'none';");
+        //await jsRuntime.InvokeVoidAsync("executePatch", "am force-stop com.heytap.themestore; am force-stop com.nearme.themestore; " + code);
     }
 }
 

@@ -11,7 +11,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="Shared\Loader.html" />
+    <None Include="wwwroot\**" />
   </ItemGroup>
 
   <ItemGroup>
@@ -22,5 +22,4 @@
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="6.0.8" PrivateAssets="all" />
     <PackageReference Include="Radzen.Blazor" Version="3.20.12" />
   </ItemGroup>
-
 </Project>
