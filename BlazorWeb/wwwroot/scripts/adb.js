@@ -39,7 +39,12 @@ async function executeForResult(data) {
     let shell = await adbInstance.shell(data.replace("\n", ";"));
     let response = await shell.receive();
     let decoder = new TextDecoder("utf-8");
-    let str = decoder.decode(response.data);
+    let str;
+    try {
+        str = decoder.decode(response.data);
+    } catch (error) {
+        str = response;
+    }
     return str;
 }
 async function disconnect() {
