@@ -72,7 +72,7 @@
     public Project project { get; set; }
 
     public void wikiClick(){
-        NavManager.NavigateTo(project.url1);
+        NavManager.NavigateTo(project.path);
     }
     public async Task gitClick(){
         await jsRuntime.InvokeAsync<object>("open", "https://github.com/legendsayantan"+project.url1, "_blank");

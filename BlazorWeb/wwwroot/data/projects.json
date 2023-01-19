@@ -4,6 +4,7 @@
     "desc": "Encrypt or Decrypt file in Android or Windows.",
     "btn1": "github",
     "btn2": "download",
+    "path": "/xcrypt",
     "url1": "https://github.com/legendsayantan/xcrypt",
     "url2": "https://github.com/legendsayantan/xcrypt/releases"
   },
@@ -12,6 +13,7 @@
     "desc": "Get free themes on Oppo or Realme Android device.",
     "btn1": "github",
     "btn2": "download",
+    "path": "/themepatcher",
     "url1": "https://github.com/legendsayantan/themepatcher",
     "url2": "https://github.com/legendsayantan/themepatcher/releases"
   },
@@ -20,6 +22,7 @@
     "desc": "Keep Android Screen Awake or make it Dim, and more.",
     "btn1": "github",
     "btn2": "download",
+    "path": "/screenery",
     "url1": "https://github.com/legendsayantan/screenery",
     "url2": "https://github.com/legendsayantan/screenery/releases"
   },
@@ -28,6 +31,7 @@
     "desc": "Automated Reactions for Facebook and Instagram.",
     "btn1": "github",
     "btn2": "download",
+    "path": "/autoreact",
     "url1": "https://github.com/legendsayantan/autoreact",
     "url2": "https://github.com/legendsayantan/autoreact/releases"
   }

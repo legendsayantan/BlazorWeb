@@ -175,6 +175,9 @@
             appInfos.Add(app);
         }
         Console.WriteLine(System.Text.Json.JsonSerializer.Serialize(appInfos.ToArray()));
+        if(appInfos.Count<1){
+            await jsRuntime.InvokeVoidAsync("eval", "document.getElementById('text').innerText='Failed to retrieve app data, try refreshing the page.'");
+        }
         await jsRuntime.InvokeVoidAsync("eval", "document.getElementById('processing').style.display='none'");
     }
     protected async Task executeCommand(String code){
@@ -183,6 +186,5 @@
     protected async Task uninstallApp(string id){
         Console.WriteLine("Requested to uninstall "+id);
     }
-
 }
 

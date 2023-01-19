@@ -1,7 +1,8 @@
 ﻿<div class="container" @onclick="@onclick">
     <div style="display: flex; flex-direction: row; align-items: baseline; margin: 0px;">
-        <h3>@info.id</h3>
-        <p>@("  Removal : " + info.removal)</p>
+        <h4>@info.id</h3>
+            <br /><br />
+        <p>@("Removal : " + info.removal)</p>
     </div>
     <p class="description">@info.description</p>
 </div>
@@ -12,7 +13,8 @@
         border-radius: 1rem;
         border-color: rgba(128, 128, 128, 0.5);
         border-width: 5px;
-        margin: 5px;
+        flex: none;
+        margin: 2.5px;
     }
 
     h3 {
@@ -26,6 +28,9 @@
     .description {
         font-size: small;
         margin: 0%;
+    }
+    div{
+        margin:0px;
     }
 </style>
 @code {
