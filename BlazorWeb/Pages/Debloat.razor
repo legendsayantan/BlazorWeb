@@ -23,7 +23,7 @@
     <p style="display:none" id="processing">Please wait, Processing Apps...</p>
     <div id="list">
         @foreach(AppInfo info in appInfos){
-            <AppItem info=info @onclick="@(()=>uninstallApp(info.id))" />
+            <AppItem info=info onclick="@(()=>uninstallApp(info.id))" />
         }
     </div>
 </section>
@@ -167,7 +167,7 @@
             AppInfo app = new AppInfo();
             string[] segments = str.Split(".apk=");
             app.id = segments[segments.Length - 1].Trim();
-            if (app.id.Equals("")) continue;
+            if (string.IsNullOrEmpty(app.id)) continue;
             foreach (AppInfo appInfo in allApps ?? Enumerable.Empty<AppInfo>())
             {
                 if (appInfo.id.Trim().Equals(app.id)) app = appInfo;

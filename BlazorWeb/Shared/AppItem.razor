@@ -1,4 +1,4 @@
-﻿<div class="container">
+﻿<div class="container" @onclick="@onclick">
     <div style="display: flex; flex-direction: row; align-items: baseline; margin: 0px;">
         <h3>@info.id</h3>
         <p>@("  Removal : " + info.removal)</p>
@@ -31,4 +31,7 @@
 @code {
     [Parameter]
     public AppInfo? info { get; set; }
+
+    [Parameter]
+    public EventCallback<MouseEventArgs> onclick { get;  set; }
 }
