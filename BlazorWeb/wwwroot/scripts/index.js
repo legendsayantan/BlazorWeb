@@ -63,7 +63,6 @@ async function connectADB(connectBtnId,nameViewId,controlViewId) {
     }
 }
 async function executeOnShell(data) {
-    data = "am force-stop com.heytap.themestore; am force-stop com.nearme.themestore; " + data;
     let shell = await adbInstance.shell(data.replace("\n",";"));
     console.log(await shell.receive());
     connectBtn.style.display = "block";

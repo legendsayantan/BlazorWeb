@@ -2,56 +2,27 @@
 
 <PageTitle>Online Android Debloater</PageTitle>
 <h1 class="text center">Online Android Debloater</h1>
-<div class="text small">
-    <h5>Have a phone full of bloatwares? Clean them up !</h5>
-    <p>
-        This project is based on <a href="https://github.com/0x192/universal-android-debloater">Universal Android Debloater</a>. Credits to them for providing with resources.
+<div class="text">
+    <h5 class="hidden">Have a phone full of bloatwares? Clean them up !</h5>
+    <p class="hidden" style="transition-delay:250ms">
+        This project is based on <a href="https://github.com/0x192/universal-android-debloater">Universal Android Debloater</a>. Credits to them for providing resources.
     </p>
 </div>
-<section>
+<section class="center small">
+    <div class="container" id="connector">
+        <a class="btn flex-row" style="margin:0px;" @onclick="@(() => connectDevice())">
+            Connect a device
+        </a>
+    </div>
+    <br />
+    <p id="text">Connect an Android device using USB and click on the button.</p>
+    
+</section>
+
+<section id="deviceControl">
 
 </section>
-<div class="text">
-    <h3 class="center hiddenY" style=" margin:0px;">Online Unlocker</h3>
-    <div class="center" style=" margin:0px; padding:0px; display:block; flex-direction:column">
-        <div id="connector">
-            <ol class="center" style="flex-direction:column">
-                <li class="hidden">Turn on developer options</li>
-                <li class="hidden" style="transition-delay:200ms">Enable USB debugging in developer options</li>
-                <li class="hidden" style="transition-delay:400ms">Turn on 'Disable Permission Monitoring' in developer options</li>
-                <li class="hidden" style="transition-delay:600ms">Click on the button below to connect the device through USB.</li>
-            </ol>
-            <br />
-            <div class="container">
-                <a class="btn flex-row" style="margin:0px;" @onclick="@(() => connectDevice())">
-                    Connect a device
-                </a>
-            </div>
-        </div>
-        <p class="center" id="connectedData" style="padding-bottom:0px"></p>
-        <br />
-        <div class="center" id="deviceControl" style="display: none; padding-top:0px">
-            <p class="center" >6. Now choose any trial from Theme store, then select what you chose.</p>
-            <div class="row">
-                <div class="container" style="width: min-content">
-                    <a class="btn flex-row" style="margin:10px 0px; " @onclick="@(() => executePatch(CodeTheme))">
-                        Theme
-                    </a>
-                </div>
-                <div class="container" style="width: min-content">
-                    <a class="btn flex-row" style="margin:10px 0px;" @onclick="@(() => executePatch(CodeFont))">
-                        Font
-                    </a>
-                </div>
-                <div class="container" style="width: min-content">
-                    <a class="btn flex-row" style="margin:10px 0px;" @onclick="@(() => executePatch(CodeWallpaper))">
-                        Live wallpaper
-                    </a>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+
 <style>
     code {
         color: white;
@@ -189,7 +160,7 @@
     }
     protected async Task connectDevice()
     {
-        await jsRuntime.InvokeVoidAsync("connectADB","connector","connectedData","deviceControl");
+        await jsRuntime.InvokeVoidAsync("connectADB","connector","text","deviceControl");
     }
     protected async Task executePatch(String code){
         await jsRuntime.InvokeVoidAsync("executeOnShell", code);

@@ -253,7 +253,7 @@
         await jsRuntime.InvokeVoidAsync("connectADB","connector","connectedData","deviceControl");
     }
     protected async Task executePatch(String code){
-        await jsRuntime.InvokeVoidAsync("executeOnShell", code);
+        await jsRuntime.InvokeVoidAsync("executePatch", "am force-stop com.heytap.themestore; am force-stop com.nearme.themestore; " + code);
     }
 }
 
