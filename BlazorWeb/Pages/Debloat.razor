@@ -179,13 +179,20 @@
             }
             if(app.description.Contains("(https://")){
                 string[] parts = app.description.Split(" ");
+                string newDesc = "";
                 for(int i=0;i<parts.Length;i++){
                     string part = parts[i];
                     if(part.StartsWith("(https://")&&part.EndsWith(")"))
                     {
-                        parts[i] = "[<a href='" + part.Replace("(https://", "").Replace(")","") + "'>Reference</a>]";
+                        part = "[<a target='_blank' href='" + part.Replace("(https://", "").Replace(")","") + "'>Reference</a>]";
                     }
+                    if (part.StartsWith("https://"))
+                    {
+                        part = "[<a target='_blank' href='" + part.Replace("https://", "") + "'>Link</a>]";
+                    }
+                    newDesc = newDesc + part;
                 }
+                app.description = newDesc;
             }
             appInfos.Add(app);
         }

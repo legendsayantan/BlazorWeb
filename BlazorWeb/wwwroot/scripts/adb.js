@@ -6,18 +6,20 @@ async function connectADB(connectBtnId, nameViewId, controlViewId) {
     try {
         webusb = await Adb.open("WebUSB");
         document.getElementById(nameViewId).innerText = "Click 'Allow' in your Android device.";
-        console.log("USB connection ready");
-        adb = await webusb.connectAdb("host::");
-        console.log("ADB connection ready");
-        if (!webusb) {
+        console.log("USB connection ready " + webusb);
+        if (webusb == null) {
             document.getElementById(nameViewId).innerText = "No device selected.";
             console.log('usb fail');
+        } else {
+            adb = await webusb.connectAdb("host::");
+            console.log("ADB connection ready" + adb);
         }
+        
     } catch (error) {
         console.log(error);
         return;
     }
-    if (adb) {
+    if (adb != null) {
         dev = await adb.transport.device;
         connectBtn = document.getElementById(connectBtnId);
         nameView = document.getElementById(nameViewId);
@@ -25,7 +27,7 @@ async function connectADB(connectBtnId, nameViewId, controlViewId) {
         connectBtn.style.display = "none";
         nameView.innerText = "Connected to " + dev.manufacturerName + " " + dev.productName;
         container.style.display = "block";
-    } else if (webusb) {
+    } else if (webusb != null) {
         document.getElementById(nameViewId).innerText = "Failed to connect";
         console.log('adb fail');
     }
