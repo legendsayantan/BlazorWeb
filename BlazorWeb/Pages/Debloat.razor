@@ -21,8 +21,10 @@
 </section>
 
 <section id="deviceControl" class="center" style="display:none">
-    <input type="button" value="Disconnect" @onclick=@(()=>reset())/>
-    <p style="display:none" id="processing">Please wait, Processing Apps...</p>
+    <div class="center">
+        <input type="button" value="Disconnect" @onclick=@(()=>reset()) />
+        <p style="display:none" id="processing">Please wait, Processing Apps...</p>
+    </div>
     <div id="list">
         @foreach(AppInfo info in appInfos){
             <AppItem info=info onclick="@(()=>uninstallApp(info))" />

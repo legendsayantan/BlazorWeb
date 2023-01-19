@@ -3,33 +3,32 @@ var adb = null, dev = null, webusb = null;
 var connectBtn, nameView, container;
 async function connectADB(connectBtnId, nameViewId, controlViewId) {
     console.log("Connecting to WebUSB");
-    try {
-        webusb = await Adb.open("WebUSB");
-        document.getElementById(nameViewId).innerText = "Click 'Allow' in your Android device.";
-        console.log("USB connection ready " + webusb);
-        if (webusb == null) {
-            document.getElementById(nameViewId).innerText = "No device selected.";
-            console.log('usb fail');
-        } else {
-            adb = await webusb.connectAdb("host::");
-            console.log("ADB connection ready" + adb);
-        }
-        
-    } catch (error) {
-        console.log(error);
-        return;
+    connectBtn = document.getElementById(connectBtnId);
+    nameView = document.getElementById(nameViewId);
+    container = document.getElementById(controlViewId);
+    await usbConnection();
+}
+async function usbConnection() {
+    webusb = await Adb.open("WebUSB");
+    if (webusb == null) {
+        nameView.innerText = "No device selected.";
+        console.log('usb fail');
+    } else {
+        nameView.innerText = "Click 'Allow' in your Android device.";
+        adb = await webusb.connectAdb("host::");
+        await adbConnection();
     }
-    if (adb != null) {
+}
+async function adbConnection() {
+    if (adb == null) {
+        await setTimeout(500);
+        await adbConnection();
+    } else {
         dev = await adb.transport.device;
-        connectBtn = document.getElementById(connectBtnId);
-        nameView = document.getElementById(nameViewId);
-        container = document.getElementById(controlViewId);
+        console.log("ADB connection ready" + adb);
         connectBtn.style.display = "none";
         nameView.innerText = "Connected to " + dev.manufacturerName + " " + dev.productName;
         container.style.display = "block";
-    } else if (webusb != null) {
-        document.getElementById(nameViewId).innerText = "Failed to connect";
-        console.log('adb fail');
     }
 }
 async function executePatch(data) {
