@@ -5,7 +5,7 @@
 <div class="text">
     <h5 class="hidden">Have a phone full of bloatwares? Clean them up !</h5>
     <p class="hidden" style="transition-delay:250ms">
-        Datasets for this project is collected from <a href="https://github.com/0x192/universal-android-debloater">Universal Android Debloater</a>.
+        App descriptions are collected from <a href="https://github.com/0x192/universal-android-debloater">Universal Android Debloater</a>.
     </p>
 </div>
 <section class="center small">
@@ -20,7 +20,7 @@
     
 </section>
 
-<section id="deviceControl" class="center">
+<section id="deviceControl" class="center" style="display:none">
     <input type="button" value="Disconnect" @onclick=@(()=>reset())/>
     <p style="display:none" id="processing">Please wait, Processing Apps...</p>
     <div id="list">
@@ -201,7 +201,7 @@
     protected async Task reset()
     {
         await jsRuntime.InvokeVoidAsync("disconnect");
-        await jsRuntime.InvokeVoidAsync("eval","window.reload()");
+        nav.NavigateTo(nav.Uri, true);
     }
     protected async Task uninstallApp(AppInfo info){
         Console.WriteLine("Requested to uninstall "+info.id);
