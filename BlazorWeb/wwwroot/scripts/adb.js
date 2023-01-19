@@ -1,9 +1,8 @@
 ﻿console.log('init adb.js');
-var adbInstance = null, dev = null;
+var adb = null, dev = null, webusb = null;
 var connectBtn, nameView, container;
 async function connectADB(connectBtnId, nameViewId, controlViewId) {
     console.log("Connecting to WebUSB");
-    let adb;
     try {
         webusb = await Adb.open("WebUSB");
         document.getElementById(nameViewId).innerText = "Click 'Allow' in your Android device.";
@@ -15,7 +14,7 @@ async function connectADB(connectBtnId, nameViewId, controlViewId) {
             console.log('usb fail');
         }
     } catch (error) {
-        console.error(error);
+        console.log(error);
         return;
     }
     if (adb) {
@@ -26,7 +25,6 @@ async function connectADB(connectBtnId, nameViewId, controlViewId) {
         connectBtn.style.display = "none";
         nameView.innerText = "Connected to " + dev.manufacturerName + " " + dev.productName;
         container.style.display = "block";
-        adbInstance = adb;
     } else if (webusb) {
         document.getElementById(nameViewId).innerText = "Failed to connect";
         console.log('adb fail');
@@ -41,7 +39,7 @@ async function executePatch(data) {
     container.style.display = "none";
 }
 async function executeForResult(data) {
-    let shell = await adbInstance.shell(data.replace("\n", ";"));
+    let shell = await adb.shell(data.replace("\n", ";"));
     console.log("execution ready");
     let response = await shell.receive();
     let str;
@@ -59,7 +57,7 @@ async function disconnect() {
     } catch (error) { }
 }
 async function getPackages() {
-    if (webusb && adbInstance) return await executeForResult('pm list packages -f');
+    if (webusb && adb) return await executeForResult('pm list packages -f');
     else return '';
 }
 async function fetchAppInfo(view) {
