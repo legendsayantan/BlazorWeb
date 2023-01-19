@@ -200,12 +200,12 @@
         if(info.removal.Equals("Unsafe")){
             await jsRuntime.InvokeVoidAsync("alert","This app is unsafe to remove and will possibly break your system.");
         }else if(info.removal.Equals("Unknown")){
-            bool ask = await jsRuntime.InvokeAsync<bool>("prompt","Removal may cause problems if it is a system app.\nUninstall Anyway??");
+            bool ask = await jsRuntime.InvokeAsync<bool>("confirm","Removal may cause problems if it is a system app.\nUninstall Anyway??");
             if(ask){
                 await executeCommand("pm uninstall "+info.id);
             }
         }else{
-            bool ask = await jsRuntime.InvokeAsync<bool>("prompt","Uninstall app "+info.id+" ??");
+            bool ask = await jsRuntime.InvokeAsync<bool>("confirm","Uninstall app "+info.id+" ??");
             if(ask){
                 await executeCommand("pm uninstall "+info.id);
             }
