@@ -59,7 +59,7 @@ async function fetchAppInfo(view) {
     view.innerText = "Loading information on apps, please wait...";
     let data;
     await fetch('https://rawcdn.githack.com/0x192/universal-android-debloater/749820ca8616df97b81a2b51e0422f3ae7cd593c/resources/assets/uad_lists.json').then(async function (response) {
-        return response.text();
+        return await response.text();
     })
         .then(async function (body) {
             data = body;

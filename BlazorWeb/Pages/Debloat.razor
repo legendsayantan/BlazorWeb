@@ -131,9 +131,10 @@
 @inject IJSRuntime jsRuntime
 @code {
 
-    public String packages = "";
-    public String json = "[]";
-    List<String> apps = new List<String>();
+    public string packages = "";
+    public string json = "[]";
+    String[] apps = {};
+    List<AppInfo> appInfos = new List<AppInfo>();
     protected async Task copyText(string str)
     {
         await jsRuntime.InvokeVoidAsync("navigator.clipboard.writeText", str);
@@ -149,16 +150,23 @@
         await jsRuntime.InvokeVoidAsync("connectADB","connector","text","deviceControl");
         packages = await jsRuntime.InvokeAsync<String>("getPackages");
         json = await jsRuntime.InvokeAsync<String>("fetchAppInfo","text");
+        apps = packages.Split("\n");
+        AppInfo[]? allApps = System.Text.Json.JsonSerializer.Deserialize<AppInfo[]>(json);
+        foreach(string str in apps){
+            AppInfo app = new AppInfo();
+            string[] segments = str.Split(".apk=");
+            app.id = segments[segments.Length - 1].Trim();
+            foreach (AppInfo appInfo in allApps ?? Enumerable.Empty<AppInfo>())
+            {
+                if (appInfo.id.Trim().Equals(app.id)) app = appInfo;
+            }
+            appInfos.Add(app);
+        }
+        Console.WriteLine(appInfos.ToString());
     }
     protected async Task executeCommand(String code){
         await jsRuntime.InvokeVoidAsync("executeForResult", code);
     }
-    public class AppInfo{
-        String? Name;
-        String? id;
-        String? description;
-        String? removal;
-        public AppInfo(){ }
-    }
+
 }
 
