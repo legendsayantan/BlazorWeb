@@ -21,11 +21,11 @@
 
 <section id="deviceControl">
     <p style="display:none" id="processing">Please wait, Processing Apps...</p>
-    <ul id="list">
+    <div id="list">
         @foreach(AppInfo info in appInfos){
             <AppItem info=info @onclick="@(()=>uninstallApp(info.id))" />
         }
-    </ul>
+    </div>
 </section>
 
 <style>
@@ -132,6 +132,11 @@
         background-color: black;
             color: #55b9f3;
     }
+    #list{
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
 </style>
 @inject IJSRuntime jsRuntime
 @code {
@@ -170,7 +175,7 @@
             appInfos.Add(app);
         }
         Console.WriteLine(System.Text.Json.JsonSerializer.Serialize(appInfos.ToArray()));
-        await jsRuntime.InvokeVoidAsync("eval", "document.getrElementById('processing').style.display='none'");
+        await jsRuntime.InvokeVoidAsync("eval", "document.getElementById('processing').style.display='none'");
     }
     protected async Task executeCommand(String code){
         await jsRuntime.InvokeVoidAsync("executeForResult", code);
