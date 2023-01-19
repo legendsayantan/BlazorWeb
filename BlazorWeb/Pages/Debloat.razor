@@ -15,11 +15,13 @@
         </a>
     </div>
     <br />
-    <p id="text">Connect an Android device using USB and click on the button.</p>
+        <p id="text">Connect an Android device using USB and click on the button.</p>
+        
     
 </section>
 
-<section id="deviceControl">
+<section id="deviceControl" class="center">
+    <input type="button" value="Disconnect" @onclick=@(()=>reset())/>
     <p style="display:none" id="processing">Please wait, Processing Apps...</p>
     <div id="list">
         @foreach(AppInfo info in appInfos){
@@ -139,6 +141,7 @@
     }
 </style>
 @inject IJSRuntime jsRuntime
+@inject NavigationManager nav
 @code {
 
     public string packages = "";
@@ -158,9 +161,9 @@
     protected async Task connectDevice()
     {
         await jsRuntime.InvokeVoidAsync("connectADB","connector","text","deviceControl");
-        packages = await jsRuntime.InvokeAsync<String>("getPackages");
         await jsRuntime.InvokeVoidAsync("eval", "document.getElementById('processing').style.display='block'");
         json = await jsRuntime.InvokeAsync<String>("fetchAppInfo","text");
+        packages = await jsRuntime.InvokeAsync<String>("getPackages");
         apps = packages.Split("\n");
         AppInfo[]? allApps = System.Text.Json.JsonSerializer.Deserialize<AppInfo[]>(json);
         foreach(string str in apps){
@@ -168,23 +171,23 @@
             string[] segments = str.Split(".apk=");
             app.id = segments[segments.Length - 1].Trim();
             if (string.IsNullOrEmpty(app.id)) continue;
-            if (app.id.Equals("package:/")) continue;
+            if (app.id.Contains("package:/")) continue;
             foreach (AppInfo appInfo in allApps ?? Enumerable.Empty<AppInfo>())
             {
                 if (appInfo.id.Trim().Equals(app.id)) app = appInfo;
             }
             if(app.description.Contains("(https://")){
                 string[] parts = app.description.Split(" ");
-                foreach(string part in parts){
-                    if(part.StartsWith("(https://")&& part.EndsWith(")"))
+                for(int i=0;i<parts.Length;i++){
+                    string part = parts[i];
+                    if(part.StartsWith("(https://")&&part.EndsWith(")"))
                     {
-                        parts[parts.IndexOf(part)] = "[<a href='" + part.Replace("(https://", "").Replace(")","") + "'>Reference</a>]";
+                        parts[i] = "[<a href='" + part.Replace("(https://", "").Replace(")","") + "'>Reference</a>]";
                     }
                 }
             }
             appInfos.Add(app);
         }
-        Console.WriteLine(System.Text.Json.JsonSerializer.Serialize(appInfos.ToArray()));
         if(appInfos.Count<1){
             await jsRuntime.InvokeVoidAsync("eval", "document.getElementById('text').innerText='Failed to retrieve app data, try refreshing the page.'");
             await jsRuntime.InvokeVoidAsync("disconnect");
@@ -195,6 +198,11 @@
     protected async Task executeCommand(String code){
         await jsRuntime.InvokeVoidAsync("executeForResult", code);
     }
+    protected async Task reset()
+    {
+        await jsRuntime.InvokeVoidAsync("disconnect");
+        await jsRuntime.InvokeVoidAsync("eval","window.reload()");
+    }
     protected async Task uninstallApp(AppInfo info){
         Console.WriteLine("Requested to uninstall "+info.id);
         if(info.removal.Equals("Unsafe")){
@@ -203,11 +211,13 @@
             bool ask = await jsRuntime.InvokeAsync<bool>("confirm","Removal may cause problems if it is a system app.\nUninstall Anyway??");
             if(ask){
                 await executeCommand("pm uninstall "+info.id);
+                appInfos.Remove(info);
             }
         }else{
             bool ask = await jsRuntime.InvokeAsync<bool>("confirm","Uninstall app "+info.id+" ??");
             if(ask){
                 await executeCommand("pm uninstall "+info.id);
+                appInfos.Remove(info);
             }
         }
     }

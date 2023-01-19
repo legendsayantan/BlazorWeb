@@ -51,7 +51,9 @@ async function executeForResult(data) {
     return str;
 }
 async function disconnect() {
-    dev.close();
+    try {
+        dev.close();
+    } catch (error) { }
 }
 async function getPackages() {
     if (webusb && adbInstance) return await executeForResult('pm list packages -f');
