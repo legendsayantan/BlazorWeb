@@ -23,7 +23,7 @@
     <p style="display:none" id="processing">Please wait, Processing Apps...</p>
     <div id="list">
         @foreach(AppInfo info in appInfos){
-            <AppItem info=info onclick="@(()=>uninstallApp(info.id))" />
+            <AppItem info=info onclick="@(()=>uninstallApp(info))" />
         }
     </div>
 </section>
@@ -178,7 +178,7 @@
                 foreach(string part in parts){
                     if(part.StartsWith("(https://")&& part.EndsWith(")"))
                     {
-                        parts[parts.IndexOf(part)] = "[<a href='"+part.Replace("(https://","").Replace(")")+"'>Reference</a>]"
+                        parts[parts.IndexOf(part)] = "[<a href='" + part.Replace("(https://", "").Replace(")","") + "'>Reference</a>]";
                     }
                 }
             }
@@ -201,14 +201,14 @@
     protected async Task uninstallApp(AppInfo info){
         Console.WriteLine("Requested to uninstall "+info.id);
         if(info.removal.Equals("Unsafe")){
-            await jsRuntime.InvokeVoid("alert","This app is unsafe to remove and will possibly break your system.");
+            await jsRuntime.InvokeVoidAsync("alert","This app is unsafe to remove and will possibly break your system.");
         }else if(info.removal.Equals("Unknown")){
-            bool ask = await jsRuntime.InvokeVoidAsync<bool>("prompt","Removal may cause problems if it is a system app.\nUninstall Anyway??");
+            bool ask = await jsRuntime.InvokeAsync<bool>("prompt","Removal may cause problems if it is a system app.\nUninstall Anyway??");
             if(ask){
                 executeCommand("pm uninstall 0 -k --user "+info.id);
             }
         }else{
-            bool ask = await jsRuntime.InvokeVoidAsync<bool>("prompt","Uninstall app "+info.id+" ??");
+            bool ask = await jsRuntime.InvokeAsync<bool>("prompt","Uninstall app "+info.id+" ??");
             if(ask){
                 executeCommand("pm uninstall 0 -k --user "+info.id);
             }
