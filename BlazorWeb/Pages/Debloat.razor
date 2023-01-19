@@ -162,7 +162,7 @@
             }
             appInfos.Add(app);
         }
-        Console.WriteLine(appInfos.ToString());
+        Console.WriteLine(System.Text.Json.JsonSerializer.Serialize(appInfos.ToArray()));
     }
     protected async Task executeCommand(String code){
         await jsRuntime.InvokeVoidAsync("executeForResult", code);
