@@ -163,22 +163,27 @@
     }
     protected async Task connectDevice()
     {
-        await jsRuntime.InvokeVoidAsync("eval", "document.getElementById('text').innerText='Waiting for connection...'");
-        await jsRuntime.InvokeVoidAsync("connectADB","connector","text","deviceControl");
-        json = await jsRuntime.InvokeAsync<String>("fetchAppInfo","text");
-        Console.WriteLine("json size "+json.Length);
+        await jsRuntime.InvokeVoidAsync("connectADB", "connector", "text", "deviceControl");
+        await jsRuntime.InvokeVoidAsync("eval", "document.getElementById('processing').style.display='block'");
+        json = await jsRuntime.InvokeAsync<String>("fetchAppInfo", "text");
+        Console.WriteLine("json size " + json.Length);
         await waitForConnection();
+
+
     }
-    protected async Task waitForConnection(){
+    protected async Task waitForConnection()
+    {
         bool connectionStatus = await jsRuntime.InvokeAsync<bool>("checkConnection");
         if (connectionStatus)
         {
             packages = await jsRuntime.InvokeAsync<String>("getPackages");
             Console.WriteLine("packages size " + packages.Length);
-            if(packages.Length>2){
-                await jsRuntime.InvokeVoidAsync("eval", "document.getElementById('processing').style.display='block'");
+            if (packages.Length > 2)
+            {
                 await processDevice();
-            }else{
+            }
+            else
+            {
                 await Task.Delay(1000);
                 await waitForConnection();
             }
