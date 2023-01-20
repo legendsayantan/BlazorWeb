@@ -3,6 +3,7 @@
     public class Project
     {
         public string? name { get; set; }
+        public string? name_big { get; set; }
         public string? desc { get; set; }
         public string? btn1 { get; set; }
         public string? btn2 { get; set; }

@@ -8,7 +8,7 @@
         App descriptions are collected from <a href="https://github.com/0x192/universal-android-debloater">Universal Android Debloater</a>.
     </p>
 </div>
-<section class="center small" style="margin:0px;padding:0px;">
+<section class="center small" style="margin:0px;padding:0px;max-width:100%">
     <div class="container" id="connector">
         <a class="btn flex-row" style="margin:0px;" @onclick="@(() => connectDevice())">
             Connect a device
@@ -25,7 +25,7 @@
         <input type="button" value="Disconnect" @onclick=@(()=>reset()) />
         <p style="display:none" id="processing">Please wait, Processing Apps...</p>
     </div>
-    <div>
+    <div style="display:flex;flex-direction:row;flex-wrap:wrap;overflow-wrap:anywhere">
         @foreach(AppInfo info in appInfos){
             <AppItem info=info onclick="@(()=>uninstallApp(info))" />
         }
@@ -180,18 +180,25 @@
             {
                 if (appInfo.id.Trim().Equals(app.id)) app = appInfo;
             }
-            if(app.description.Contains("(https://")){
-                string[] parts = app.description.Split(" ");
+            if(app.description.Contains("https://")){
+                string[] parts = app.description.Split("(");
                 string newDesc = "";
                 for(int i=0;i<parts.Length;i++){
-                    string part = parts[i];
-                    if(part.StartsWith("(https://")&&part.EndsWith(")"))
+                    string part = parts[i].Split(")")[0];
+                    if(part.StartsWith("https://")&&(!part.Contains(" ")))
                     {
-                        part = "[<a target='_blank' href='" + part.Replace("(https://", "").Replace(")","") + "'>Reference</a>]";
+                        part = "<a target='_blank' href='" + part + "'>Reference</a>";
                     }
-                    if (part.StartsWith("https://"))
+                    newDesc = newDesc + part;
+                }
+                string[] parts2 = newDesc.Split(" ");
+                newDesc = "";
+                for (int i = 0; i < parts2.Length; i++)
+                {
+                    string part = parts2[i];
+                    if (part.StartsWith("https://") && (!part.Contains(" ")))
                     {
-                        part = "[<a target='_blank' href='" + part.Replace("https://", "") + "'>Link</a>]";
+                        part = "<a target='_blank' href='" + part + "'>Link</a>";
                     }
                     newDesc = newDesc + part;
                 }
