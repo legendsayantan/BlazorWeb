@@ -72,8 +72,8 @@ async function getPackages() {
     else return '';
 }
 async function checkConnection() {
-    console.log("webadb " + webusb != null?"ok":"null");
-    console.log("adbInstance " + adbInstance != null ? "ok" : "null");
+    console.log(webusb != null ? "webusb ok" : "webusb null");
+    console.log(adbInstance != null ? "adb ok" : "adb null");
     return (webusb != null && adbInstance != null);
 }
 async function fetchAppInfo(view) {
