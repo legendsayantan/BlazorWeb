@@ -62,7 +62,7 @@ async function executeForResult(data) {
     return str;
 }
 async function disconnect() {
-    console.log(webusb == null + " - " + adbInstance == null);
+    console.log(webusb != null + " - " + adbInstance != null);
     try {
         dev.close();
     } catch (error) { }
@@ -72,8 +72,8 @@ async function getPackages() {
     else return '';
 }
 async function checkConnection() {
-    console.log("webadb " + webusb != null);
-    console.log("adbInstance " + adbInstance!=null);
+    console.log("webadb " + webusb != null?"ok":"null");
+    console.log("adbInstance " + adbInstance != null ? "ok" : "null");
     return (webusb != null && adbInstance != null);
 }
 async function fetchAppInfo(view) {
