@@ -8,7 +8,6 @@ async function connectADB(connectBtnId, nameViewId, controlViewId) {
     nameView = document.getElementById(nameViewId);
     container = document.getElementById(controlViewId);
     await usbConnection();
-    console.log(webusb == null + " - " + adbInstance == null);
 }
 async function usbConnection() {
     webusb = await Adb.open("WebUSB");
@@ -17,22 +16,20 @@ async function usbConnection() {
         console.log('usb fail');
     } else {
         nameView.innerText = "Click 'Allow' in your Android device.";
-        let tempadb;
         try {
-            tempadb = await webusb.connectAdb("host::");
+            adbInstance = await webusb.connectAdb("host::");
         } catch (error) {
             console.log(error);
         }
-        await adbConnection(tempadb);
+        await adbConnection();
     }
 }
-async function adbConnection(tempadb) {
+async function adbConnection() {
     console.log("checking adb connection");
-    if (tempadb == null) {
+    if (adbInstance == null) {
         await new Promise(resolve => setTimeout(resolve, 1000));
-        await adbConnection(tempadb);
+        await adbConnection();
     } else {
-        adbInstance = tempadb;
         dev = await adbInstance.transport.device;
         console.log("ADB connection ready " + adbInstance);
         connectBtn.style.display = "none";

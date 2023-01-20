@@ -9,7 +9,7 @@
 <section>
     <h3 class="center hiddenY" style="margin-top:100px;" onclick="this.scrollIntoView({behavior:'smooth'})">Open-Source Tools</h3>
 
-    <div class="center" id="projectContainer">
+    <div class="center" id="projectContainer" style="padding:0px">
         @foreach (Project proj in @projects ?? Enumerable.Empty<Project>())
         {
             @if(projects.IndexOf(proj)%2==0){
