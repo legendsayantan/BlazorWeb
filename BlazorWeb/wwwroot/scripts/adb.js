@@ -67,6 +67,9 @@ async function getPackages() {
     if (webusb && adbInstance) return await executeForResult('pm list packages -f');
     else return '';
 }
+async function checkConnection() {
+    return (webusb != null && adbInstance != null);
+}
 async function fetchAppInfo(view) {
     let txt = view.innerText;
     view.innerText = "Loading information on apps, please wait...";

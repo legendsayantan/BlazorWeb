@@ -9,7 +9,7 @@
     </p>
 </div>
 <section class="center small" style="margin:0px;padding:0px;max-width:100%">
-    <div class="container" id="connector">
+    <div class="container" id="connector" style="margin:25px">
         <a class="btn flex-row" style="margin:0px;" @onclick="@(() => connectDevice())">
             Connect a device
         </a>
@@ -167,10 +167,35 @@
         await jsRuntime.InvokeVoidAsync("eval", "document.getElementById('processing').style.display='block'");
         json = await jsRuntime.InvokeAsync<String>("fetchAppInfo","text");
         Console.WriteLine("json size "+json.Length);
-        packages = await jsRuntime.InvokeAsync<String>("getPackages");
+
+
+
+    }
+    protected async Task waitForConnection(){
+        bool connectionStatus = await jsRuntime.InvokeAsync<bool>("checkConnection");
+        await jsRuntime.InvokeVoidAsync("eval", "document.getElementById('text').innerText='Waiting for connection...'");
+        if (connectionStatus)
+        {
+            packages = await jsRuntime.InvokeAsync<String>("getPackages");
+            Console.WriteLine("packages size " + packages.Length);
+            if(packages.Length>2){
+                await processDevice();
+            }else{
+                await Task.Delay(1000);
+                await waitForConnection();
+            }
+        }
+        else
+        {
+            await Task.Delay(1000);
+            await waitForConnection();
+        }
+    }
+    protected async Task processDevice(){
         apps = packages.Split("\n");
         AppInfo[]? allApps = System.Text.Json.JsonSerializer.Deserialize<AppInfo[]>(json);
-        foreach(string str in apps){
+        foreach (string str in apps)
+        {
             AppInfo app = new AppInfo();
             string[] segments = str.Split(".apk=");
             app.id = segments[segments.Length - 1].Trim();
@@ -180,27 +205,34 @@
             {
                 if (appInfo.id.Trim().Equals(app.id)) app = appInfo;
             }
-            if(app.description.Contains("https://")){
+            if (app.description.Contains("https://"))
+            {
                 string[] parts = app.description.Split("(");
                 string newDesc = "";
-                foreach(string p in parts){
+                foreach (string p in parts)
+                {
                     string part = p.Split(")")[0];
-                    if(part.StartsWith("https://")&&(!part.Contains(" ")))
+                    if (part.StartsWith("https://") && (!part.Contains(" ")))
                     {
                         app.url = part;
-                    }else{
+                    }
+                    else
+                    {
                         newDesc = newDesc + " " + part;
                     }
                 }
-                if((app.url??"").Equals("")){
+                if ((app.url ?? "").Equals(""))
+                {
                     string[] parts2 = newDesc.Split(" ");
                     newDesc = "";
-                    foreach(string part in parts2)
+                    foreach (string part in parts2)
                     {
                         if (part.StartsWith("https://") && (!part.Contains(" ")))
                         {
-                            app.url = "link-->"+part;
-                        }else{
+                            app.url = "link-->" + part;
+                        }
+                        else
+                        {
                             newDesc = newDesc + " " + part;
                         }
                     }
@@ -209,6 +241,7 @@
             }
             appInfos.Add(app);
         }
+        await Task.Delay(2000);
         if(appInfos.Count<1){
             await jsRuntime.InvokeVoidAsync("eval", "document.getElementById('text').innerText='Failed to retrieve app data, try refreshing the page.';console.log(webusb == null + ' - ' + adb == null);");
             await jsRuntime.InvokeVoidAsync("disconnect");
