@@ -27,7 +27,10 @@ async function askForAdb() {
         adbInstance = await webusb.connectAdb("host::");
     } catch (error) {
         console.log(error);
-        await askForAdb();
+        if (error.message.includes("Failed to connect with 'host::'")) {
+            await askForAdb();
+        } else nameView.innerText = error.message;
+        
     }
 }
 async function adbConnection() {
