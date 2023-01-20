@@ -1,4 +1,5 @@
 ﻿console.log('init adb.js');
+var adb;
 var adbInstance = null, dev = null, webusb = null;
 var connectBtn, nameView, container;
 async function connectADB(connectBtnId, nameViewId, controlViewId) {
@@ -24,8 +25,8 @@ async function usbConnection() {
 async function adbConnection(tempadb) {
     console.log("checking adb connection");
     if (tempadb == null) {
-        await setTimeout(500);
-        await adbConnection();
+        await new Promise(resolve => setTimeout(resolve, 1000));
+        await adbConnection(tempadb);
     } else {
         adbInstance = tempadb;
         dev = await adbInstance.transport.device;

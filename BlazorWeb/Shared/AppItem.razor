@@ -11,11 +11,11 @@
 
             @if (@info.url.StartsWith("link-->"))
             {
-                <a style="margin: 0px 10px;" target="_blank" href="@info.url.Replace("link-->","")">Link</a>
+                <a class="description" style="margin: 0px 10px;" target="_blank" href="@info.url.Replace("link-->","")">Link</a>
             }
             else
             {
-                <a style="margin: 0px 10px;" target="_blank" href="@info.url">Reference</a>
+                <a class="description" style="margin: 0px 10px;" target="_blank" href="@info.url">Reference</a>
             }
         }
     </div>
