@@ -10,18 +10,24 @@ async function connectADB(connectBtnId, nameViewId, controlViewId) {
     await usbConnection();
 }
 async function usbConnection() {
-    webusb = await Adb.open("WebUSB");
+    try {
+        webusb = await Adb.open("WebUSB");
+    } catch (error) { }
     if (webusb == null) {
         nameView.innerText = "No device selected.";
         console.log('usb fail');
     } else {
         nameView.innerText = "Click 'Allow' in your Android device.";
-        try {
-            adbInstance = await webusb.connectAdb("host::");
-        } catch (error) {
-            console.log(error);
-        }
+        await askForAdb();
         await adbConnection();
+    }
+}
+async function askForAdb() {
+    try {
+        adbInstance = await webusb.connectAdb("host::");
+    } catch (error) {
+        console.log(error);
+        await askForAdb();
     }
 }
 async function adbConnection() {
@@ -59,7 +65,8 @@ async function executeForResult(data) {
     return str;
 }
 async function disconnect() {
-    console.log(webusb != null + " - " + adbInstance != null);
+    webusb = null;
+    adbInstance = null;
     try {
         dev.close();
     } catch (error) { }
