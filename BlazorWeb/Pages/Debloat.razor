@@ -3,11 +3,11 @@
 <PageTitle>Online Android Debloater</PageTitle>
 <h1 class="text center">Online Android Debloater</h1>
 <div class="text">
-    <h5 class="hidden">Have a phone full of bloatwares? Clean them up without installing anything!</h5>
+    <h4 class="hidden">Have a phone full of bloatwares? Clean them up without installing anything!</h4>
 </div>
 
-<section class="center small" style="margin:0px;padding:0px;max-width:100%;flex-direction:column;">
-    <div id="connector" class="center">
+<section class="center small" style="margin:0px;padding:0px;max-width:100%;flex-direction:column;align-items:center">
+    <div id="connector" class="center" style="flex-direction:column;align-items:center">
         <h4>Steps to debloat</h4>
         <ol class="center" style="flex-direction:column">
             <li class="hidden">Turn on developer options in the Android device</li>
@@ -33,7 +33,7 @@
         <p style="display:none" id="processing">Please wait, Processing Apps...</p>
     </div>
     <div class="center">
-        <h4 id="app_header">Select the app you want to uninstall...</h4>
+        <h4 id="app_header" style="display:none">Select the app you want to uninstall...</h4>
     </div>
     <div style="display:flex;flex-direction:row;flex-wrap:wrap;overflow-wrap:anywhere">
         @foreach(AppInfo info in appInfos){
@@ -42,7 +42,7 @@
     </div>
 </section>
 <section style="margin:25px">
-    <p class="hidden" style="transition-delay:250ms;font-size:small">
+    <p style="transition-delay:250ms;font-size:small">
         App informations shown here are collected from <a href="https://github.com/0x192/universal-android-debloater">Universal Android Debloater</a>.
     </p>
 </section>

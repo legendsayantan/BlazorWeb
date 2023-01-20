@@ -5,26 +5,27 @@
         </h5>
         <p style="margin: 0px 10px;font-size:small;">@("Removal : " + info.removal)</p>
     </div>
-    <p class="description">@info.description
-    @if (!(info.url??"").Equals(""))
-    {
+    <p class="description">
+        @info.description
+        @if (!(info.url ?? "").Equals(""))
+        {
 
-        @if (info.url.StartsWith("link-->"))
-        {
-            <a class="description" style="margin: 0px 10px;" target="_blank" href="@info.url.Replace("link-->","")">Link</a>
+            @if (info.url.StartsWith("link-->"))
+            {
+                <a class="description" style="margin: 0px 10px;" target="_blank" href="@info.url.Replace("link-->","")" @onclick:stopPropagation="true">Link</a>
+            }
+            else
+            {
+                <a class="description" style="margin: 0px 10px;" target="_blank" href="@info.url" @onclick:stopPropagation="true">Reference</a>
+            }
         }
-        else
-        {
-            <a class="description" style="margin: 0px 10px;" target="_blank" href="@info.url">Reference</a>
-        }
-    }
     </p>
 
 </div>
 <style>
     .cont {
         padding: 0.5rem;
-        font-size:small;
+        font-size: small;
         border-radius: 1rem;
         border-color: rgba(128, 128, 128, 0.5);
         border-width: 5px;
@@ -34,7 +35,7 @@
 
     h5 {
         margin: 0px;
-        font-size:15px;
+        font-size: 15px;
         color: aliceblue;
     }
 
@@ -43,7 +44,7 @@
     }
 
     .description {
-        font-size: 10px;
+        font-size: 12px;
         margin: 0%;
     }
 
