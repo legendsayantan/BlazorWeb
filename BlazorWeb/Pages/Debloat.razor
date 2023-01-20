@@ -3,16 +3,23 @@
 <PageTitle>Online Android Debloater</PageTitle>
 <h1 class="text center">Online Android Debloater</h1>
 <div class="text">
-    <h5 class="hidden">Have a phone full of bloatwares? Clean them up !</h5>
-    <p class="hidden" style="transition-delay:250ms">
-        App descriptions are collected from <a href="https://github.com/0x192/universal-android-debloater">Universal Android Debloater</a>.
-    </p>
+    <h5 class="hidden">Have a phone full of bloatwares? Clean them up without installing anything!</h5>
 </div>
-<section class="center small" style="margin:0px;padding:0px;max-width:100%">
-    <div class="container" id="connector" style="margin:25px">
-        <a class="btn flex-row" style="margin:0px;" @onclick="@(() => connectDevice())">
-            Connect a device
-        </a>
+
+<section class="center small" style="margin:0px;padding:0px;max-width:100%;flex-direction:column;">
+    <div id="connector" class="center">
+        <h4>Steps to debloat</h4>
+        <ol class="center" style="flex-direction:column">
+            <li class="hidden">Turn on developer options in the Android device</li>
+            <li class="hidden" style="transition-delay:200ms">Enable USB debugging in developer options</li>
+            <li class="hidden" style="transition-delay:400ms">Connect the Android device using an USB cable</li>
+            <li class="hidden" style="transition-delay:600ms">Click on the button below.</li>
+        </ol>
+        <div class="container" style="margin:0px">
+            <a class="btn flex-row" style="margin:0px;" @onclick="@(() => connectDevice())">
+                Connect a device
+            </a>
+        </div>
     </div>
     <br />
         <p id="text">Connect an Android device using USB and click on the button.</p>
@@ -25,13 +32,20 @@
         <input type="button" value="Disconnect" @onclick=@(()=>reset()) style="margin:10px"/>
         <p style="display:none" id="processing">Please wait, Processing Apps...</p>
     </div>
+    <div class="center">
+        <h4 id="app_header">Select the app you want to uninstall...</h4>
+    </div>
     <div style="display:flex;flex-direction:row;flex-wrap:wrap;overflow-wrap:anywhere">
         @foreach(AppInfo info in appInfos){
             <AppItem info=info onclick="@(()=>uninstallApp(info))" />
         }
     </div>
 </section>
-
+<section style="margin:25px">
+    <p class="hidden" style="transition-delay:250ms;font-size:small">
+        App informations shown here are collected from <a href="https://github.com/0x192/universal-android-debloater">Universal Android Debloater</a>.
+    </p>
+</section>
 <style>
     code {
         color: white;
@@ -46,7 +60,7 @@
         padding: 25px;
         justify-content: center;
         align-content: center;
-        align-items:center;
+        align-items:baseline;
         color: powderblue;
         font-family: 'Palatino Linotype';
     }
@@ -252,6 +266,7 @@
             await jsRuntime.InvokeVoidAsync("disconnect");
         }else{
             await jsRuntime.InvokeVoidAsync("eval", "document.getElementById('processing').style.display='none'");
+            await jsRuntime.InvokeVoidAsync("eval", "document.getElementById('app_header').style.display='block'");
         }
     }
     protected async Task executeCommand(String code){
