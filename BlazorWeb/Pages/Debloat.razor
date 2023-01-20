@@ -175,7 +175,6 @@
     protected async Task waitForConnection()
     {
         bool connectionStatus = await jsRuntime.InvokeAsync<bool>("checkConnection");
-        await jsRuntime.InvokeVoidAsync("eval", "console.log('webusb - '+webusb != null );console.log('adbInstance - ' +  adbInstance != null);");
         if (connectionStatus)
         {
             packages = await jsRuntime.InvokeAsync<String>("getPackages");
