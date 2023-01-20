@@ -46,6 +46,7 @@
         padding: 25px;
         justify-content: center;
         align-content: center;
+        align-items:center;
         color: powderblue;
         font-family: 'Palatino Linotype';
     }
@@ -174,6 +175,7 @@
     protected async Task waitForConnection()
     {
         bool connectionStatus = await jsRuntime.InvokeAsync<bool>("checkConnection");
+        await jsRuntime.InvokeVoidAsync("eval", "console.log('webusb - '+webusb == null );console.log('adbInstance - ' +  adbInstance == null);");
         if (connectionStatus)
         {
             packages = await jsRuntime.InvokeAsync<String>("getPackages");
@@ -246,7 +248,7 @@
         }
         await Task.Delay(2000);
         if(appInfos.Count<1){
-            await jsRuntime.InvokeVoidAsync("eval", "document.getElementById('text').innerText='Failed to retrieve app data, try refreshing the page.';console.log(webusb == null + ' - ' + adb == null);");
+            await jsRuntime.InvokeVoidAsync("eval", "document.getElementById('text').innerText='Failed to retrieve app data, try refreshing the page.';");
             await jsRuntime.InvokeVoidAsync("disconnect");
         }else{
             await jsRuntime.InvokeVoidAsync("eval", "document.getElementById('processing').style.display='none'");

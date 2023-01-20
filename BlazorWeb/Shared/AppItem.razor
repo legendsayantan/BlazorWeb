@@ -5,7 +5,7 @@
         <p style="margin: 0px 10px;">@("Removal : " + info.removal)</p>
     </div>
     <p class="description">@info.description
-    @if (!info.url.Equals(""))
+    @if (!(info.url??"").Equals(""))
     {
 
         @if (@info.url.StartsWith("link-->"))
