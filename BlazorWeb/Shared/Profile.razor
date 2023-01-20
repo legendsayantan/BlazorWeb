@@ -59,7 +59,7 @@
                     <br/>
                     <div class="small buttons" style="transition-delay:500ms">
                         <button @onclick="openGitHub" class="btn btn-primary px-4 ms-3">GitHub</button>
-                        <button @onclick="openIssue" class="btn btn-outline-primary px-4">Support</button>
+                        <button @onclick="openMail" class="btn btn-outline-primary px-4">Email</button>
                     </div>
 
 
@@ -203,9 +203,9 @@
         string url = "https://github.com/legendsayantan";
         await jsRuntime.InvokeAsync<object>("open", url, "_blank");
     }
-    public async Task openIssue()
+    public async Task openMail()
     {
-        string url = "https://github.com/legendsayantan/legendsayantan.github.io/issues";
+        string url = "mailto:legendsayantan@gmail.com";
         await jsRuntime.InvokeAsync<object>("open", url, "_blank");
     }
 }

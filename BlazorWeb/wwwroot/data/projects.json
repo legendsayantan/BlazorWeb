@@ -38,7 +38,7 @@
   {
     "name": "Debloater",
     "name_big": "Online Android Debloater",
-    "desc": "Debloat your Android device only using this webpage.",
+    "desc": "Debloat your Android device, no installation.",
     "btn1": "Try it",
     "btn2": "",
     "path": "/debloat",
