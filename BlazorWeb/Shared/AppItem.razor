@@ -4,21 +4,20 @@
         <br /><br />
         <p style="margin: 0px 10px;">@("Removal : " + info.removal)</p>
     </div>
-    <div style="display: flex; flex-direction: row; flex-wrap:wrap; align-items: flex-start; margin: 0px; height: 25px;">
-        <p class="description">@info.description</p>
-        @if (!info.url.Equals(""))
-        {
+    <p class="description">@info.description
+    @if (!info.url.Equals(""))
+    {
 
-            @if (@info.url.StartsWith("link-->"))
-            {
-                <a class="description" style="margin: 0px 10px;" target="_blank" href="@info.url.Replace("link-->","")">Link</a>
-            }
-            else
-            {
-                <a class="description" style="margin: 0px 10px;" target="_blank" href="@info.url">Reference</a>
-            }
+        @if (@info.url.StartsWith("link-->"))
+        {
+            <a class="description" style="margin: 0px 10px;" target="_blank" href="@info.url.Replace("link-->","")">Link</a>
         }
-    </div>
+        else
+        {
+            <a class="description" style="margin: 0px 10px;" target="_blank" href="@info.url">Reference</a>
+        }
+    }
+    </p>
 
 </div>
 <style>

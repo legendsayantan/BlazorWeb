@@ -17,16 +17,20 @@ async function usbConnection() {
         console.log('usb fail');
     } else {
         nameView.innerText = "Click 'Allow' in your Android device.";
-        let tempadb;
-        tempadb = await webusb.connectAdb("host::");
-        await adbConnection(tempadb);
+        await adbConnection();
     }
 }
-async function adbConnection(tempadb) {
+async function adbConnection() {
+    let tempadb;
+    try {
+        tempadb = await webusb.connectAdb("host::");
+    } catch (error) {
+        console.log(error);
+    }
     console.log("checking adb connection");
     if (tempadb == null) {
         await new Promise(resolve => setTimeout(resolve, 1000));
-        await adbConnection(tempadb);
+        await adbConnection();
     } else {
         adbInstance = tempadb;
         dev = await adbInstance.transport.device;
