@@ -1,29 +1,28 @@
-﻿<div class="container" @onclick="@onclick">
-    <div style="display: flex; flex-direction: row; flex-wrap:wrap; align-items: center; margin: 0px; height: 25px;">
+﻿<div class="cont" @onclick="@onclick">
+    <div style="display: flex; flex-direction: row; flex-wrap:wrap; align-items: flex-start; margin: 0px; height: 25px;">
         <h5>@info.id</h5>
-            <br /><br />
+        <br /><br />
         <p style="margin: 0px 10px;">@("Removal : " + info.removal)</p>
     </div>
     <p class="description">@info.description</p>
 </div>
 <style>
-    .container {
+    .cont {
         padding: 0.5rem;
         font-size: medium;
         border-radius: 1rem;
         border-color: rgba(128, 128, 128, 0.5);
         border-width: 5px;
         display: block;
-        flex: none;
         margin: 2.5px;
     }
 
     h5 {
         margin: 0px;
-        color:aliceblue;
+        color: aliceblue;
     }
 
-    .container:hover {
+    .cont:hover {
         background-color: rgba(128, 128, 128, 0.25);
     }
 
@@ -31,8 +30,9 @@
         font-size: small;
         margin: 0%;
     }
-    div{
-        margin:0px;
+
+    div {
+        margin: 0px;
     }
 </style>
 @code {

@@ -34,5 +34,14 @@
     "path": "/autoreact",
     "url1": "https://github.com/legendsayantan/autoreact",
     "url2": "https://github.com/legendsayantan/autoreact/releases"
+  },
+  {
+    "name": "Debloater",
+    "desc": "Debloat your Android device, only using this webpage.",
+    "btn1": "Try it",
+    "btn2": "",
+    "path": "/debloat",
+    "url1": "",
+    "url2": ""
   }
 ]

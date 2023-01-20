@@ -14,7 +14,10 @@
     <MatCardActions Class="actions">
 
         <RainbowButton Text=@project.btn1 Path=@project.url1 />
-        <RainbowButton Text=@project.btn2 Path=@project.url2 />
+        @if ((project.btn2 ?? "").Length>0)
+       {
+           <RainbowButton Text=@project.btn2 Path=@project.url2 />
+       }
     </MatCardActions>
 </MatCard>
 

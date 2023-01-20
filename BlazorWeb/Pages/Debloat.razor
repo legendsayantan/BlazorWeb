@@ -8,7 +8,7 @@
         App descriptions are collected from <a href="https://github.com/0x192/universal-android-debloater">Universal Android Debloater</a>.
     </p>
 </div>
-<section class="center small">
+<section class="center small" style="margin:0px;padding:0px;">
     <div class="container" id="connector">
         <a class="btn flex-row" style="margin:0px;" @onclick="@(() => connectDevice())">
             Connect a device
@@ -20,12 +20,12 @@
     
 </section>
 
-<section id="deviceControl" class="center" style="display:none">
+<section id="deviceControl" class="center" style="display:none;margin:0px;padding:0px;">
     <div class="center">
         <input type="button" value="Disconnect" @onclick=@(()=>reset()) />
         <p style="display:none" id="processing">Please wait, Processing Apps...</p>
     </div>
-    <div id="list">
+    <div>
         @foreach(AppInfo info in appInfos){
             <AppItem info=info onclick="@(()=>uninstallApp(info))" />
         }
@@ -86,6 +86,7 @@
     .container {
         display: flex;
         flex-wrap: wrap;
+        flex-direction: column;
         justify-content: center;
         align-items: center;
     }
