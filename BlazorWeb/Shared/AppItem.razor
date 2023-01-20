@@ -1,8 +1,9 @@
 ﻿<div class="cont" @onclick="@onclick">
     <div style="display: flex; flex-direction: row; flex-wrap:wrap; align-items: flex-start; margin: 0px; height: 25px;">
-        <h5>@info.id</h5>
-        <br /><br />
-        <p style="margin: 0px;">@("Removal : " + info.removal)</p>
+        <h5>@info.id
+        <p style="margin: 0px 10px;">@("Removal : " + info.removal)</p>
+        </h5>
+        
     </div>
     <p class="description">@info.description
     @if (!(info.url??"").Equals(""))
