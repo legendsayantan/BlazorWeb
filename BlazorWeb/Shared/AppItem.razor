@@ -4,7 +4,22 @@
         <br /><br />
         <p style="margin: 0px 10px;">@("Removal : " + info.removal)</p>
     </div>
-    <p class="description">@info.description</p>
+    <div style="display: flex; flex-direction: row; flex-wrap:wrap; align-items: flex-start; margin: 0px; height: 25px;">
+        <p class="description">@info.description</p>
+        @if (!info.url.Equals(""))
+        {
+
+            @if (@info.url.StartsWith("link-->"))
+            {
+                <a style="margin: 0px 10px;" target="_blank" href="@info.url.Replace("link-->","")">Link</a>
+            }
+            else
+            {
+                <a style="margin: 0px 10px;" target="_blank" href="@info.url">Reference</a>
+            }
+        }
+    </div>
+
 </div>
 <style>
     .cont {
@@ -40,5 +55,5 @@
     public AppInfo? info { get; set; }
 
     [Parameter]
-    public EventCallback<MouseEventArgs> onclick { get;  set; }
+    public EventCallback<MouseEventArgs> onclick { get; set; }
 }

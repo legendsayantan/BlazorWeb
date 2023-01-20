@@ -22,7 +22,7 @@
 
 <section id="deviceControl" class="center" style="display:none;margin:0px;padding:0px;">
     <div class="center">
-        <input type="button" value="Disconnect" @onclick=@(()=>reset()) />
+        <input type="button" value="Disconnect" @onclick=@(()=>reset()) style="margin:10px"/>
         <p style="display:none" id="processing">Please wait, Processing Apps...</p>
     </div>
     <div style="display:flex;flex-direction:row;flex-wrap:wrap;overflow-wrap:anywhere">
@@ -183,24 +183,27 @@
             if(app.description.Contains("https://")){
                 string[] parts = app.description.Split("(");
                 string newDesc = "";
-                for(int i=0;i<parts.Length;i++){
-                    string part = parts[i].Split(")")[0];
+                foreach(string p in parts){
+                    string part = p.Split(")")[0];
                     if(part.StartsWith("https://")&&(!part.Contains(" ")))
                     {
-                        part = "<a target='_blank' href='" + part + "'>Reference</a>";
+                        app.url = part;
+                    }else{
+                        newDesc = newDesc + " " + part;
                     }
-                    newDesc = newDesc + part;
                 }
-                string[] parts2 = newDesc.Split(" ");
-                newDesc = "";
-                for (int i = 0; i < parts2.Length; i++)
-                {
-                    string part = parts2[i];
-                    if (part.StartsWith("https://") && (!part.Contains(" ")))
+                if((app.url??"").Equals("")){
+                    string[] parts2 = newDesc.Split(" ");
+                    newDesc = "";
+                    foreach(string part in parts2)
                     {
-                        part = "<a target='_blank' href='" + part + "'>Link</a>";
+                        if (part.StartsWith("https://") && (!part.Contains(" ")))
+                        {
+                            app.url = "link-->"+part;
+                        }else{
+                            newDesc = newDesc + part;
+                        }
                     }
-                    newDesc = newDesc + part;
                 }
                 app.description = newDesc;
             }
