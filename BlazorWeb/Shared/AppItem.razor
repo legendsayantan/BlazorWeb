@@ -2,13 +2,13 @@
     <div style="display: flex; flex-direction: row; flex-wrap:wrap; align-items: flex-start; margin: 0px; height: 25px;">
         <h5>@info.id</h5>
         <br /><br />
-        <p style="margin: 0px 10px;">@("Removal : " + info.removal)</p>
+        <p style="margin: 0px;">@("Removal : " + info.removal)</p>
     </div>
     <p class="description">@info.description
     @if (!(info.url??"").Equals(""))
     {
 
-        @if (@info.url.StartsWith("link-->"))
+        @if (info.url.StartsWith("link-->"))
         {
             <a class="description" style="margin: 0px 10px;" target="_blank" href="@info.url.Replace("link-->","")">Link</a>
         }
@@ -23,7 +23,7 @@
 <style>
     .cont {
         padding: 0.5rem;
-        font-size: medium;
+        font-size:small;
         border-radius: 1rem;
         border-color: rgba(128, 128, 128, 0.5);
         border-width: 5px;
@@ -33,6 +33,7 @@
 
     h5 {
         margin: 0px;
+        font-size:15px;
         color: aliceblue;
     }
 
@@ -41,7 +42,7 @@
     }
 
     .description {
-        font-size: small;
+        font-size: 10px;
         margin: 0%;
     }
 
