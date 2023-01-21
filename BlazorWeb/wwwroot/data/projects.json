@@ -44,6 +44,15 @@
     "path": "/autoreact",
     "url1": "https://github.com/legendsayantan/autoreact",
     "url2": "https://github.com/legendsayantan/autoreact/releases"
+  },
+  {
+    "name": "WebMimic",
+    "desc": "Record and Replay user actions on websites.",
+    "btn1": "github",
+    "btn2": "download",
+    "path": "/webmimic",
+    "url1": "https://github.com/legendsayantan/webmimic",
+    "url2": "https://github.com/legendsayantan/webmimic/releases"
   }
 
 ]

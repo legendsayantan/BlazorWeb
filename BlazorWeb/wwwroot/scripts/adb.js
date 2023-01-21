@@ -29,6 +29,8 @@ async function askForAdb() {
         console.log(error);
         if (error.message.includes("Failed to connect with 'host::'")) {
             await askForAdb();
+        } else if (error.message.includes("Unable to claim interface")) {
+            nameView.innerText = "Device connected to another ADB interface."
         } else nameView.innerText = error.message;
         
     }
