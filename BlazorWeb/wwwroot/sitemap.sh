@@ -1,5 +1,5 @@
 filename='sitemap.xml'
-page= echo ${GITHUB_REPOSITORY} | cut -d '/' -f 2
+page= echo "$1" | cut -d '/' -f 2
 curDate=$(date +'%Y-%m-%d')
 if [ -f "$filename" ] ; then
     rm "$filename"
