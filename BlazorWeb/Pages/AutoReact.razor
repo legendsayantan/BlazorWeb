@@ -192,7 +192,7 @@
         await JS.InvokeVoidAsync("animatePageObserve");
     }
     public async Task openFbAuto(){
-        code = await Http.GetStringAsync("https://raw.githubusercontent.com/legendsayantan/AutoReact/master/app/src/main/assets/FbAutoReactor.js");
+        code = await Http.GetStringAsync("https://rawcdn.githack.com/legendsayantan/AutoReact/master/app/src/main/assets/FbAutoReactor.js");
         if (code == null) return;
         code = code.Replace("var autoscroll = false;", "var autoscroll = true;");
         await JS.InvokeVoidAsync("navigator.clipboard.writeText", code);
@@ -202,7 +202,7 @@
     }
     public async Task openInstaAuto()
     {
-        code = await Http.GetStringAsync("https://raw.githubusercontent.com/legendsayantan/AutoReact/master/app/src/main/assets/InstaAutoReactor.js");
+        code = await Http.GetStringAsync("https://rawcdn.githack.com/legendsayantan/AutoReact/master/app/src/main/assets/InstaAutoReactor.js");
         if (code == null) return;
         await JS.InvokeVoidAsync("navigator.clipboard.writeText", code);
         par = null;
