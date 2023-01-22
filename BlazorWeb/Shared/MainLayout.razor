@@ -28,12 +28,19 @@
                             <img height="25" width="25" src="https://img.icons8.com/material/2x/twitter--v2.png" />
                         </a><a href="https://linkedin.com/in/sayantan-paul-4717b3231" target="_blank">
                             <img height="25" width="25" src="https://img.icons8.com/material/2x/linkedin--v1.png" />
+                        </a><a href="mailto:legendsayantan@gmail.com" target="_blank">
+                            <img height="25" width="25" src="https://img.icons8.com/material-rounded/512/new-post.png" />
                         </a>
                     </div>
                 </div>
                 <div style="margin: 25px; display: flex; flex-direction: column;">
                     <a class="footerText" style="cursor:pointer; margin-bottom:10px;" href=@(navManager.Uri)>Scroll to top</a>
                     <a class="footerText" style="cursor:pointer;" href="/">Home Page</a>
+                </div>
+                <div style="justify-content:center;align-items:center; position:absolute;right:50px;bottom:50px;">
+                    <a id="switch_domain" title="switch domain">
+                        <div style="height:25px; width:25px; background-color:#3890FC; -webkit-mask:url(https://img.icons8.com/material/2x/domain.png) no-repeat center/ contain; mask:url(https://img.icons8.com/material/2x/domain.png) no-repeat center/ contain" />
+                    </a>
                 </div>
             </div>
         </footer>
@@ -45,24 +52,28 @@
     #back {
         background-image: linear-gradient(to bottom right,black,#3890FC);
     }
-    .footerHead{
+
+    .footerHead {
         color: #3890FC;
-        font-family:'Palatino Linotype';
+        font-family: 'Palatino Linotype';
         margin: 25px;
-        margin-bottom:5px;
+        margin-bottom: 5px;
     }
+
     .footerText {
         color: #3890FC;
-        font-family:Consolas;
-        margin-left:25px;
+        font-family: Consolas;
+        margin-left: 25px;
     }
-    .padder{
-        padding:20px;
+
+    .padder {
+        padding: 20px;
     }
-    .tinted{
-        padding:5px;
+
+    .tinted {
+        padding: 5px;
         background-color: #3890FC;
-        border-radius:10px;
+        border-radius: 10px;
     }
 
     @@font-face {

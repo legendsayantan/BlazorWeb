@@ -22,24 +22,33 @@
         </div>
     </div>
     <br />
-        <p id="text">Connect an Android device using USB and click on the button.</p>
-        
-    
+    <p id="text">Connect an Android device using USB and click on the button.</p>
+
+
 </section>
 
 <section id="deviceControl" class="center" style="display:none;margin:0px;padding:0px;">
     <div class="center">
-        <input type="button" value="Disconnect" @onclick=@(()=>reset()) style="margin:10px"/>
+        <input type="button" value="Disconnect" @onclick=@(()=>reset()) style="margin:10px" />
         <p style="display:none" id="processing">Please wait, Processing Apps...</p>
+
     </div>
-    <div class="center">
-        <h4 id="app_header" style="display:none">Select the app you want to uninstall...</h4>
+    <div id="app_header" class="center" style="display:none;align-items:center">
+        <h4 style="margin-top:10px">Select the app you want to uninstall...</h4>
+        <img id="search_icon" title="search" style="height:30px;width:30px; margin:0px 15px; cursor:pointer" src="https://www.svgrepo.com/show/425208/search-find-ecommerce.svg" @onclick=@applyFilter />
     </div>
     <div style="display:flex;flex-direction:row;flex-wrap:wrap;overflow-wrap:anywhere">
-        @foreach(AppInfo info in appInfos){
+        @foreach (AppInfo info in appInfos)
+        {
             <AppItem info=info onclick="@(()=>uninstallApp(info))" />
         }
     </div>
+    @if (temporaryAppInfos.Count > 0 && appInfos.Count == 0)
+    {
+        <div class="center" style="align-items:center; margin:25px">
+            <p>No apps found through search.</p>
+        </div>
+    }
 </section>
 <section style="margin:25px">
     <p style="transition-delay:250ms;font-size:small">
@@ -54,13 +63,14 @@
         padding: 3px;
         border-radius: 6px;
     }
+
     .center {
         display: flex;
         flex-wrap: wrap;
         padding: 25px;
         justify-content: center;
         align-content: center;
-        align-items:baseline;
+        align-items: baseline;
         color: powderblue;
         font-family: 'Palatino Linotype';
     }
@@ -143,16 +153,18 @@
         .btn:hover:before {
             left: 100%;
         }
-    input[type=button]{
+
+    input[type=button] {
         background-color: #0F2CD4;
         color: powderblue;
     }
 
-    input[type=button]:hover{
-        background-color: black;
+        input[type=button]:hover {
+            background-color: black;
             color: #55b9f3;
-    }
-    #list{
+        }
+
+    #list {
         display: flex;
         flex-direction: row;
         flex-wrap: wrap;
@@ -164,8 +176,9 @@
 
     public string packages = "";
     public string json = "[]";
-    String[] apps = {};
+    String[] apps = { };
     List<AppInfo> appInfos = new List<AppInfo>();
+    List<AppInfo> temporaryAppInfos = new List<AppInfo>();
     protected async Task copyText(string str)
     {
         await jsRuntime.InvokeVoidAsync("navigator.clipboard.writeText", str);
@@ -210,7 +223,8 @@
             await waitForConnection();
         }
     }
-    protected async Task processDevice(){
+    protected async Task processDevice()
+    {
         apps = packages.Split("\n");
         AppInfo[]? allApps = System.Text.Json.JsonSerializer.Deserialize<AppInfo[]>(json);
         foreach (string str in apps)
@@ -261,15 +275,19 @@
             appInfos.Add(app);
         }
         await Task.Delay(2000);
-        if(appInfos.Count<1){
+        if (appInfos.Count < 1)
+        {
             await jsRuntime.InvokeVoidAsync("eval", "document.getElementById('text').innerText='Failed to retrieve app data, try refreshing the page.';");
             await jsRuntime.InvokeVoidAsync("disconnect");
-        }else{
+        }
+        else
+        {
             await jsRuntime.InvokeVoidAsync("eval", "document.getElementById('processing').style.display='none'");
-            await jsRuntime.InvokeVoidAsync("eval", "document.getElementById('app_header').style.display='block'");
+            await jsRuntime.InvokeVoidAsync("eval", "document.getElementById('app_header').style.display='flex'");
         }
     }
-    protected async Task executeCommand(String code){
+    protected async Task executeCommand(String code)
+    {
         await jsRuntime.InvokeVoidAsync("executeForResult", code);
     }
     protected async Task reset()
@@ -277,21 +295,54 @@
         await jsRuntime.InvokeVoidAsync("disconnect");
         nav.NavigateTo(nav.Uri, true);
     }
-    protected async Task uninstallApp(AppInfo info){
-        Console.WriteLine("Requested to uninstall "+info.id);
-        if(info.removal.Equals("Unsafe")){
-            await jsRuntime.InvokeVoidAsync("alert","This app is unsafe to remove and will possibly break your system.");
-        }else if(info.removal.Equals("Unknown")){
-            bool ask = await jsRuntime.InvokeAsync<bool>("confirm","Removal may cause problems if it is a system app.\nUninstall Anyway??");
-            if(ask){
-                await executeCommand("pm uninstall "+info.id);
+    protected async Task uninstallApp(AppInfo info)
+    {
+        Console.WriteLine("Requested to uninstall " + info.id);
+        if (info.removal.Equals("Unsafe"))
+        {
+            await jsRuntime.InvokeVoidAsync("alert", "This app is unsafe to remove and will possibly break your system.");
+        }
+        else if (info.removal.Equals("Unknown"))
+        {
+            bool ask = await jsRuntime.InvokeAsync<bool>("confirm", "Removal may cause problems if it is a system app.\nUninstall Anyway??");
+            if (ask)
+            {
+                await executeCommand("pm uninstall " + info.id);
                 appInfos.Remove(info);
             }
-        }else{
-            bool ask = await jsRuntime.InvokeAsync<bool>("confirm","Uninstall app "+info.id+" ??");
-            if(ask){
-                await executeCommand("pm uninstall "+info.id);
+        }
+        else
+        {
+            bool ask = await jsRuntime.InvokeAsync<bool>("confirm", "Uninstall app " + info.id + " ??");
+            if (ask)
+            {
+                await executeCommand("pm uninstall " + info.id);
                 appInfos.Remove(info);
+            }
+        }
+    }
+    protected async Task applyFilter()
+    {
+        if (temporaryAppInfos.Count > 0)
+        {
+            appInfos = temporaryAppInfos;
+            temporaryAppInfos = new List<AppInfo>();
+            await jsRuntime.InvokeVoidAsync("eval", "document.getElementById('search_icon').style.filter='unset'");
+            await jsRuntime.InvokeVoidAsync("eval", "document.getElementById('search_icon').title='search'");
+        }
+        else
+        {
+            string filter = await jsRuntime.InvokeAsync<string>("prompt", "Search for app id, removal category or matching description.") ?? "";
+            if (filter.Length > 0)
+            {
+                temporaryAppInfos = appInfos;
+                appInfos = appInfos.Where(x => (x.id.ToLower().Contains(filter.ToLower()) || x.removal.ToLower().Contains(filter.ToLower()) || x.description.ToLower().Contains(filter.ToLower()))).ToList();
+                await jsRuntime.InvokeVoidAsync("eval", "document.getElementById('search_icon').style.filter='grayscale(1)'");
+                await jsRuntime.InvokeVoidAsync("eval", "document.getElementById('search_icon').title='reset search'");
+            }
+            else
+            {
+
             }
         }
     }
