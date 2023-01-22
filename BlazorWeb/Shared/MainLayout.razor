@@ -39,7 +39,7 @@
                     <a class="footerText" style="cursor:pointer;" href="/">Home Page</a>
                 </div>
                 <div style="justify-content:center;align-items:center; position:absolute;right:50px;bottom:50px;">
-                    <a id="switch_domain" title="switch domain">
+                    <a id="switch_domain" title="switch domain" href="@newDomain">
                         <div style="height:25px; width:25px; background-color:#3890FC; -webkit-mask:url(https://img.icons8.com/material/2x/domain.png) no-repeat center/ contain; mask:url(https://img.icons8.com/material/2x/domain.png) no-repeat center/ contain" />
                     </a>
                 </div>
@@ -93,8 +93,17 @@
     }
 </style>
 @code{
+    String newDomain = "";
+    
     protected override void OnInitialized()
     {
-        js.InvokeVoidAsync("Initialise");
+        String fullAdress = navManager.Uri;
+        if(fullAdress.Contains("github.io")){
+            newDomain = fullAdress.Replace("github.io", "is-a.dev");
+        }
+        else
+        {
+            newDomain = fullAdress.Replace("is-a.dev", "github.io");
+        }
     }
 }

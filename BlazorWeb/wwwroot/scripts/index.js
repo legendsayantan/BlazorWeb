@@ -38,8 +38,3 @@ async function treeObserver(callback) {
     var observer = new MutationObserver(callback);
     observer.observe(targetNode, config);
 }
-//get the current domain
-function initialise() {
-    var domain = window.location.host;
-    document.getElementById('switch_domain').setAttribute('href', 'https://' + (domain.includes('github.io') ? domain.replace('github.io', 'is-a.dev') : domain.replace('is-a.dev', 'github.io')) + window.location.pathname);
-}
