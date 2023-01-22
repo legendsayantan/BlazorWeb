@@ -13,9 +13,7 @@ jobs:
 
     # uses GitHub's checkout action to checkout code form the master branch
     - uses: actions/checkout@v2
-    # Creates Sitemap
-    - name: Sitemap Generation
-      run: bash sitemap.sh
+
     # sets up .NET Core SDK 5.0.x
     - name: Setup .NET Core SDK
       uses: actions/setup-dotnet@v2
