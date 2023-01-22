@@ -1,11 +1,11 @@
 ﻿@using MatBlazor;
 <MatCard class="demo-mat-card">
     <MatCardContent @onclick="wikiClick">
-        <div class="demo-mat-card-content">
+        <a class="demo-mat-card-content" href="@project.path" @onclick:stopPropagation="true">
             <MatHeadline6 class="demo-mat-card-clean-margin">
                 @(project.name_big ?? project.name)
             </MatHeadline6>
-        </div>
+        </a>
 
         <MatBody2 class="demo-mat-card-content demo-mat-card-clean-margin">
             @project.desc
@@ -64,6 +64,9 @@
     .mat-card-action {
         -webkit-text-fill-color: #3890FC;
     }
+    a:link{
+        text-decoration: none;
+    }
 </style>
 
 
@@ -76,8 +79,5 @@
 
     public void wikiClick(){
         NavManager.NavigateTo(project.path);
-    }
-    public async Task gitClick(){
-        await jsRuntime.InvokeAsync<object>("open", "https://github.com/legendsayantan"+project.url1, "_blank");
     }
 }
