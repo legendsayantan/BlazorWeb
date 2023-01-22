@@ -22,14 +22,15 @@ concurrency:
 
 jobs:
   deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
-      steps:
-      # uses GitHub's checkout action to checkout code form the master branch
-      - uses: actions/checkout@v3
-      # Creates Sitemap
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
       - name: Sitemap Generation
         run: bash sitemap.sh
-      # Publish to pages
       - name: Setup Pages
         uses: actions/configure-pages@v2
       - name: Upload artifact
