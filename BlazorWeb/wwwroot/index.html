@@ -13,7 +13,8 @@
     <link href="css/bootstrap/bootstrap.min.css" rel="stylesheet" />
     <link href="css/app.css" rel="stylesheet" />
     <link href="BlazorWeb.styles.css" rel="stylesheet" />
-    <link href="_content/MatBlazor/dist/matBlazor.css" rel="stylesheet" />
+    <link rel="preload" href="_content/MatBlazor/dist/matBlazor.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="_content/MatBlazor/dist/matBlazor.css"></noscript>
 </head>
 
 <body>

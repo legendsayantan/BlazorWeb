@@ -1,5 +1,6 @@
 ﻿@inherits LayoutComponentBase
 @inject NavigationManager navManager
+@inject IJSRuntime js
 <div class="page">
     <div class="sidebar">
         <NavMenu />
@@ -91,3 +92,9 @@
         src: url('/fonts/Pristina.woff');
     }
 </style>
+@code{
+    protected override void OnInitialized()
+    {
+        js.InvokeVoidAsync("Initialise");
+    }
+}
