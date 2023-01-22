@@ -332,7 +332,7 @@
         }
         else
         {
-            string filter = await jsRuntime.InvokeAsync<string>("prompt", "Search for app id, removal category or matching description.") ?? "";
+            string filter = await jsRuntime.InvokeAsync<string>("prompt", "Search for app id, removal category or words in description.") ?? "";
             if (filter.Length > 0)
             {
                 temporaryAppInfos = appInfos;

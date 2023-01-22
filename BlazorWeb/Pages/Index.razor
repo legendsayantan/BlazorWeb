@@ -12,10 +12,16 @@
     <div class="center" id="projectContainer" style="padding:0px">
         @foreach (Project proj in @projects ?? Enumerable.Empty<Project>())
         {
-            @if(projects.IndexOf(proj)%2==0){
-                <div class="hidden"><ProjectCard project="proj" /></div>
-            }else{
-                <div class="hidden2"><ProjectCard project="proj" /></div>
+            @if ((proj.name ?? "") != "")
+            {
+                @if (projects.IndexOf(proj) % 2 == 0)
+                {
+                    <div class="hidden"><ProjectCard project="proj" /></div>
+                }
+                else
+                {
+                    <div class="hidden2"><ProjectCard project="proj" /></div>
+                }
             }
         }
     </div>

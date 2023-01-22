@@ -21,9 +21,12 @@
             <span id="divider">Open-Source Tools</span>
         </div>
         @foreach(Project proj in @projects ?? Enumerable.Empty<Project>()){
-            <div class="nav-item px-3">
-                <NavLink class="nav-link" href=@proj.path>@proj.name</NavLink>
-            </div>
+            @if ((proj.name ?? "") != "")
+            {
+                <div class="nav-item px-3">
+                    <NavLink class="nav-link" href=@proj.path>@proj.name</NavLink>
+                </div>
+            }
         }
         </nav>
 </div>
