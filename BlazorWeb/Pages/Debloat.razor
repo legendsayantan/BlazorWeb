@@ -243,6 +243,7 @@
         AppInfo[]? allApps = System.Text.Json.JsonSerializer.Deserialize<AppInfo[]>(json);
         foreach (string str in apps)
         {
+            if (appInfos.Find(x => x.id == str)!=null) continue;
             AppInfo app = new AppInfo();
             app.id = str;
             if (string.IsNullOrEmpty(app.id)) continue;
