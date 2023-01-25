@@ -1,5 +1,7 @@
 ﻿@page "/debloat"
 
+@inject IJSRuntime jsRuntime
+@inject NavigationManager nav
 <PageTitle>Online Android Debloater</PageTitle>
 <h1 class="text center">Online Android Debloater</h1>
 <div class="text">
@@ -10,9 +12,9 @@
     <div id="connector" class="center" style="flex-direction:column;align-items:center">
         <h4>Steps to debloat</h4>
         <ol class="center" style="flex-direction:column">
-            <li class="hidden">Turn on developer options in the Android device</li>
-            <li class="hidden" style="transition-delay:200ms">Enable USB debugging in developer options</li>
-            <li class="hidden" style="transition-delay:400ms">Connect the Android device using an USB cable</li>
+            <li class="hidden">Turn on developer options in the Android device you want to debloat.</li>
+            <li class="hidden" style="transition-delay:200ms">Enable USB debugging in developer options.</li>
+            <li class="hidden" style="transition-delay:400ms">Connect the Android device to this device using USB.</li>
             <li class="hidden" style="transition-delay:600ms">Click on the button below.</li>
         </ol>
         <div class="container" style="margin:0px">
@@ -22,7 +24,7 @@
         </div>
     </div>
     <br />
-    <p id="text">Connect an Android device using USB and click on the button.</p>
+    <p id="text">Connect the Android device you want to debloat and click on the button.</p>
 
 
 </section>
@@ -55,6 +57,15 @@
         App informations shown here are collected from <a href="https://github.com/0x192/universal-android-debloater">Universal Android Debloater</a>.
     </p>
 </section>
+<div class="text">
+    <h4 class="hiddenY">But.. how can I trust this website?</h4>
+    <p>
+        This webpage is completely open source on <a href="https://github.com/legendsayantan/blazorweb">github</a> along with all the projects mentioned here and I don't make money out of it. My goal is to make debloating easier to everyone, even those without a computer.
+    </p>
+    <p>
+        This webpage doesn't have any ads or shady trackers. Consider sharing this tool to everyone who might need it.
+    </p>
+</div>
 <style>
     code {
         color: white;
@@ -170,8 +181,6 @@
         flex-wrap: wrap;
     }
 </style>
-@inject IJSRuntime jsRuntime
-@inject NavigationManager nav
 @code {
 
     public string packages = "";
