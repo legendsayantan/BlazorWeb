@@ -77,7 +77,7 @@ async function disconnect() {
     } catch (error) { }
 }
 async function getPackages() {
-    if (webusb && adbInstance) return await executeForResult('pm list packages -f');
+    if (webusb && adbInstance) return await executeForResult("pm list packages | awk -F \":\" '{ print $2 }'");
     else return '';
 }
 async function checkConnection() {

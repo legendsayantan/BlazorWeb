@@ -25,6 +25,10 @@
     </div>
     <br />
     <p id="text">Connect the Android device you want to debloat and click on the button.</p>
+    @if (appInfos.Count > 0)
+    {
+        <p id="text">Apps found: @appInfos.Count</p>
+    }
 
 
 </section>
@@ -47,8 +51,9 @@
     </div>
     @if (temporaryAppInfos.Count > 0 && appInfos.Count == 0)
     {
-        <div class="center" style="align-items:center; margin:25px">
+        <div class="center" style="align-items:center; margin:25px; flex-direction:column">
             <p>No apps found through search.</p>
+            <input type="button" value="Reset Search Filters" @onclick=@applyFilter />
         </div>
     }
 </section>
@@ -214,7 +219,7 @@
         if (connectionStatus)
         {
             packages = await jsRuntime.InvokeAsync<String>("getPackages");
-            Console.WriteLine("packages size " + packages.Length);
+            Console.WriteLine("packages " + packages);
             if (packages.Length > 2)
             {
                 await processDevice();
@@ -239,8 +244,7 @@
         foreach (string str in apps)
         {
             AppInfo app = new AppInfo();
-            string[] segments = str.Split(".apk=");
-            app.id = segments[segments.Length - 1].Trim();
+            app.id = str;
             if (string.IsNullOrEmpty(app.id)) continue;
             if (app.id.Contains("package:/")) continue;
             foreach (AppInfo appInfo in allApps ?? Enumerable.Empty<AppInfo>())
