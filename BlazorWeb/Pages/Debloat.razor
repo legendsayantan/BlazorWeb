@@ -239,7 +239,7 @@
     }
     protected async Task processDevice()
     {
-        apps = packages.Split("\n");
+        apps = packages.Split(" ");
         AppInfo[]? allApps = System.Text.Json.JsonSerializer.Deserialize<AppInfo[]>(json);
         foreach (string str in apps)
         {
