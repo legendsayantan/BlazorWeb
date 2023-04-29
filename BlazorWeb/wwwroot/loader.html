@@ -50,7 +50,7 @@
     <h4 class="center" style="margin:0px;">Please wait, I'm Loading !</h4>
 </div>
 <div class="center" style="margin-left:0px; margin-right:0px; align-items:center; position:absolute; bottom:25px; right:25px; left:25px; padding-bottom:20px">
-    <p style="margin-right:10px;cursor:pointer;text-decoration:underline" onclick="getLiteUrl()">site too slow? Try Lite</p>
+    <p style="margin-right:10px;cursor:pointer;text-decoration:underline" href="javascript:getLiteUrl()">site too slow? Try Lite</p>
 </div>
 <div class="center" style="margin-left:0px; margin-right:0px; align-items:center; position:absolute; bottom:0px; right:25px; left:25px; padding-bottom:20px">
     <p style="margin:0px; font-size:15px; display:none; font-family:monospace; color:#00ff13" id="visit">Visitors </p>
@@ -130,6 +130,6 @@
 </style>
 <script type="text/javascript">
     function getLiteUrl() {
-        window.open(window.location.href.replace(window.location.hostname, "legendsayantan.is-a.dev"))
+        window.open(window.location.href.replace(window.location.hostname, "legendsayantan.is-a.dev"),"_blank")
     }
 </script>
