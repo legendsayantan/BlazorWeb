@@ -38,15 +38,15 @@ jobs:
         destination-github-username: 'legendsayantan'
         destination-repository-name: 'legendsayantan.github.io'
         target-branch: main
-    - name: Push to is-a.dev repository 
-      uses: cpina/github-action-push-to-another-repository@main
-      env:
-        API_TOKEN_GITHUB: ${{secrets.API_TOKEN_GITHUB}}
-      with:
-        source-directory: 'release/wwwroot'
-        destination-github-username: 'legendsayantan'
-        destination-repository-name: 'legendsayantan.is-a.dev'
-        target-branch: main
+    # - name: Push to is-a.dev repository 
+    #   uses: cpina/github-action-push-to-another-repository@main
+    #   env:
+    #     API_TOKEN_GITHUB: ${{secrets.API_TOKEN_GITHUB}}
+    #   with:
+    #     source-directory: 'release/wwwroot'
+    #     destination-github-username: 'legendsayantan'
+    #     destination-repository-name: 'legendsayantan.is-a.dev'
+    #     target-branch: main
     - name: Setup workflows on github.io repository 
       uses: cpina/github-action-push-to-another-repository@main
       env:
@@ -57,13 +57,13 @@ jobs:
         destination-github-username: 'legendsayantan'
         destination-repository-name: 'legendsayantan.github.io'
         target-branch: main
-    - name: Setup workflows on is-a.dev repository 
-      uses: cpina/github-action-push-to-another-repository@main
-      env:
-        API_TOKEN_GITHUB: ${{secrets.API_TOKEN_GITHUB}}
-      with:
-        source-directory: .push/.github/
-        target-directory: .github/
-        destination-github-username: 'legendsayantan'
-        destination-repository-name: 'legendsayantan.is-a.dev'
-        target-branch: main
+    # - name: Setup workflows on is-a.dev repository 
+    #   uses: cpina/github-action-push-to-another-repository@main
+    #   env:
+    #     API_TOKEN_GITHUB: ${{secrets.API_TOKEN_GITHUB}}
+    #   with:
+    #     source-directory: .push/.github/
+    #     target-directory: .github/
+    #     destination-github-username: 'legendsayantan'
+    #     destination-repository-name: 'legendsayantan.is-a.dev'
+    #     target-branch: main
