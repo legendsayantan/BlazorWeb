@@ -32,6 +32,7 @@
             })
             .then(function (body) {
                 document.getElementById('app').innerHTML = body;
+                document.getElementById("forwardToLite").setAttribute("href", window.location.href.replace(window.location.hostname, "LegendSayantan.is-a.dev"))                
             });
     </script>
     <script src="_framework/blazor.webassembly.js"></script>
